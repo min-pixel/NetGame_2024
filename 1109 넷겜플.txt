@@ -1,0 +1,91 @@
+오늘 한 일
+1. 패킷 구조 정의 (아이템 패킷은 뺌)
+2. 네트워크 매니저에서 SendData(): 패킷 보내는 함수 정의
+3. 네트워크 매니저에서 <Client_Send_Thread(): SendData()를 통해서 키입력값을 전송>를 구현
+	Scene.h에 bool m_bGameStop = false; 를 사용해서, 게임 끝나기 전까지 키입력 패킷을 전송할려고
+		  bool m_bGameStop = false;를 private에서 public으로 이동
+	Scene.h에 public에 bool m_bKeyInput = false;를 추가 (키를 눌렀는지 확인하려고)
+		Scene.cpp 에 OnProcessingKeyboardMessage에 키입력이 발생하면 bool m_bKeyInput = true;
+	Scene.h에 public에 WPARAM m_lastKeyPressed; 추가 (어떤 키를 입력했는지 알려고)
+		Scene.cpp 에 OnProcessingKeyboardMessage에 입력한 키값을 m_lastKeyPressed = wParam;로 업데이트
+	Scene.h에 private에 NetworkManager* m_pNetworkManager = nullptr; 추가
+4. Scene에 OnProcessingKeyboardMessage j,k,l과 플레이어2 입력 주석처리
+//------------------------------------------------------------------------------------------------------------------------
+bool NetworkManager::SendData(void* packet) {
+    if (m_socket == INVALID_SOCKET) {
+        std::cerr << "Socket is not connected." << std::endl;
+        return false;
+    }
+
+    // 패킷 타입을 먼저 전송하고, 그 후 패킷 데이터를 전송
+    PacketType packetType = *(PacketType*)packet;
+    int result;
+
+    // 패킷 타입을 서버에 전송
+    result = send(m_socket, (char*)&packetType, sizeof(PacketType), 0);
+    if (result == SOCKET_ERROR) {
+        std::cerr << "Send failed (packet type): " << WSAGetLastError() << std::endl;
+        closesocket(m_socket);
+        return false;
+    }
+
+    // 패킷 타입에 따라 다른 구조체 데이터를 전송
+    switch (packetType) {
+    case KEY_CONTROL_PACKET: {
+        PlayerKeyControl* keyControlPacket = static_cast<PlayerKeyControl*>(packet);
+        result = send(m_socket, (char*)keyControlPacket, sizeof(PlayerKeyControl), 0);
+        break;
+    }
+    default:
+        std::cerr << "Unknown packet type." << std::endl;
+        return false;
+    }
+
+    if (result == SOCKET_ERROR) {
+        std::cerr << "Send failed (packet data): " << WSAGetLastError() << std::endl;
+        closesocket(m_socket);
+        return false;
+    }
+
+    std::cout << "Packet Sent: " << result << " bytes." << std::endl;
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------
+void NetworkManager::Client_Send_Thread(Player* player, Scene* scene) {
+    
+    PlayerKeyControl keyControlPacket; // 키 입력 제어 패킷
+
+
+    while (scene->m_bGameStop == false) {  // scene의 m_bGameStop을 사용하여 루프 유지 여부 결정
+
+        // 키 입력이 있을 경우 키 입력 제어 패킷 전송
+        if (scene->m_bKeyInput) { 
+            switch (scene->m_lastKeyPressed) { 
+            case VK_LEFT: 
+                keyControlPacket.nMessageID = VK_LEFT;
+                break;
+            case VK_RIGHT: 
+                keyControlPacket.nMessageID = VK_RIGHT;
+                break;
+            case VK_UP: 
+                keyControlPacket.nMessageID = VK_UP;
+                break;
+            case VK_DOWN: 
+                keyControlPacket.nMessageID = VK_DOWN;
+                break;
+            case VK_OEM_COMMA: 
+                keyControlPacket.nMessageID = VK_OEM_COMMA;
+                break;
+            case VK_OEM_PERIOD: 
+                keyControlPacket.nMessageID = VK_OEM_PERIOD;
+                break;
+            default:
+                break; 
+            }
+            this->SendData(static_cast<void*>(&keyControlPacket)); 
+        }
+        Sleep(100); // 전송 주기 (0.1초)
+    }
+}
+//----------------------------------------------------------------------------------------------------------------

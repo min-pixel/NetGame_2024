@@ -1,0 +1,972 @@
+﻿  Gameframework.cpp
+C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(3,13): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(3,13): error C2146: 구문 오류: ';'이(가) 'MAX_SAMPLE_COUNT' 식별자 앞에 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(3,30): error C2059: 구문 오류: '='
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(16,29): error C2061: 구문 오류: 식별자 'LPTSTR'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(32,27): error C2065: 'MAX_SAMPLE_COUNT': 선언되지 않은 식별자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(33,14): error C3646: 'm_nSampleCount': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(33,28): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(51,23): error C2378: 'ULONG': 재정의. 형식 정의를 사용하여 기호를 오버로드할 수 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(3,7):
+  'ULONG' 선언을 참조하십시오.
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(52,15): error C2143: 구문 오류: ';'이(가) '*' 앞에 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(52,15): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(52,15): error C2378: 'ULONG': 재정의. 형식 정의를 사용하여 기호를 오버로드할 수 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(3,7):
+  'ULONG' 선언을 참조하십시오.
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(52,22): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(82,32): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(82,32): error C2378: 'ULONG': 재정의. 형식 정의를 사용하여 기호를 오버로드할 수 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(3,7):
+  'ULONG' 선언을 참조하십시오.
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(82,15): error C2146: 구문 오류: ';'이(가) 'NOTIFICATION_MASK' 식별자 앞에 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(139,19): error C3646: 'TransactionNotification': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(139,42): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(141,19): error C3646: 'ArgumentLength': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(141,33): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(153,11): error C3646: 'Flags': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(153,16): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(156,27): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(156,27): error C2378: 'ULONG': 재정의. 형식 정의를 사용하여 기호를 오버로드할 수 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(3,7):
+  'ULONG' 선언을 참조하십시오.
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(156,15): error C2146: 구문 오류: ';'이(가) 'SAVEPOINT_ID' 식별자 앞에 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(156,43): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(159,18): error C3646: 'SavepointId': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(159,29): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(163,11): error C3646: 'PropagationCookie': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(163,28): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(166,11): error C3646: 'BufferLength': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(166,23): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(171,11): error C3646: 'MarshalCookie': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(171,24): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(184,24): error C3646: 'VersionMajor': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(184,36): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(185,24): error C3646: 'VersionMinor': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(185,36): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(186,24): error C3646: 'NumProtocols': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(186,36): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(187,24): error C3646: 'Unused': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(187,30): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(193,24): error C3646: 'IsolationLevel': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(193,38): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(194,24): error C3646: 'IsolationFlags': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(194,38): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(195,24): error C3646: 'Timeout': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(195,31): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(201,41): error C3646: 'StaticInfoLength': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(201,57): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(202,24): error C3646: 'TransactionIdInfoLength': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(202,47): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(203,24): error C3646: 'Unused1': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(203,31): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(204,24): error C3646: 'Unused2': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(204,31): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\minwinbase.h(271,11): error C3646: 'Version': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\minwinbase.h(271,18): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\minwinbase.h(276,19): error C3646: 'LocalizedReasonId': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\minwinbase.h(276,36): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\minwinbase.h(277,19): error C3646: 'ReasonStringCount': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\minwinbase.h(277,36): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\fileapi.h(1268,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(135,16): warning C4229: 오래된 구문을 사용했습니다. 데이터의 한정자가 무시됩니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(134,1): error C2491: 'AddVectoredExceptionHandler': dllimport 데이터을(를) 정의할 수 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(135,16): error C2146: 구문 오류: ')'이(가) 'First' 식별자 앞에 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(141,1): error C2143: 구문 오류: ';'이(가) '__stdcall' 앞에 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(141,1): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(140,1): error C2373: 'ULONG': 재정의. 형식 한정자가 다릅니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(3,7):
+  'ULONG' 선언을 참조하십시오.
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(143,6): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(151,16): warning C4229: 오래된 구문을 사용했습니다. 데이터의 한정자가 무시됩니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(150,1): error C2491: 'AddVectoredContinueHandler': dllimport 데이터을(를) 정의할 수 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(151,16): error C2146: 구문 오류: ')'이(가) 'First' 식별자 앞에 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(157,1): error C2143: 구문 오류: ';'이(가) '__stdcall' 앞에 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(157,1): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(156,1): error C2373: 'ULONG': 재정의. 형식 한정자가 다릅니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(3,7):
+  'ULONG' 선언을 참조하십시오.
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(159,6): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\namedpipeapi.h(137,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ioapiset.h(58,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\synchapi.h(308,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\synchapi.h(526,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\interlockedapi.h(81,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(582,20): warning C4229: 오래된 구문을 사용했습니다. 데이터의 한정자가 무시됩니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(581,1): error C2491: 'SetThreadStackGuarantee': dllimport 데이터을(를) 정의할 수 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(582,20): error C2146: 구문 오류: ')'이(가) 'StackSizeInBytes' 식별자 앞에 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1049,11): error C3646: 'MemoryPriority': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1049,25): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1083,11): error C3646: 'Version': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1083,18): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1084,11): error C3646: 'ControlMask': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1084,22): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1085,11): error C3646: 'StateMask': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1085,20): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1223,11): error C3646: 'Version': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1223,18): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1224,11): error C3646: 'ControlMask': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1224,22): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1225,11): error C3646: 'StateMask': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1225,20): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1237,11): error C3646: 'Flags': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1237,16): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1238,11): error C3646: 'Reserved': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1238,19): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1272,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1283,57): error C2061: 구문 오류: 식별자 'PULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1293,46): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1293,46): error C2143: 구문 오류: ','이(가) '*' 앞에 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1302,57): error C2061: 구문 오류: 식별자 'PULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1312,42): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1312,42): error C2143: 구문 오류: ','이(가) '*' 앞에 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\sysinfoapi.h(491,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\sysinfoapi.h(489,1): error C2733: 'VerSetConditionMask': 'extern "C"' 연결을 사용하여 함수를 오버로드할 수 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(21975,1):
+  'VerSetConditionMask' 선언을 참조하십시오.
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(493,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(513,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(524,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(534,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(616,18): warning C4229: 오래된 구문을 사용했습니다. 데이터의 한정자가 무시됩니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(615,1): error C2491: 'GetMemoryErrorHandlingCapabilities': dllimport 데이터을(를) 정의할 수 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(616,18): error C2146: 구문 오류: ')'이(가) 'Capabilities' 식별자 앞에 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(705,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(716,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(730,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(741,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(750,16): warning C4229: 오래된 구문을 사용했습니다. 데이터의 한정자가 무시됩니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(749,1): error C2491: 'OpenFileMappingFromApp': dllimport 데이터을(를) 정의할 수 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(750,16): error C2146: 구문 오류: ')'이(가) 'DesiredAccess' 식별자 앞에 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(874,11): error C3646: 'AllocationProtect': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(874,28): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(877,15): error C3646: 'Flags': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(877,20): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(880,19): error C3646: 'Private': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(880,27): error C2059: 구문 오류: ':'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(880,27): error C2334: ':' 앞에 예기치 않은 토큰이 있습니다. 명백한 함수 본문을 건너뜁니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(925,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(941,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(971,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1000,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1016,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1037,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1053,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1076,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1104,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1113,11): error C3646: 'Flags': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1113,16): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1114,11): error C3646: 'NumaNode': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1114,19): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1115,11): error C3646: 'Channel': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1115,18): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1116,11): error C3646: 'NumberOfNumaNodes': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1116,28): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1130,11): error C3646: 'PartitionId': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1130,22): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1152,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\enclaveapi.h(22,1): error C2159: 스토리지 클래스를 두 개 이상 지정했습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\enclaveapi.h(22,8): error C2059: 구문 오류: '문자열'
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\enclaveapi.h(22,12): error C2143: 구문 오류: ';'이(가) '{' 앞에 없습니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\enclaveapi.h(22,12): error C1003: 오류 수가 100개를 초과했습니다. 컴파일을 중지합니다.
+  (소스 파일 'Gameframework.cpp'을(를) 컴파일하는 중)
+  
+  GameObject.cpp
+  GraphicsPipeline.cpp
+  Inversus.cpp
+  MainH.cpp
+  Scene.cpp
+  Timer.cpp
+C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(3,13): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(3,13): error C2146: 구문 오류: ';'이(가) 'MAX_SAMPLE_COUNT' 식별자 앞에 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(3,30): error C2059: 구문 오류: '='
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(16,29): error C2061: 구문 오류: 식별자 'LPTSTR'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(32,27): error C2065: 'MAX_SAMPLE_COUNT': 선언되지 않은 식별자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(33,14): error C3646: 'm_nSampleCount': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(33,28): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(51,23): error C2378: 'ULONG': 재정의. 형식 정의를 사용하여 기호를 오버로드할 수 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(3,7):
+  'ULONG' 선언을 참조하십시오.
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(52,15): error C2143: 구문 오류: ';'이(가) '*' 앞에 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(52,15): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(52,15): error C2378: 'ULONG': 재정의. 형식 정의를 사용하여 기호를 오버로드할 수 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(3,7):
+  'ULONG' 선언을 참조하십시오.
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(52,22): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(82,32): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(82,32): error C2378: 'ULONG': 재정의. 형식 정의를 사용하여 기호를 오버로드할 수 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(3,7):
+  'ULONG' 선언을 참조하십시오.
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(82,15): error C2146: 구문 오류: ';'이(가) 'NOTIFICATION_MASK' 식별자 앞에 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(139,19): error C3646: 'TransactionNotification': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(139,42): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(141,19): error C3646: 'ArgumentLength': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(141,33): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(153,11): error C3646: 'Flags': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(153,16): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(156,27): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(156,27): error C2378: 'ULONG': 재정의. 형식 정의를 사용하여 기호를 오버로드할 수 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(3,7):
+  'ULONG' 선언을 참조하십시오.
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(156,15): error C2146: 구문 오류: ';'이(가) 'SAVEPOINT_ID' 식별자 앞에 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(156,43): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(159,18): error C3646: 'SavepointId': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(159,29): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(163,11): error C3646: 'PropagationCookie': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(163,28): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(166,11): error C3646: 'BufferLength': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(166,23): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(171,11): error C3646: 'MarshalCookie': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(171,24): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(184,24): error C3646: 'VersionMajor': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(184,36): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(185,24): error C3646: 'VersionMinor': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(185,36): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(186,24): error C3646: 'NumProtocols': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(186,36): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(187,24): error C3646: 'Unused': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(187,30): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(193,24): error C3646: 'IsolationLevel': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(193,38): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(194,24): error C3646: 'IsolationFlags': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(194,38): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(195,24): error C3646: 'Timeout': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(195,31): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(201,41): error C3646: 'StaticInfoLength': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(201,57): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(202,24): error C3646: 'TransactionIdInfoLength': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(202,47): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(203,24): error C3646: 'Unused1': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(203,31): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(204,24): error C3646: 'Unused2': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ktmtypes.h(204,31): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\minwinbase.h(271,11): error C3646: 'Version': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\minwinbase.h(271,18): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\minwinbase.h(276,19): error C3646: 'LocalizedReasonId': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\minwinbase.h(276,36): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\minwinbase.h(277,19): error C3646: 'ReasonStringCount': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\minwinbase.h(277,36): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\fileapi.h(1268,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(135,16): warning C4229: 오래된 구문을 사용했습니다. 데이터의 한정자가 무시됩니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(134,1): error C2491: 'AddVectoredExceptionHandler': dllimport 데이터을(를) 정의할 수 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(135,16): error C2146: 구문 오류: ')'이(가) 'First' 식별자 앞에 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(141,1): error C2143: 구문 오류: ';'이(가) '__stdcall' 앞에 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(141,1): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(140,1): error C2373: 'ULONG': 재정의. 형식 한정자가 다릅니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(3,7):
+  'ULONG' 선언을 참조하십시오.
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(143,6): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(151,16): warning C4229: 오래된 구문을 사용했습니다. 데이터의 한정자가 무시됩니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(150,1): error C2491: 'AddVectoredContinueHandler': dllimport 데이터을(를) 정의할 수 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(151,16): error C2146: 구문 오류: ')'이(가) 'First' 식별자 앞에 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(157,1): error C2143: 구문 오류: ';'이(가) '__stdcall' 앞에 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(157,1): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(156,1): error C2373: 'ULONG': 재정의. 형식 한정자가 다릅니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  C:\Users\ajm12\OneDrive\바탕 화면\공부\소스파일들 종합 모음집\Inversus\Inversus\Timer.h(3,7):
+  'ULONG' 선언을 참조하십시오.
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\errhandlingapi.h(159,6): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\namedpipeapi.h(137,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ioapiset.h(58,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\synchapi.h(308,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\synchapi.h(526,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\interlockedapi.h(81,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(582,20): warning C4229: 오래된 구문을 사용했습니다. 데이터의 한정자가 무시됩니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(581,1): error C2491: 'SetThreadStackGuarantee': dllimport 데이터을(를) 정의할 수 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(582,20): error C2146: 구문 오류: ')'이(가) 'StackSizeInBytes' 식별자 앞에 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1049,11): error C3646: 'MemoryPriority': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1049,25): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1083,11): error C3646: 'Version': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1083,18): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1084,11): error C3646: 'ControlMask': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1084,22): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1085,11): error C3646: 'StateMask': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1085,20): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1223,11): error C3646: 'Version': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1223,18): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1224,11): error C3646: 'ControlMask': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1224,22): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1225,11): error C3646: 'StateMask': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1225,20): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1237,11): error C3646: 'Flags': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1237,16): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1238,11): error C3646: 'Reserved': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1238,19): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1272,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1283,57): error C2061: 구문 오류: 식별자 'PULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1293,46): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1293,46): error C2143: 구문 오류: ','이(가) '*' 앞에 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1302,57): error C2061: 구문 오류: 식별자 'PULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1312,42): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(1312,42): error C2143: 구문 오류: ','이(가) '*' 앞에 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\sysinfoapi.h(491,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\sysinfoapi.h(489,1): error C2733: 'VerSetConditionMask': 'extern "C"' 연결을 사용하여 함수를 오버로드할 수 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h(21975,1):
+  'VerSetConditionMask' 선언을 참조하십시오.
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(493,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(513,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(524,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(534,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(616,18): warning C4229: 오래된 구문을 사용했습니다. 데이터의 한정자가 무시됩니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(615,1): error C2491: 'GetMemoryErrorHandlingCapabilities': dllimport 데이터을(를) 정의할 수 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(616,18): error C2146: 구문 오류: ')'이(가) 'Capabilities' 식별자 앞에 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(705,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(716,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(730,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(741,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(750,16): warning C4229: 오래된 구문을 사용했습니다. 데이터의 한정자가 무시됩니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(749,1): error C2491: 'OpenFileMappingFromApp': dllimport 데이터을(를) 정의할 수 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(750,16): error C2146: 구문 오류: ')'이(가) 'DesiredAccess' 식별자 앞에 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(874,11): error C3646: 'AllocationProtect': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(874,28): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(877,15): error C3646: 'Flags': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(877,20): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(880,19): error C3646: 'Private': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(880,27): error C2059: 구문 오류: ':'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(880,27): error C2334: ':' 앞에 예기치 않은 토큰이 있습니다. 명백한 함수 본문을 건너뜁니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(925,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(941,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(971,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1000,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1016,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1037,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1053,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1076,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1104,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1113,11): error C3646: 'Flags': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1113,16): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1114,11): error C3646: 'NumaNode': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1114,19): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1115,11): error C3646: 'Channel': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1115,18): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1116,11): error C3646: 'NumberOfNumaNodes': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1116,28): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1130,11): error C3646: 'PartitionId': 알 수 없는 재정의 지정자입니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1130,22): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\memoryapi.h(1152,10): error C2061: 구문 오류: 식별자 'ULONG'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\enclaveapi.h(22,1): error C2159: 스토리지 클래스를 두 개 이상 지정했습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\enclaveapi.h(22,8): error C2059: 구문 오류: '문자열'
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\enclaveapi.h(22,12): error C2143: 구문 오류: ';'이(가) '{' 앞에 없습니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\enclaveapi.h(22,12): error C1003: 오류 수가 100개를 초과했습니다. 컴파일을 중지합니다.
+  (소스 파일 'Timer.cpp'을(를) 컴파일하는 중)
+  
+  코드를 생성하고 있습니다...
