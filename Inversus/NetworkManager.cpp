@@ -3,6 +3,14 @@
 #include "Scene.h"
 #include "GameObject.h"
 #include <thread>
+<<<<<<< HEAD
+=======
+#include <iostream>
+#include <string>
+
+#define BUFSIZE    512
+
+>>>>>>> 4577a03 (ì„œë²„ì™€ ì—°ê²° í™•ì¸ (1ì°¨))
 NetworkManager::NetworkManager()
     : m_socket(INVALID_SOCKET), m_initialized(false)
 {
@@ -61,9 +69,45 @@ bool NetworkManager::ConnectToServer(const std::string& serverIP, int serverPort
         return false;
     }
 
+<<<<<<< HEAD
     return true;
 }
 
+=======
+    std::cout << "Connected to server!" << std::endl;
+
+    // ¼­¹ö·Î °£´ÜÇÑ Å×½ºÆ® µ¥ÀÌÅÍ Àü¼Û
+    const char* testData = "Connection test message from game client";
+    result = send(m_socket, testData, static_cast<int>(strlen(testData)), 0);
+    if (result == SOCKET_ERROR)
+    {
+        std::cerr << "Send failed: " << WSAGetLastError() << std::endl;
+        closesocket(m_socket);
+        return false;
+    }
+    std::cout << "Sent test data: " << testData << std::endl;
+
+    // µ¥ÀÌÅÍ ¼ö½Å ´ë±â ·çÇÁ
+    char recvbuf[BUFSIZE];
+    while (true) {
+        result = recv(m_socket, recvbuf, BUFSIZE, 0);
+        if (result > 0) {
+            recvbuf[result] = '\0';
+            std::cout << "[Received Data] " << recvbuf << std::endl;
+        }
+        else if (result == 0) {
+            std::cout << "Connection closed by server." << std::endl;
+            break;
+        }
+        else {
+            std::cerr << "Receive failed: " << WSAGetLastError() << std::endl;
+            break;
+        }
+    }
+
+    return true;
+}
+>>>>>>> 4577a03 (ì„œë²„ì™€ ì—°ê²° í™•ì¸ (1ì°¨))
 //bool NetworkManager::SendMessageFunc(const std::string& data)
 //{
 //    if (m_socket == INVALID_SOCKET)
@@ -171,6 +215,14 @@ void NetworkManager::Client_Send_Thread(Player* player, Scene* scene) {
     
     PlayerKeyControl keyControlPacket; // Å° ÀÔ·Â Á¦¾î ÆĞÅ¶
 
+<<<<<<< HEAD
+=======
+    getPlayer getplayinfo;
+
+    
+
+
+>>>>>>> 4577a03 (ì„œë²„ì™€ ì—°ê²° í™•ì¸ (1ì°¨))
     while (scene->m_bGameStop == false) {  // sceneÀÇ m_bGameStopÀ» »ç¿ëÇÏ¿© ·çÇÁ À¯Áö ¿©ºÎ °áÁ¤
 
         // Å° ÀÔ·ÂÀÌ ÀÖÀ» °æ¿ì Å° ÀÔ·Â Á¦¾î ÆĞÅ¶ Àü¼Û
