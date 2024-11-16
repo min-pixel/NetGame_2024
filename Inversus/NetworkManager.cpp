@@ -3,14 +3,11 @@
 #include "Scene.h"
 #include "GameObject.h"
 #include <thread>
-<<<<<<< HEAD
-=======
-#include <iostream>
-#include <string>
 
-#define BUFSIZE    512
+#define BUFSIZE 512
 
->>>>>>> 4577a03 (ì„œë²„ì™€ ì—°ê²° í™•ì¸ (1ì°¨))
+//¾ÆÁ÷ ¹Ì¿ÏÀÎ ºÎºĞÀº ÁÖ¼® Ã³¸®ÇÔ.
+
 NetworkManager::NetworkManager()
     : m_socket(INVALID_SOCKET), m_initialized(false)
 {
@@ -69,11 +66,6 @@ bool NetworkManager::ConnectToServer(const std::string& serverIP, int serverPort
         return false;
     }
 
-<<<<<<< HEAD
-    return true;
-}
-
-=======
     std::cout << "Connected to server!" << std::endl;
 
     // ¼­¹ö·Î °£´ÜÇÑ Å×½ºÆ® µ¥ÀÌÅÍ Àü¼Û
@@ -87,27 +79,66 @@ bool NetworkManager::ConnectToServer(const std::string& serverIP, int serverPort
     }
     std::cout << "Sent test data: " << testData << std::endl;
 
-    // µ¥ÀÌÅÍ ¼ö½Å ´ë±â ·çÇÁ
-    char recvbuf[BUFSIZE];
-    while (true) {
-        result = recv(m_socket, recvbuf, BUFSIZE, 0);
-        if (result > 0) {
-            recvbuf[result] = '\0';
-            std::cout << "[Received Data] " << recvbuf << std::endl;
-        }
-        else if (result == 0) {
-            std::cout << "Connection closed by server." << std::endl;
-            break;
-        }
-        else {
-            std::cerr << "Receive failed: " << WSAGetLastError() << std::endl;
-            break;
-        }
-    }
+    // getPlayer ÆĞÅ¶ »ı¼º ¹× ¼­¹ö·Î Àü¼Û
+    //getPlayer playerPacket;
+    //playerPacket.packetType = GET_PLAYER_PACKET;
+    //playerPacket.ip = serverIP;           // Å¬¶óÀÌ¾ğÆ® IP ¼³Á¤
+    //playerPacket.nMessageID = 1;          // ¿¹½Ã·Î ID 1À» »ç¿ë
+    //playerPacket.accept_server = true;    // ¼­¹ö ½ÂÀÎ ¿©ºÎ ¼³Á¤
+
+    //// getPlayer ÆĞÅ¶ Àü¼Û
+    //result = send(m_socket, (char*)&playerPacket, sizeof(getPlayer), 0);
+    //if (result == SOCKET_ERROR)
+    //{
+    //    std::cerr << "Send failed (getPlayer packet): " << WSAGetLastError() << std::endl;
+    //    closesocket(m_socket);
+    //    return false;
+    //}
+    //std::cout << "Sent getPlayer packet to server." << std::endl;
+
+    //// µ¥ÀÌÅÍ ¼ö½Å ´ë±â ·çÇÁ
+    //char recvbuf[BUFSIZE];
+    //while (true) {
+    //    result = recv(m_socket, recvbuf, BUFSIZE, 0);
+    //    if (result > 0) {
+    //        recvbuf[result] = '\0';
+    //        std::cout << "[Received Data] " << recvbuf << std::endl;
+    //    }
+    //    else if (result == 0) {
+    //        std::cout << "Connection closed by server." << std::endl;
+    //        break;
+    //    }
+    //    else {
+    //        std::cerr << "Receive failed: " << WSAGetLastError() << std::endl;
+    //        break;
+    //    }
+    //}
 
     return true;
 }
->>>>>>> 4577a03 (ì„œë²„ì™€ ì—°ê²° í™•ì¸ (1ì°¨))
+
+
+//bool NetworkManager::SendAcceptServerPacket() {
+//    if (m_socket == INVALID_SOCKET) {
+//        std::cerr << "Socket is not connected." << std::endl;
+//        return false;
+//    }
+//
+//    bool accept_server = true;
+//
+//    int result = send(m_socket, (char*)&accept_server, sizeof(accept_server), 0);
+//    if (result == SOCKET_ERROR) {
+//        std::cerr << "Send failed: " << WSAGetLastError() << std::endl;
+//        closesocket(m_socket);
+//        return false;
+//    }
+//
+//    std::cout << "Sent accept_server signal (true) to server." << std::endl;
+//    return true;
+//}
+
+
+
 //bool NetworkManager::SendMessageFunc(const std::string& data)
 //{
 //    if (m_socket == INVALID_SOCKET)
@@ -172,86 +203,121 @@ void NetworkManager::Disconnect()
 //--------------------------------------------------------------------------------------------------------¿©±â¼­ºÎÅÍ ±¸Çö (11/09)
 bool NetworkManager::SendData(void* packet) {
     if (m_socket == INVALID_SOCKET) {
-        std::cerr << "Socket is not connected." << std::endl;
+        std::cerr << "[Error] Socket is not connected." << std::endl;
         return false;
     }
 
-    // ÆĞÅ¶ Å¸ÀÔÀ» ¸ÕÀú Àü¼ÛÇÏ°í, ±× ÈÄ ÆĞÅ¶ µ¥ÀÌÅÍ¸¦ Àü¼Û
     PacketType packetType = *(PacketType*)packet;
     int result;
 
-    // ÆĞÅ¶ Å¸ÀÔÀ» ¼­¹ö¿¡ Àü¼Û
+    // ÆĞÅ¶ Å¸ÀÔ Àü¼Û
     result = send(m_socket, (char*)&packetType, sizeof(PacketType), 0);
     if (result == SOCKET_ERROR) {
-        std::cerr << "Send failed (packet type): " << WSAGetLastError() << std::endl;
+        std::cerr << "[Error] Send failed (packet type): " << WSAGetLastError() << std::endl;
         closesocket(m_socket);
         return false;
     }
+    std::cout << "[Debug] Sent packet type: " << packetType << std::endl;
 
-    // ÆĞÅ¶ Å¸ÀÔ¿¡ µû¶ó ´Ù¸¥ ±¸Á¶Ã¼ µ¥ÀÌÅÍ¸¦ Àü¼Û
+    // ÆĞÅ¶ µ¥ÀÌÅÍ Àü¼Û
     switch (packetType) {
     case KEY_CONTROL_PACKET: {
         PlayerKeyControl* keyControlPacket = static_cast<PlayerKeyControl*>(packet);
         result = send(m_socket, (char*)keyControlPacket, sizeof(PlayerKeyControl), 0);
         break;
     }
+    case MESH_PACKET: {
+        PlayerMeshPacket* meshPacket = static_cast<PlayerMeshPacket*>(packet);
+        result = send(m_socket, (char*)meshPacket, sizeof(PlayerMeshPacket), 0);
+        break;
+    }
     default:
-        std::cerr << "Unknown packet type." << std::endl;
+        std::cerr << "[Error] Unknown packet type." << std::endl;
         return false;
     }
 
     if (result == SOCKET_ERROR) {
-        std::cerr << "Send failed (packet data): " << WSAGetLastError() << std::endl;
+        std::cerr << "[Error] Send failed (packet data): " << WSAGetLastError() << std::endl;
         closesocket(m_socket);
         return false;
     }
 
-    std::cout << "Packet Sent: " << result << " bytes." << std::endl;
+    std::cout << "[Debug] Packet data sent. Bytes: " << result << std::endl;
     return true;
 }
-
 
 void NetworkManager::Client_Send_Thread(Player* player, Scene* scene) {
     
     PlayerKeyControl keyControlPacket; // Å° ÀÔ·Â Á¦¾î ÆĞÅ¶
 
-<<<<<<< HEAD
-=======
-    getPlayer getplayinfo;
+    PlayerMeshPacket meshPacket;
 
+    //meshPacket.packetType = MESH_PACKET;
+
+    // ÀÌÀü ÁÂÇ¥¸¦ ÀúÀåÇÏ´Â º¯¼ö
+    //float lastFxPosition = -1.0f;
+    //float lastFyPosition = -1.0f;
     
 
 
->>>>>>> 4577a03 (ì„œë²„ì™€ ì—°ê²° í™•ì¸ (1ì°¨))
     while (scene->m_bGameStop == false) {  // sceneÀÇ m_bGameStopÀ» »ç¿ëÇÏ¿© ·çÇÁ À¯Áö ¿©ºÎ °áÁ¤
 
-        // Å° ÀÔ·ÂÀÌ ÀÖÀ» °æ¿ì Å° ÀÔ·Â Á¦¾î ÆĞÅ¶ Àü¼Û
-        if (scene->m_bKeyInput) { 
-            switch (scene->m_lastKeyPressed) { 
-            case VK_LEFT: 
-                keyControlPacket.nMessageID = VK_LEFT;
-                break;
-            case VK_RIGHT: 
-                keyControlPacket.nMessageID = VK_RIGHT;
-                break;
-            case VK_UP: 
-                keyControlPacket.nMessageID = VK_UP;
-                break;
-            case VK_DOWN: 
-                keyControlPacket.nMessageID = VK_DOWN;
-                break;
-            case VK_OEM_COMMA: 
-                keyControlPacket.nMessageID = VK_OEM_COMMA;
-                break;
-            case VK_OEM_PERIOD: 
-                keyControlPacket.nMessageID = VK_OEM_PERIOD;
-                break;
-            default:
-                break; 
+        //ºí·°ÀÇ À§Ä¡ Á¤º¸ ÆĞÅ¶ Àü¼Û (¹Ì¿Ï)
+        //for (auto& object : scene->m_objects) {
+        //    if (object->m_fxPosition != lastFxPosition || object->m_fyPosition != lastFyPosition) { // y ÁÂÇ¥°¡ 0º¸´Ù Å« ºí·Ï¸¸ Àü¼Û
+        //        
+        //        // ÁÂÇ¥ ¾÷µ¥ÀÌÆ®
+        //        lastFxPosition = object->m_fxPosition; 
+        //        lastFyPosition = object->m_fyPosition; 
+        //        
+        //        meshPacket.m_fxPosition = object->m_fxPosition;
+        //        meshPacket.m_fyPosition = object->m_fyPosition;
+
+        //        // µğ¹ö±ë ¸Ş½ÃÁö
+        //        std::cout << "[Debug] Sending Mesh Packet: ("
+        //            << meshPacket.m_fxPosition << ", "
+        //            << meshPacket.m_fyPosition << ")" << std::endl;
+
+        //        // ¼­¹ö·Î ÆĞÅ¶ Àü¼Û
+        //        this->SendData(&meshPacket);
+        //    }
+        //}
+
+
+            // Å° ÀÔ·ÂÀÌ ÀÖÀ» °æ¿ì Å° ÀÔ·Â Á¦¾î ÆĞÅ¶ Àü¼Û
+            if (scene->m_bKeyInput) {
+                switch (scene->m_lastKeyPressed) {
+                case VK_LEFT:
+                    keyControlPacket.nMessageID = VK_LEFT;
+                    break;
+                case VK_RIGHT:
+                    keyControlPacket.nMessageID = VK_RIGHT;
+                    break;
+                case VK_UP:
+                    keyControlPacket.nMessageID = VK_UP;
+                    break;
+                case VK_DOWN:
+                    keyControlPacket.nMessageID = VK_DOWN;
+                    break;
+                case VK_OEM_COMMA:
+                    keyControlPacket.nMessageID = VK_OEM_COMMA;
+                    break;
+                case VK_OEM_PERIOD:
+                    keyControlPacket.nMessageID = VK_OEM_PERIOD;
+                    break;
+                default:
+                    break;
+                }
+
+                // µğ¹ö±ë ¸Ş½ÃÁö
+                std::cout << "[Debug] Sending Key Packet: Key = " << keyControlPacket.nMessageID << std::endl;
+
+                meshPacket.meshIndex = scene->m_nIndex;
+                this->SendData(static_cast<void*>(&keyControlPacket));
+                this->SendData(&meshPacket);
             }
-            this->SendData(static_cast<void*>(&keyControlPacket)); 
-        }
-        Sleep(100); // Àü¼Û ÁÖ±â (0.1ÃÊ)
+            Sleep(100); // Àü¼Û ÁÖ±â (0.1ÃÊ)
+        
     }
 }
 

@@ -16,18 +16,21 @@ enum PacketType {
 
 struct getPlayer {
     PacketType packetType = GET_PLAYER_PACKET;
-    std::string ip;            
+    char ip[16];
     uint32_t nMessageID;
     bool accept_server;
 };
 
-//struct PlayerMeshPacket {
-//    PacketType packetType = MESH_PACKET;
-//    float m_fxPosition;
-//    float m_fyPosition;
-//    //float m_fMovingSpeed;
-//    //GameObject* m_pNextGameObjectOne;
-//};
+
+struct PlayerMeshPacket {
+    PacketType packetType = MESH_PACKET;
+    /*float m_fxPosition;
+    float m_fyPosition;*/
+    int meshIndex;  // 블록의 메쉬 타입 (0~7 범위의 인덱스)
+    //float m_fMovingSpeed;
+    /*GameObject* m_pNextGameObjectOne;
+    int blockType;*/
+};
 
 struct PlayerKeyControl {
     PacketType packetType = KEY_CONTROL_PACKET;

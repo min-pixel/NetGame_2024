@@ -30,6 +30,7 @@ public:
     bool SendData(void* packet);  // 패킷 전송 함수 추가
     void Client_Send_Thread(Player* pPlayer, Scene* scene);
     //bool ReceiveData(std::string& outData); // 서버로부터 데이터 수신
+    //bool SendAcceptServerPacket();
     void Disconnect();
 
     SOCKET GetSocket() const { return m_socket; }

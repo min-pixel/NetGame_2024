@@ -68,7 +68,7 @@ private: //게임 오브젝트의 배열로 구성되어있다.
 
 	MeshGetInfo* m_pRandomMeshGet = NULL;	//8개의 메쉬 정보를 갖고있다.
 	int m_nRandomCount = 8;	//블럭 메쉬는 총 8개를 의미.
-	int m_nIndex = 0; //현재 선택된 메쉬의 종류를 판단해줄 index값 0~7
+	//int m_nIndex = 0; //현재 선택된 메쉬의 종류를 판단해줄 index값 0~7
 	int m_nIndex2 = 0;
 	DWORD m_dColor[8] = { RGB(125,0,0),RGB(200,0,0), RGB(120,120,0), RGB(120,200,0), RGB(120,0,102), RGB(200,0,200),
 	RGB(0,125,125), RGB(0,200,125) };	//블럭들 색상
@@ -97,7 +97,7 @@ private: //게임 오브젝트의 배열로 구성되어있다.
 	double m_DbtnRight = m_DbtnLeft + FRAMEBUFFER_WIDTH / 3;// 좌표값 용도 입니다.
 	double m_DbtnBottom = m_DbtnTop + FRAMEBUFFER_HEIGHT / 10;// 좌표값 용도 입니다.
 
-	NetworkManager* m_pNetworkManager = nullptr;
+	NetworkManager* m_pNetworkManager = nullptr; //네트워크 매니저 추가
 
 public:
 
@@ -106,6 +106,9 @@ public:
 
 	bool m_bKeyInput = false; //키입력 체크
 	bool m_bGameStop = false;
+	//std::vector<GameObject*> m_objects;
+	//GameObject* m_pNextGameObjectOne = NULL; //다음출력될 블럭을 미리 보여주는 거. 플레이어 1
+	int m_nIndex = 0; //현재 선택된 메쉬의 종류를 판단해줄 index값 0~7
 	WPARAM m_lastKeyPressed; 
 
 public:

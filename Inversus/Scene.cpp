@@ -37,6 +37,12 @@ void Scene::OnProcessingMouseMessage(HWND hWnd, UINT nMessageID, WPARAM wParam, 
 			m_pPlayer2->m_nthisDestoryItemCount = 3;
 			m_pPlayer2->m_notherDestoryItemCount = 3;
 			m_pPlayer2->m_nChangeBlockCount = 5;
+
+			// °ÔÀÓ ½ÃÀÛÀ» ¼­¹ö¿¡ ¾Ë¸®´Â ÆĞÅ¶ Àü¼Û
+			/*if (m_pNetworkManager) {
+				m_pNetworkManager->SendAcceptServerPacket();
+			}*/
+
 			ReleaseObjects();	//¿ÀºêÁ§Æ®¸¦ »èÁ¦ÇÏ°í
 			BuildObjects();	//¿ÀºêÁ§Æ®¸¦ »ı¼ºÇÏ°í
 			m_bGameStart = true;
@@ -339,11 +345,7 @@ void Scene::BuildObjects()
 	
 	// ³×Æ®¿öÅ© ¸Å´ÏÀú ÃÊ±âÈ­ ¹× ¼­¹ö ¿¬°á
 	m_pNetworkManager = new NetworkManager();
-<<<<<<< HEAD
-	if (m_pNetworkManager->ConnectToServer("127.0.0.1", 8080)) { // ¼­¹ö IP¿Í Æ÷Æ®¸¦ ÀÔ·Â
-=======
 	if (m_pNetworkManager->ConnectToServer("127.0.0.1", 9000)) { // ¼­¹ö IP¿Í Æ÷Æ®¸¦ ÀÔ·Â
->>>>>>> 4577a03 (ì„œë²„ì™€ ì—°ê²° í™•ì¸ (1ì°¨))
 		// ¿¬°áÀÌ ¼º°øÇÑ °æ¿ì, Å¬¶óÀÌ¾ğÆ® Àü¼Û ½º·¹µå¸¦ ½ÃÀÛ
 		std::thread clientSendThread(&NetworkManager::Client_Send_Thread, m_pNetworkManager, m_pPlayer, this);
 		clientSendThread.detach(); // ½º·¹µå¸¦ ºĞ¸®ÇÏ¿© µ¶¸³ÀûÀ¸·Î ½ÇÇà
