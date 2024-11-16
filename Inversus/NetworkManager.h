@@ -37,6 +37,12 @@ public:
 
 private:
     SOCKET m_socket;
+    SOCKET udpSocket;      // UDP 소켓 (새로 추가)
+
+    // 추가: 서버 정보 저장
+    std::string m_serverIP;   // 서버 IP 주소
+    int m_serverPort;         // 서버 포트 번호
+
     bool m_initialized;
 };
 

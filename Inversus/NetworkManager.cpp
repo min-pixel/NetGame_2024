@@ -11,6 +11,7 @@
 NetworkManager::NetworkManager()
     : m_socket(INVALID_SOCKET), m_initialized(false)
 {
+    
 }
 
 NetworkManager::~NetworkManager()
@@ -53,6 +54,9 @@ bool NetworkManager::ConnectToServer(const std::string& serverIP, int serverPort
         return false;
     }
 
+
+
+
     sockaddr_in serverAddr;
     serverAddr.sin_family = AF_INET;
     inet_pton(AF_INET, serverIP.c_str(), &serverAddr.sin_addr);
@@ -67,6 +71,29 @@ bool NetworkManager::ConnectToServer(const std::string& serverIP, int serverPort
     }
 
     std::cout << "Connected to server!" << std::endl;
+
+    // UDP 소켓 생성
+    udpSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+    if (udpSocket == INVALID_SOCKET)
+    {
+        std::cerr << "UDP socket creation failed: " << WSAGetLastError() << std::endl;
+        closesocket(m_socket);
+        WSACleanup();
+        return false;
+    }
+    std::cout << "UDP socket created!" << std::endl;
+
+    // UDP 소켓에 서버 주소 바인딩 (필요 시)
+    result = connect(udpSocket, (SOCKADDR*)&serverAddr, sizeof(serverAddr));
+    if (result == SOCKET_ERROR)
+    {
+        std::cerr << "UDP connection setup failed: " << WSAGetLastError() << std::endl;
+        closesocket(m_socket);
+        closesocket(udpSocket);
+        return false;
+    }
+    std::cout << "UDP socket setup completed!" << std::endl;
+
 
     // 서버로 간단한 테스트 데이터 전송
     const char* testData = "Connection test message from game client";
@@ -113,6 +140,10 @@ bool NetworkManager::ConnectToServer(const std::string& serverIP, int serverPort
     //        break;
     //    }
     //}
+
+    // 서버 정보 저장 (멤버 변수)
+    m_serverIP = serverIP;
+    m_serverPort = serverPort;
 
     return true;
 }
@@ -198,6 +229,12 @@ void NetworkManager::Disconnect()
         closesocket(m_socket);
         m_socket = INVALID_SOCKET;
     }
+
+    if (udpSocket != INVALID_SOCKET)
+    {
+        closesocket(udpSocket);
+        udpSocket = INVALID_SOCKET;
+    }
 }
 
 //--------------------------------------------------------------------------------------------------------여기서부터 구현 (11/09)
@@ -227,8 +264,25 @@ bool NetworkManager::SendData(void* packet) {
         break;
     }
     case MESH_PACKET: {
+        // 메쉬 패킷은 UDP로 전송
         PlayerMeshPacket* meshPacket = static_cast<PlayerMeshPacket*>(packet);
-        result = send(m_socket, (char*)meshPacket, sizeof(PlayerMeshPacket), 0);
+
+        sockaddr_in serverAddr;
+        serverAddr.sin_family = AF_INET;
+        serverAddr.sin_port = htons(m_serverPort); // 서버 포트 설정
+        inet_pton(AF_INET, m_serverIP.c_str(), &serverAddr.sin_addr);
+
+        // UDP 전송
+        result = sendto(udpSocket, (char*)meshPacket, sizeof(PlayerMeshPacket), 0,
+            (sockaddr*)&serverAddr, sizeof(serverAddr));
+        if (result == SOCKET_ERROR)
+        {
+            std::cerr << "[Error] UDP send failed: " << WSAGetLastError() << std::endl;
+        }
+        else
+        {
+            std::cout << "[Debug] Sent Mesh Packet via UDP (Index: " << meshPacket->meshIndex << ")" << std::endl;
+        }
         break;
     }
     default:
