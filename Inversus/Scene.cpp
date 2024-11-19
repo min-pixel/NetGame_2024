@@ -48,7 +48,7 @@ void Scene::OnProcessingMouseMessage(HWND hWnd, UINT nMessageID, WPARAM wParam, 
 			BuildObjects();	//오브젝트를 생성하고
 
 			m_bGameStart = true;
-
+			m_bGameStop = false; //11월 19일 추가 : 재시작 안 하면 전송 안 하던 걸 해결.
 			m_pNetworkManager = new NetworkManager();
 			if (m_pNetworkManager->ConnectToServer("127.0.0.1", 9000)) { // 서버 IP와 포트를 입력
 				// 연결이 성공한 경우, 클라이언트 전송 스레드를 시작

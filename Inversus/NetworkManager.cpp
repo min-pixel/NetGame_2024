@@ -287,18 +287,15 @@ bool NetworkManager::SendData(void* packet) {
         // UDP 전송 : 문자열로 보내야 함. 혹은 배열값으로
         result = sendto(udpSocket, (char*)meshPacket, sizeof(PlayerMeshPacket), 0,
             (sockaddr*)&serverAddr, sizeof(serverAddr));
-        if (result == SOCKET_ERROR)
-        {
-            std::cerr << "[Error] UDP send failed: " << WSAGetLastError() << std::endl;
+        if (result == SOCKET_ERROR) {
+            std::string udpError = "[Error] UDP send failed: " + std::to_string(WSAGetLastError());
+            LogDebugOutput(udpError);
         }
-        else
-        {
-            std::cout << "[Debug] Sent Mesh Packet via UDP (Index: " << meshPacket->meshIndex << ")" << std::endl;
+        else {
+            std::string udpSuccess = "[Debug] Sent Mesh Packet via UDP (Index: " + std::to_string(meshPacket->meshIndex) + ")";
+            LogDebugOutput(udpSuccess);
         }
         break;
-
-       
-
     }
     default:
         std::cerr << "[Error] Unknown packet type." << std::endl;

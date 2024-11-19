@@ -1,7 +1,67 @@
 ﻿  NetworkManager.cpp
+  Scene.cpp
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(131,15): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(430,32): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(431,33): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(522,33): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(529,34): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(714,40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(746,40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(787,59): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(810,116): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(810,88): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(810,54): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(812,65): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(812,52): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(812,41): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(812,29): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(813,116): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(813,88): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(813,54): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(815,47): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(815,40): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(815,35): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(815,29): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(816,111): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(816,88): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(816,54): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(821,18): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(821,18): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(821,30): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(821,30): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(821,41): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(821,41): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(821,54): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(821,54): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(826,18): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(826,18): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(826,25): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(826,25): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(826,30): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(826,30): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(826,38): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(826,38): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(839,87): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(839,39): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(849,50): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(851,50): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(853,50): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(861,50): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(863,50): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(865,50): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(836,7): warning C4101: 'hPen' :참조되지 않은 지역 변수입니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(879,48): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(883,52): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(886,51): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(873,7): warning C4101: 'hPen' :참조되지 않은 지역 변수입니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(928,48): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(930,63): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(933,62): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(937,62): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\Inversus\Scene.cpp(941,53): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다.
-  4 of 808 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
+  2 of 808 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    12 functions had inline decision re-evaluated but remain unchanged
+    6 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   Inversus.vcxproj -> C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\x64\Release\Inversus.exe
