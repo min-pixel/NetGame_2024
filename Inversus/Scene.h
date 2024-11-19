@@ -51,14 +51,14 @@ private: //게임 오브젝트의 배열로 구성되어있다.
 
 	b2World* m_b2World = NULL;
 
-	int m_nIndexPlayerOne = 0;		//현재 1번 플레이어의 오브젝트들의 몇 번째 인덱스가 플레이어의 입력 제어를 받을지
-	std::vector<GameObject*> m_objects;
+	//int m_nIndexPlayerOne = 0;		//현재 1번 플레이어의 오브젝트들의 몇 번째 인덱스가 플레이어의 입력 제어를 받을지
+	//std::vector<GameObject*> m_objects;
 
 	int m_nIndexPlayerTwo = 0;
 	std::vector<GameObject*> m_objects2;
 
 	//랜덤하게 생성되는 블럭 관련 부분.
-	GameObject* m_pNextGameObjectOne = NULL; //다음출력될 블럭을 미리 보여주는 거. 플레이어 1
+	//GameObject* m_pNextGameObjectOne = NULL; //다음출력될 블럭을 미리 보여주는 거. 플레이어 1
 	GameObject* m_pNextGameObjectTwo = NULL; //다음출력될 블럭을 미리 보여주는 거.  플레이어 2
 
 	Point2D m_pTopPosition1;	//플레이어 1의 블럭들 중 가장 높은거 저장.
@@ -106,9 +106,10 @@ public:
 
 	bool m_bKeyInput = false; //키입력 체크
 	bool m_bGameStop = false;
-	//std::vector<GameObject*> m_objects;
-	//GameObject* m_pNextGameObjectOne = NULL; //다음출력될 블럭을 미리 보여주는 거. 플레이어 1
+	std::vector<GameObject*> m_objects;
+	GameObject* m_pNextGameObjectOne = NULL; //다음출력될 블럭을 미리 보여주는 거. 플레이어 1
 	int m_nIndex = 0; //현재 선택된 메쉬의 종류를 판단해줄 index값 0~7
+	int m_nIndexPlayerOne = 0;
 	WPARAM m_lastKeyPressed; 
 
 public:

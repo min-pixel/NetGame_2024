@@ -3,7 +3,16 @@
 #include "Scene.h"
 #include "GameObject.h"
 #include <thread>
+#include <mutex>
+#include <windows.h>
+#include <string>
 
+void LogDebugOutput(const std::string& message) {
+    OutputDebugStringA((message + "\n").c_str());
+}
+
+
+std::mutex packetMutex;
 #define BUFSIZE 512
 
 //아직 미완인 부분은 주석 처리함.
@@ -239,10 +248,6 @@ void NetworkManager::Disconnect()
 
 //--------------------------------------------------------------------------------------------------------여기서부터 구현 (11/09)
 bool NetworkManager::SendData(void* packet) {
-    if (m_socket == INVALID_SOCKET) {
-        std::cerr << "[Error] Socket is not connected." << std::endl;
-        return false;
-    }
 
     PacketType packetType = *(PacketType*)packet;
     int result;
@@ -267,12 +272,19 @@ bool NetworkManager::SendData(void* packet) {
         // 메쉬 패킷은 UDP로 전송
         PlayerMeshPacket* meshPacket = static_cast<PlayerMeshPacket*>(packet);
 
+
+        std::string debugMessage = "Packet Data - Type: MESH_PACKET, fx: " +
+            std::to_string(meshPacket->m_fxPosition) +
+            ", fy: " + std::to_string(meshPacket->m_fyPosition) +
+            ", meshIndex: " + std::to_string(meshPacket->meshIndex);
+        LogDebugOutput(debugMessage);
+
         sockaddr_in serverAddr;
         serverAddr.sin_family = AF_INET;
-        serverAddr.sin_port = htons(m_serverPort); // 서버 포트 설정
+        serverAddr.sin_port = htons(9500); // 서버 포트 설정
         inet_pton(AF_INET, m_serverIP.c_str(), &serverAddr.sin_addr);
 
-        // UDP 전송
+        // UDP 전송 : 문자열로 보내야 함. 혹은 배열값으로
         result = sendto(udpSocket, (char*)meshPacket, sizeof(PlayerMeshPacket), 0,
             (sockaddr*)&serverAddr, sizeof(serverAddr));
         if (result == SOCKET_ERROR)
@@ -284,6 +296,9 @@ bool NetworkManager::SendData(void* packet) {
             std::cout << "[Debug] Sent Mesh Packet via UDP (Index: " << meshPacket->meshIndex << ")" << std::endl;
         }
         break;
+
+       
+
     }
     default:
         std::cerr << "[Error] Unknown packet type." << std::endl;
@@ -302,76 +317,129 @@ bool NetworkManager::SendData(void* packet) {
 
 void NetworkManager::Client_Send_Thread(Player* player, Scene* scene) {
     
-    PlayerKeyControl keyControlPacket; // 키 입력 제어 패킷
+    PlayerMeshPacket meshPacket = {};  // 모든 값을 0으로 초기화 
+    PlayerKeyControl keyControlPacket = {}; // 모든 값을 0으로 초기화 
 
-    PlayerMeshPacket meshPacket;
-
+    
     //meshPacket.packetType = MESH_PACKET;
 
     // 이전 좌표를 저장하는 변수
-    //float lastFxPosition = -1.0f;
-    //float lastFyPosition = -1.0f;
+    float lastFxPosition = 0.0f;
+    float lastFyPosition = 0.0f;
     
-
+    //클라에서 데이터가 제대로 보내지는지 확인, 똑바로 가져와지는 지 확인.........
 
     while (scene->m_bGameStop == false) {  // scene의 m_bGameStop을 사용하여 루프 유지 여부 결정
+        std::lock_guard<std::mutex> lock(packetMutex);
+        if (scene->m_pNextGameObjectOne) {
 
-        //블럭의 위치 정보 패킷 전송 (미완)
-        //for (auto& object : scene->m_objects) {
-        //    if (object->m_fxPosition != lastFxPosition || object->m_fyPosition != lastFyPosition) { // y 좌표가 0보다 큰 블록만 전송
-        //        
-        //        // 좌표 업데이트
-        //        lastFxPosition = object->m_fxPosition; 
-        //        lastFyPosition = object->m_fyPosition; 
-        //        
-        //        meshPacket.m_fxPosition = object->m_fxPosition;
-        //        meshPacket.m_fyPosition = object->m_fyPosition;
+            if (!scene->m_objects.empty() && scene->m_nIndexPlayerOne >= 0 &&
+                scene->m_nIndexPlayerOne < scene->m_objects.size()) {
 
-        //        // 디버깅 메시지
-        //        std::cout << "[Debug] Sending Mesh Packet: ("
-        //            << meshPacket.m_fxPosition << ", "
-        //            << meshPacket.m_fyPosition << ")" << std::endl;
+                GameObject* activeBlock = scene->m_objects[scene->m_nIndexPlayerOne];  //다음 블럭의 위치 정보가 아니라, 현재 조작 중인 블럭이어야 함. 즉, 수정이 필요.
+                // 패킷 데이터 설정
 
-        //        // 서버로 패킷 전송
-        //        this->SendData(&meshPacket);
-        //    }
-        //}
+                //if (activeBlock->m_fxPosition != lastFxPosition || activeBlock->m_fyPosition != lastFyPosition) {
+                    //lastFxPosition = activeBlock->m_fxPosition;
+                    //lastFyPosition = activeBlock->m_fyPosition;
 
+                meshPacket.packetType = MESH_PACKET;
+                meshPacket.m_fxPosition = activeBlock->m_fxPosition;
+                meshPacket.m_fyPosition = activeBlock->m_fyPosition;
+                meshPacket.meshIndex = scene->m_nIndex;
 
-            // 키 입력이 있을 경우 키 입력 제어 패킷 전송
-            if (scene->m_bKeyInput) {
-                switch (scene->m_lastKeyPressed) {
-                case VK_LEFT:
-                    keyControlPacket.nMessageID = VK_LEFT;
-                    break;
-                case VK_RIGHT:
-                    keyControlPacket.nMessageID = VK_RIGHT;
-                    break;
-                case VK_UP:
-                    keyControlPacket.nMessageID = VK_UP;
-                    break;
-                case VK_DOWN:
-                    keyControlPacket.nMessageID = VK_DOWN;
-                    break;
-                case VK_OEM_COMMA:
-                    keyControlPacket.nMessageID = VK_OEM_COMMA;
-                    break;
-                case VK_OEM_PERIOD:
-                    keyControlPacket.nMessageID = VK_OEM_PERIOD;
-                    break;
-                default:
-                    break;
+                // 서버로 패킷 전송
+                this->SendData(&meshPacket);
+                if (!this->SendData(&meshPacket)) {
+                    std::cerr << "[Error] Failed to send mesh packet to server." << std::endl;
                 }
 
-                // 디버깅 메시지
-                std::cout << "[Debug] Sending Key Packet: Key = " << keyControlPacket.nMessageID << std::endl;
 
-                meshPacket.meshIndex = scene->m_nIndex;
-                this->SendData(static_cast<void*>(&keyControlPacket));
-                this->SendData(&meshPacket);
+                /*std::string debugMessage = "Sending Packet: fx: " + std::to_string(activeBlock->m_fxPosition) +
+                    ", fy: " + std::to_string(activeBlock->m_fyPosition) +
+                    ", meshIndex: " + std::to_string(scene->m_nIndex);
+                LogDebugOutput(debugMessage);*/
+
+
+
             }
-            Sleep(100); // 전송 주기 (0.1초)
+
+           // }
+        }
         
+
+        // 서버로 패킷 전송
+        //this->SendData(&meshPacket);
+
+
+        // 키 입력이 있을 경우 키 입력 제어 패킷 전송
+        if (scene->m_bKeyInput) {
+
+            switch (scene->m_lastKeyPressed) {
+            case VK_LEFT:
+                keyControlPacket.nMessageID = VK_LEFT;
+                break;
+            case VK_RIGHT:
+                keyControlPacket.nMessageID = VK_RIGHT;
+                break;
+            case VK_UP:
+                keyControlPacket.nMessageID = VK_UP;
+                break;
+            case VK_DOWN:
+                keyControlPacket.nMessageID = VK_DOWN;
+                break;
+            case VK_OEM_COMMA:
+                keyControlPacket.nMessageID = VK_OEM_COMMA;
+                break;
+            case VK_OEM_PERIOD:
+                keyControlPacket.nMessageID = VK_OEM_PERIOD;
+                break;
+            default:
+                break;
+            }
+
+            // 디버깅 메시지
+            std::cout << "[Debug] Sending Key Packet: Key = " << keyControlPacket.nMessageID << std::endl;
+
+            keyControlPacket.packetType = KEY_CONTROL_PACKET;
+            //meshPacket.meshIndex = scene->m_nIndex;
+            this->SendData(static_cast<void*>(&keyControlPacket));
+            //this->SendData(&meshPacket);
+
+            // 플레이어 1의 조작 중인 블록의 위치 정보 전송
+            //if (scene->m_pNextGameObjectOne) {
+            //    GameObject* activeBlock = scene->m_pNextGameObjectOne;
+
+            //    // 이전 위치와 비교하여 변경이 있는 경우에만 전송
+            //    if (activeBlock->m_fxPosition != lastFxPosition || activeBlock->m_fyPosition != lastFyPosition) {
+            //        // 좌표 업데이트
+            //        lastFxPosition = activeBlock->m_fxPosition;
+            //        lastFyPosition = activeBlock->m_fyPosition;
+
+            //        // 패킷 데이터 설정
+            //        meshPacket.packetType = MESH_PACKET;
+            //        meshPacket.m_fxPosition = activeBlock->m_fxPosition;
+            //        meshPacket.m_fyPosition = activeBlock->m_fyPosition;
+            //        meshPacket.meshIndex = scene->m_nIndex;
+
+            //        // 디버깅 메시지
+            //        std::cout << "[Debug] Sending Mesh Packet: ("
+            //            << meshPacket.m_fxPosition << ", "
+            //            << meshPacket.m_fyPosition << ")" << std::endl;
+
+            //        // 서버로 패킷 전송
+            //        this->SendData(&meshPacket);
+            //    }
+            //}
+
+
+
+        }
+        Sleep(1000); // 전송 주기 (1초)
+    
     }
 }
+
+
+
 

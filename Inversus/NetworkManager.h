@@ -6,6 +6,7 @@
 #include <iostream>
 #include "Packet.h"
 
+
 #pragma comment(lib, "Ws2_32.lib")
 
 #define DEFAULT_BUFFER_LENGTH 512 // 버퍼의 크기를 정의
@@ -14,6 +15,7 @@
 // 전방 선언 추가
 class Scene;
 class Player;
+class GameObject;
 
 
 
@@ -23,6 +25,7 @@ class NetworkManager
 public:
     NetworkManager();
     ~NetworkManager();
+
 
     bool Initialize();
     bool ConnectToServer(const std::string& serverIP, int serverPort);
@@ -36,6 +39,9 @@ public:
     SOCKET GetSocket() const { return m_socket; }
 
 private:
+
+    
+
     SOCKET m_socket;
     SOCKET udpSocket;      // UDP 소켓 (새로 추가)
 

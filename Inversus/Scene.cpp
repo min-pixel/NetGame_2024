@@ -21,6 +21,7 @@ Scene::~Scene()
 {
 }
 
+
 void Scene::OnProcessingMouseMessage(HWND hWnd, UINT nMessageID, WPARAM wParam, LPARAM lParam)
 {
 	//값을 받아오기 위함
@@ -45,7 +46,20 @@ void Scene::OnProcessingMouseMessage(HWND hWnd, UINT nMessageID, WPARAM wParam, 
 
 			ReleaseObjects();	//오브젝트를 삭제하고
 			BuildObjects();	//오브젝트를 생성하고
+
 			m_bGameStart = true;
+
+			m_pNetworkManager = new NetworkManager();
+			if (m_pNetworkManager->ConnectToServer("127.0.0.1", 9000)) { // 서버 IP와 포트를 입력
+				// 연결이 성공한 경우, 클라이언트 전송 스레드를 시작
+				std::thread clientSendThread(&NetworkManager::Client_Send_Thread, m_pNetworkManager, m_pPlayer, this);
+				clientSendThread.detach(); // 스레드를 분리하여 독립적으로 실행
+			}
+			else {
+				// 연결 실패 처리
+				MessageBox(NULL, L"서버에 연결할 수 없습니다.", L"네트워크 오류", MB_OK | MB_ICONERROR);
+			}
+
 		}// exit 버튼을 클릭 했을때 로직
 		else if (m_MouseX < m_DbtnLeft + (FRAMEBUFFER_WIDTH / 4) && m_MouseX> m_DbtnRight - (FRAMEBUFFER_WIDTH / 4) && m_MouseY > (m_DbtnTop + (FRAMEBUFFER_HEIGHT / 10) * 2) && m_MouseY < m_DbtnBottom + (FRAMEBUFFER_HEIGHT / 10) * 2)
 		{
@@ -344,16 +358,16 @@ void Scene::BuildObjects()
 {
 	
 	// 네트워크 매니저 초기화 및 서버 연결
-	m_pNetworkManager = new NetworkManager();
-	if (m_pNetworkManager->ConnectToServer("127.0.0.1", 9000)) { // 서버 IP와 포트를 입력
-		// 연결이 성공한 경우, 클라이언트 전송 스레드를 시작
-		std::thread clientSendThread(&NetworkManager::Client_Send_Thread, m_pNetworkManager, m_pPlayer, this);
-		clientSendThread.detach(); // 스레드를 분리하여 독립적으로 실행
-	}
-	else {
-		// 연결 실패 처리
-		MessageBox(NULL, L"서버에 연결할 수 없습니다.", L"네트워크 오류", MB_OK | MB_ICONERROR);
-	}
+	//m_pNetworkManager = new NetworkManager();
+	//if (m_pNetworkManager->ConnectToServer("127.0.0.1", 9000)) { // 서버 IP와 포트를 입력
+	//	// 연결이 성공한 경우, 클라이언트 전송 스레드를 시작
+	//	std::thread clientSendThread(&NetworkManager::Client_Send_Thread, m_pNetworkManager, m_pPlayer, this);
+	//	clientSendThread.detach(); // 스레드를 분리하여 독립적으로 실행
+	//}
+	//else {
+	//	// 연결 실패 처리
+	//	MessageBox(NULL, L"서버에 연결할 수 없습니다.", L"네트워크 오류", MB_OK | MB_ICONERROR);
+	//}
 
 
 	float x = 0.0f; // 초기 위치 x
