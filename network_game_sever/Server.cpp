@@ -8,18 +8,31 @@
 #define MAX_CLIENT_COUNT 2
 #define UDP_SERVERPORT 9500
 
+enum PacketType {
+    MESH_PACKET
+};
+
+
+struct PlayerMeshPacket {
+    PacketType packetType = MESH_PACKET;  // 기본값 설정
+    float m_fxPosition;
+    float m_fyPosition;
+    int meshIndex;
+};
+
+
+
 // UDP Thread 함수
 DWORD WINAPI UDP_thread(LPVOID param) {
     SOCKET udp_sock = (SOCKET)param;  // 전달된 UDP 소켓을 받아서 사용
     struct sockaddr_in udp_clientaddr;
-    
-
     int udp_addrlen;
     char udp_buf[BUFSIZE + 1];
     int udp_retval;
     int udp_count = 0;
     int udp_client_sockets[MAX_CLIENT_COUNT] = { 0 };
     int port1;
+
     // 클라이언트와 데이터 통신
     while (1) {
         // 데이터 받기
@@ -37,12 +50,13 @@ DWORD WINAPI UDP_thread(LPVOID param) {
         inet_ntop(AF_INET, &udp_clientaddr.sin_addr, addr, sizeof(addr));
         int client_port = ntohs(udp_clientaddr.sin_port);
 
-        // 받은 데이터 출력
-        udp_buf[udp_retval] = '\0';  // 받은 데이터에 NULL 종료 문자 추가
-        printf("받았습니다 udp %s   주소 : %s 포트: %d\n", udp_buf, addr, ntohs(udp_clientaddr.sin_port));
-        
-        // 클라이언트 포트가 이미 존재하는지 확인
+        PlayerMeshPacket* receivedPacket = (PlayerMeshPacket*)udp_buf;
 
+        // 받은 데이터 출력
+        printf("받은 데이터: Position(%f, %f), Mesh Index:%d, port:%d\n",
+            receivedPacket->m_fxPosition, receivedPacket->m_fyPosition, receivedPacket->meshIndex, ntohs(udp_clientaddr.sin_port));
+
+        // 클라이언트 포트가 이미 존재하는지 확인
         bool isNewClient = true;
         for (int i = 0; i < udp_count; i++) {
             if (udp_client_sockets[i] == client_port) {
@@ -63,22 +77,21 @@ DWORD WINAPI UDP_thread(LPVOID param) {
             // 포트 번호에 따라 메시지를 다른 클라이언트에게 전송
             if (client_port == udp_client_sockets[0]) {
                 udp_clientaddr.sin_port = htons(udp_client_sockets[1]);
-                sendto(udp_sock, udp_buf, udp_retval, 0, (struct sockaddr*)&udp_clientaddr, sizeof(udp_clientaddr));
-                printf("보냈습니다1 %s\n",udp_buf);
+                sendto(udp_sock, (char*)receivedPacket, sizeof(PlayerMeshPacket), 0,
+                    (struct sockaddr*)&udp_clientaddr, sizeof(udp_clientaddr));
+                printf("보냈습니다1: %f, %f, %d\n",
+                    receivedPacket->m_fxPosition, receivedPacket->m_fyPosition, ntohl(receivedPacket->meshIndex));
             }
             else if (client_port == udp_client_sockets[1]) {
                 udp_clientaddr.sin_port = htons(udp_client_sockets[0]);
-                sendto(udp_sock, udp_buf, udp_retval, 0, (struct sockaddr*)&udp_clientaddr, sizeof(udp_clientaddr));
-                printf("보냈습니다2 %s\n", udp_buf);
+                sendto(udp_sock, (char*)receivedPacket, sizeof(PlayerMeshPacket), 0,
+                    (struct sockaddr*)&udp_clientaddr, sizeof(udp_clientaddr));
+                printf("보냈습니다2: %f, %f, %d\n",
+                    receivedPacket->m_fxPosition, receivedPacket->m_fyPosition, ntohl(receivedPacket->meshIndex));
             }
         }
 
         fflush(stdout);  // 출력 버퍼를 즉시 플러시
-
-        
-
-
-        
     }
 
     return 0;  // 쓰레드 종료
