@@ -81,31 +81,31 @@ bool NetworkManager::ConnectToServer(const std::string& serverIP, int serverPort
 
     std::cout << "Connected to server!" << std::endl;
 
-    // UDP 소켓 생성
-    udpSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-    if (udpSocket == INVALID_SOCKET)
-    {
-        std::cerr << "UDP socket creation failed: " << WSAGetLastError() << std::endl;
-        closesocket(m_socket);
-        WSACleanup();
-        return false;
-    }
-    std::cout << "UDP socket created!" << std::endl;
+    //// UDP 소켓 생성
+    //udpSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+    //if (udpSocket == INVALID_SOCKET)
+    //{
+    //    std::cerr << "UDP socket creation failed: " << WSAGetLastError() << std::endl;
+    //    closesocket(m_socket);
+    //    WSACleanup();
+    //    return false;
+    //}
+    //std::cout << "UDP socket created!" << std::endl;
 
-    // UDP 소켓에 서버 주소 바인딩 (필요 시)
-    result = connect(udpSocket, (SOCKADDR*)&serverAddr, sizeof(serverAddr));
-    if (result == SOCKET_ERROR)
-    {
-        std::cerr << "UDP connection setup failed: " << WSAGetLastError() << std::endl;
-        closesocket(m_socket);
-        closesocket(udpSocket);
-        return false;
-    }
-    std::cout << "UDP socket setup completed!" << std::endl;
+    //// UDP 소켓에 서버 주소 바인딩 (필요 시)
+    //result = connect(udpSocket, (SOCKADDR*)&serverAddr, sizeof(serverAddr));
+    //if (result == SOCKET_ERROR)
+    //{
+    //    std::cerr << "UDP connection setup failed: " << WSAGetLastError() << std::endl;
+    //    closesocket(m_socket);
+    //    closesocket(udpSocket);
+    //    return false;
+    //}
+    //std::cout << "UDP socket setup completed!" << std::endl;
 
 
     // 서버로 간단한 테스트 데이터 전송
-    const char* testData = "Connection test message from game client";
+    /*const char* testData = "Connection test message from game client";
     result = send(m_socket, testData, static_cast<int>(strlen(testData)), 0);
     if (result == SOCKET_ERROR)
     {
@@ -113,7 +113,7 @@ bool NetworkManager::ConnectToServer(const std::string& serverIP, int serverPort
         closesocket(m_socket);
         return false;
     }
-    std::cout << "Sent test data: " << testData << std::endl;
+    std::cout << "Sent test data: " << testData << std::endl;*/
 
     // getPlayer 패킷 생성 및 서버로 전송
     //getPlayer playerPacket;
@@ -153,6 +153,37 @@ bool NetworkManager::ConnectToServer(const std::string& serverIP, int serverPort
     // 서버 정보 저장 (멤버 변수)
     m_serverIP = serverIP;
     m_serverPort = serverPort;
+
+    // 서버로부터 데이터 수신을 처리하는 스레드 시작    처음 시도한 방법
+    std::thread receiveThread(&NetworkManager::ReceiveThread, this);
+    receiveThread.detach();
+
+    // 서버로부터 지속적으로 데이터를 수신      두 번쨰 시도한 방법
+    //char buffer[sizeof(int)];
+    //while (true)
+    //{
+    //    int timeData = 0;
+    //    result = recv(m_socket, buffer, sizeof(int), 0);
+    //    if (result > 0)
+    //    {
+    //        timeData = ntohl(*reinterpret_cast<int*>(buffer)); // 네트워크 바이트 순서 -> 호스트 바이트 순서
+    //        std::string debugMessage = "[Debug] Received Time from Server: " + std::to_string(timeData) + " seconds";
+    //        LogDebugOutput(debugMessage);
+    //    }
+    //    else if (result == 0)
+    //    {
+    //        std::cerr << "Connection closed by server." << std::endl;
+    //        break; // 서버가 연결을 종료한 경우
+    //    }
+    //    else
+    //    {
+    //        std::cerr << "Receive failed: " << WSAGetLastError() << std::endl;
+    //        break; // 오류 발생 시 종료
+    //    }
+
+    //    Sleep(1000); // CPU 사용량을 낮추기 위해 대기
+    //}
+
 
     return true;
 }
@@ -239,11 +270,12 @@ void NetworkManager::Disconnect()
         m_socket = INVALID_SOCKET;
     }
 
-    if (udpSocket != INVALID_SOCKET)
+    //UDP
+    /*if (udpSocket != INVALID_SOCKET)
     {
         closesocket(udpSocket);
         udpSocket = INVALID_SOCKET;
-    }
+    }*/
 }
 
 //--------------------------------------------------------------------------------------------------------여기서부터 구현 (11/09)
@@ -253,13 +285,13 @@ bool NetworkManager::SendData(void* packet) {
     int result;
 
     // 패킷 타입 전송
-    result = send(m_socket, (char*)&packetType, sizeof(PacketType), 0);
+    /*result = send(m_socket, (char*)&packetType, sizeof(PacketType), 0);
     if (result == SOCKET_ERROR) {
         std::cerr << "[Error] Send failed (packet type): " << WSAGetLastError() << std::endl;
         closesocket(m_socket);
         return false;
     }
-    std::cout << "[Debug] Sent packet type: " << packetType << std::endl;
+    std::cout << "[Debug] Sent packet type: " << packetType << std::endl;*/
 
     // 패킷 데이터 전송
     switch (packetType) {
@@ -273,27 +305,28 @@ bool NetworkManager::SendData(void* packet) {
         PlayerMeshPacket* meshPacket = static_cast<PlayerMeshPacket*>(packet);
 
 
-        std::string debugMessage = "Packet Data - Type: MESH_PACKET, fx: " +
+        /*std::string debugMessage = "Packet Data - Type: MESH_PACKET, fx: " +
             std::to_string(meshPacket->m_fxPosition) +
             ", fy: " + std::to_string(meshPacket->m_fyPosition) +
-            ", meshIndex: " + std::to_string(meshPacket->meshIndex);
-        LogDebugOutput(debugMessage);
+            ", meshIndex: " + std::to_string(meshPacket->meshIndex) +
+            ", Rotation: " + std::to_string(meshPacket->m_fRotation);
+        LogDebugOutput(debugMessage);*/
 
-        sockaddr_in serverAddr;
-        serverAddr.sin_family = AF_INET;
-        serverAddr.sin_port = htons(9500); // 서버 포트 설정
-        inet_pton(AF_INET, m_serverIP.c_str(), &serverAddr.sin_addr);
+        //UDP 파트
+        //sockaddr_in serverAddr;
+        //serverAddr.sin_family = AF_INET;
+        //serverAddr.sin_port = htons(9500); // 서버 포트 설정
+        //inet_pton(AF_INET, m_serverIP.c_str(), &serverAddr.sin_addr);
 
-        // UDP 전송 : 문자열로 보내야 함. 혹은 배열값으로
-        result = sendto(udpSocket, (char*)meshPacket, sizeof(PlayerMeshPacket), 0,
-            (sockaddr*)&serverAddr, sizeof(serverAddr));
+        // UDP 전송 : 문자열로 보내야 함. 혹은 배열값으로  -> 11월22일 TCP 전송으로 변경
+        result = send(m_socket, (char*)meshPacket, sizeof(PlayerMeshPacket), 0);
         if (result == SOCKET_ERROR) {
-            std::string udpError = "[Error] UDP send failed: " + std::to_string(WSAGetLastError());
+            std::string udpError = "[Error] TCP send failed: " + std::to_string(WSAGetLastError());
             LogDebugOutput(udpError);
         }
         else {
-            std::string udpSuccess = "[Debug] Sent Mesh Packet via UDP (Index: " + std::to_string(meshPacket->meshIndex) + ")";
-            LogDebugOutput(udpSuccess);
+            /*std::string udpSuccess = "[Debug] Sent Mesh Packet via TCP (Index: " + std::to_string(meshPacket->meshIndex) + ")";
+            LogDebugOutput(udpSuccess);*/
         }
         break;
     }
@@ -323,6 +356,7 @@ void NetworkManager::Client_Send_Thread(Player* player, Scene* scene) {
     // 이전 좌표를 저장하는 변수
     float lastFxPosition = 0.0f;
     float lastFyPosition = 0.0f;
+    //float lastFRotaion = 0.0f;
     
     //클라에서 데이터가 제대로 보내지는지 확인, 똑바로 가져와지는 지 확인.........
 
@@ -333,23 +367,25 @@ void NetworkManager::Client_Send_Thread(Player* player, Scene* scene) {
             if (!scene->m_objects.empty() && scene->m_nIndexPlayerOne >= 0 &&
                 scene->m_nIndexPlayerOne < scene->m_objects.size()) {
 
-                GameObject* activeBlock = scene->m_objects[scene->m_nIndexPlayerOne];  //다음 블럭의 위치 정보가 아니라, 현재 조작 중인 블럭이어야 함. 즉, 수정이 필요.
+                GameObject* activeBlock = scene->m_objects[scene->m_nIndexPlayerOne];  //현재 조작중인 블럭의 정보.
                 // 패킷 데이터 설정
 
-                //if (activeBlock->m_fxPosition != lastFxPosition || activeBlock->m_fyPosition != lastFyPosition) {
-                    //lastFxPosition = activeBlock->m_fxPosition;
-                    //lastFyPosition = activeBlock->m_fyPosition;
+                if (activeBlock->m_fxPosition != lastFxPosition || activeBlock->m_fyPosition != lastFyPosition) { //블럭의 위치가 바뀌면 전송
+                    lastFxPosition = activeBlock->m_fxPosition;
+                    lastFyPosition = activeBlock->m_fyPosition;
+                    //lastFRotaion = activeBlock->m_fRotation;
 
-                meshPacket.packetType = MESH_PACKET;
-                meshPacket.m_fxPosition = activeBlock->m_fxPosition;
-                meshPacket.m_fyPosition = activeBlock->m_fyPosition;
-                meshPacket.meshIndex = scene->m_nIndex;
+                    meshPacket.packetType = MESH_PACKET;
+                    meshPacket.m_fxPosition = activeBlock->m_fxPosition;
+                    meshPacket.m_fyPosition = activeBlock->m_fyPosition;
+                    //meshPacket.m_fRotation = activeBlock->m_fRotation;
+                    meshPacket.meshIndex = scene->m_nIndex;
 
                 // 서버로 패킷 전송
-                this->SendData(&meshPacket);
-                if (!this->SendData(&meshPacket)) {
-                    std::cerr << "[Error] Failed to send mesh packet to server." << std::endl;
-                }
+                    this->SendData(&meshPacket);
+                    if (!this->SendData(&meshPacket)) {
+                        std::cerr << "[Error] Failed to send mesh packet to server." << std::endl;
+                    }
 
 
                 /*std::string debugMessage = "Sending Packet: fx: " + std::to_string(activeBlock->m_fxPosition) +
@@ -359,9 +395,9 @@ void NetworkManager::Client_Send_Thread(Player* player, Scene* scene) {
 
 
 
-            }
+                }
 
-           // }
+            }
         }
         
 
@@ -432,11 +468,58 @@ void NetworkManager::Client_Send_Thread(Player* player, Scene* scene) {
 
 
         }
-        Sleep(1000); // 전송 주기 (1초)
+        Sleep(100); // 전송 주기 (0.1초)
     
     }
 }
 
+// 처음 시도한 방법
+void NetworkManager::ReceiveThread()
+{
+    while (true)
+    {
+        int timeData;
+        if (ReceiveTimeData(timeData))
+        {
+            std::string debugMessage = "[Debug] Received Time from Server: " + std::to_string(timeData) + " seconds";
+            LogDebugOutput(debugMessage);
+        }
+        else
+        {
+            break; // 연결 종료 또는 오류 발생 시 루프 종료
+        }
+
+        Sleep(1000); // CPU 사용량을 낮추기 위해 약간의 대기
+    }
+}
+
+bool NetworkManager::ReceiveTimeData(int& timeData)
+{
+    if (m_socket == INVALID_SOCKET)
+    {
+        std::cerr << "Socket is not connected." << std::endl;
+        return false;
+    }
+
+
+    //std::lock_guard<std::mutex> lock(packetMutex); // 소켓 접근 동기화
+    char buffer[sizeof(int)];
+    int result = recv(m_socket, buffer, sizeof(int), 0);
+    if (result > 0)
+    {
+        timeData = ntohl(*reinterpret_cast<int*>(buffer)); // 네트워크 바이트 순서 -> 호스트 바이트 순서
+        return true;
+    }
+    else if (result == 0)
+    {
+        std::cerr << "Connection closed by server." << std::endl;
+    }
+    else
+    {
+        std::cerr << "Receive failed: " << WSAGetLastError() << std::endl;
+    }
+    return false;
+}
 
 
 

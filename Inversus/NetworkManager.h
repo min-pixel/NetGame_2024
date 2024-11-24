@@ -36,6 +36,10 @@ public:
     //bool SendAcceptServerPacket();
     void Disconnect();
 
+    // 처음 시도한 방법
+    bool ReceiveTimeData(int& timeData);
+    void ReceiveThread();
+
     SOCKET GetSocket() const { return m_socket; }
 
 private:

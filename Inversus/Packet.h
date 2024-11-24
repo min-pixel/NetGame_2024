@@ -26,6 +26,7 @@ struct PlayerMeshPacket {
     PacketType packetType = MESH_PACKET;
     float m_fxPosition;
     float m_fyPosition;
+    //float m_fRotation;
     int meshIndex;  // 블록의 메쉬 타입 (0~7 범위의 인덱스)
     //float m_fMovingSpeed;
     /*GameObject* m_pNextGameObjectOne;
