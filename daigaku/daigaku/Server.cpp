@@ -11,7 +11,7 @@ DWORD WINAPI Combined_TCP_Thread(LPVOID param) {
     char buffer[BUFSIZE + 1];
     int retval;
     int inner_time;
-
+    int SavePosition[2]{};
     auto start = std::chrono::high_resolution_clock::now(); // 시작 시간 기록
 
     fd_set readfds;  // 읽기 가능한 소켓을 관리할 집합 //이부분 select GPT사용 좀더 해봐야할듯 데이터 안들어올때 오류뜨는거라
@@ -21,6 +21,7 @@ DWORD WINAPI Combined_TCP_Thread(LPVOID param) {
         auto now = std::chrono::high_resolution_clock::now();
         std::chrono::duration<float> elapsed = now - start; // float 형식으로 경과 시간 저장
         inner_time = static_cast<int>(elapsed.count());
+        
 
         // 읽기 가능한 소켓을 확인
         FD_ZERO(&readfds);  // 기존에 설정된 소켓 집합 초기화
@@ -61,11 +62,13 @@ DWORD WINAPI Combined_TCP_Thread(LPVOID param) {
 
                 // 받은 데이터 처리
                 PlayerMeshPacket* receivedPacket = (PlayerMeshPacket*)buffer;
-
+                
                 // 받은 데이터 출력
                 printf("받은 데이터(클라이언트 %d): Position(%f, %f), Mesh Index:%d\n",
                     i, receivedPacket->m_fxPosition, receivedPacket->m_fyPosition, receivedPacket->meshIndex);
-
+                //이쪽 부분 수정(준)
+                SavePosition[i] = receivedPacket->topPositionRate;
+                // 여기까지(준)
                 // 상대 클라이언트로 데이터 전송
                 int targetClient = (i == 0) ? 1 : 0;  // 현재 클라이언트가 0이면 1로
                 retval = send(client_sockets[targetClient], (char*)receivedPacket, sizeof(PlayerMeshPacket), 0);
@@ -73,7 +76,7 @@ DWORD WINAPI Combined_TCP_Thread(LPVOID param) {
                     printf("TCP send error (클라이언트 %d -> 클라이언트 %d)\n", i, targetClient);
                     continue; // 전송 오류가 발생한 경우, 해당 전송을 건너뛰고 계속 진행
                 }
-               
+
                 printf("보냈습니다(클라이언트 %d -> 클라이언트 %d): Position(%f, %f), Mesh Index:%d\n",
                     i, targetClient, receivedPacket->m_fxPosition, receivedPacket->m_fyPosition, receivedPacket->meshIndex);
             }
@@ -90,16 +93,28 @@ DWORD WINAPI Combined_TCP_Thread(LPVOID param) {
         }
         if (inner_time == 100)
         {
-            for (int i = 0; i < 2; i++)
-            {
-                retval = send(client_sockets[i], /**/);
-                if (retval == SOCKET_ERROR)
+            //끝났을 때 무슨 값을 보내야 하는지...
+           
+                for (int i = 0; i < 2; i++)
                 {
-                    printf("sendERROR %d\n", i);
+                    PlayerMeshPacket meshHeight;
+                    if (SavePosition[0] < SavePosition[1])
+                    {
+                        meshHeight.Win = (i == 1);
+                    }
+                    else {
+                        meshHeight.Win = (i == 0);
+                    }
+                    retval = send(client_sockets[i], (char*)&meshHeight, sizeof(PlayerMeshPacket), 0);
+                    //소켓 값에 동일하게 종료 되었다란 걸 보내야 할텐데
+                    if (retval == SOCKET_ERROR)
+                    {
+                        printf("sendERROR %d\n", i);
+                    }
                 }
             }
             //소켓종료부분
-           
+
 
         }
 
@@ -127,21 +142,21 @@ DWORD WINAPI ITEM_KEY_Packet(LPVOID param)
             retval = recv(client_sockets[i], key_buf, sizeof(client_sockets), 0);
             if (SOCKET_ERROR == retval)
             {
-                err_quit("recvErrorKey");
+                printf("recv에러 %d번째 소캣", i);
                 continue;
             }
         }
         //recv Key 
         switch (packetTp) {
         case KEY_CONTROL_PACKET:
-        { 
+        {
             //send key
             for (int i = 0; i < MAX_CLIENT_COUNT; i++)
             {
                 retval = send(client_sockets[i], key_buf, sizeof(PlayerKeyControlPacket), 0);
                 if (SOCKET_ERROR == retval)
                 {
-                    err_quit("SendErrorKey");
+                    printf("send에러 %d번째 소켓", i);
                     continue;
                 }
             }
