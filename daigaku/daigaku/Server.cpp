@@ -6,82 +6,112 @@
 #define UDP_SERVERPORT 9500
 
 
-// UDP Thread 함수
-DWORD WINAPI UDP_thread(LPVOID param) {
-    SOCKET udp_sock = (SOCKET)param;  // 전달된 UDP 소켓을 받아서 사용
-    struct sockaddr_in udp_clientaddr;
-    int udp_addrlen;
-    char udp_buf[BUFSIZE + 1];
-    int udp_retval;
-    int udp_count = 0;
-    int udp_client_sockets[MAX_CLIENT_COUNT] = { 0 };
-    int port1;
+DWORD WINAPI Combined_TCP_Thread(LPVOID param) {
+    SOCKET* client_sockets = (SOCKET*)param;  // 클라이언트 소켓 배열
+    char buffer[BUFSIZE + 1];
+    int retval;
+    int inner_time;
 
-    // 클라이언트와 데이터 통신
-    while (1) {
-        // 데이터 받기
-        udp_addrlen = sizeof(udp_clientaddr);
-        udp_retval = recvfrom(udp_sock, udp_buf, BUFSIZE, 0,
-            (struct sockaddr*)&udp_clientaddr, &udp_addrlen);
+    auto start = std::chrono::high_resolution_clock::now(); // 시작 시간 기록
 
-        if (udp_retval == SOCKET_ERROR) {
-            printf("UDP recvfrom error\n");
+    fd_set readfds;  // 읽기 가능한 소켓을 관리할 집합 //이부분 select GPT사용 좀더 해봐야할듯 데이터 안들어올때 오류뜨는거라
+
+    while (true) {
+        // 경과 시간 계산
+        auto now = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<float> elapsed = now - start; // float 형식으로 경과 시간 저장
+        inner_time = static_cast<int>(elapsed.count());
+
+        // 읽기 가능한 소켓을 확인
+        FD_ZERO(&readfds);  // 기존에 설정된 소켓 집합 초기화
+        FD_SET(client_sockets[0], &readfds);  // 첫 번째 클라이언트 소켓을 추가
+        FD_SET(client_sockets[1], &readfds);  // 두 번째 클라이언트 소켓을 추가
+
+        // select 호출하여 읽기 가능한 소켓을 기다림 (타임아웃을 0.1초로 설정)
+        struct timeval timeout;
+        timeout.tv_sec = 0;
+        timeout.tv_usec = 100000;
+
+        retval = select(0, &readfds, NULL, NULL, &timeout);
+        if (retval == SOCKET_ERROR) {
+            printf("select error\n");
             break;
         }
 
-        // 클라이언트 주소 출력
-        char addr[INET_ADDRSTRLEN];
-        inet_ntop(AF_INET, &udp_clientaddr.sin_addr, addr, sizeof(addr));
-        int client_port = ntohs(udp_clientaddr.sin_port);
+        if (retval == 0) {
+            // 타임아웃 발생 (데이터가 없으면 계속 대기)
+            continue;
+        }
 
-        PlayerMeshPacket* receivedPacket = (PlayerMeshPacket*)udp_buf;
+        // 데이터를 수신할 수 있는 소켓 확인
+        for (int i = 0; i < 2; i++) {
+            if (FD_ISSET(client_sockets[i], &readfds)) {  // 해당 소켓이 준비되었을 때만 처리
+                // 데이터 수신
+                retval = recv(client_sockets[i], buffer, BUFSIZE, 0);
+                if (retval == SOCKET_ERROR) {
+                    printf("TCP recv error (클라이언트 %d)\n", i);
+                    continue; // 에러가 발생한 경우 이 클라이언트는 건너뛰고, 다음 클라이언트로 이동
+                }
 
-        // 받은 데이터 출력
-        printf("받은 데이터: Position(%f, %f), Mesh Index:%d, port:%d\n",
-            receivedPacket->m_fxPosition, receivedPacket->m_fyPosition, receivedPacket->meshIndex, ntohs(udp_clientaddr.sin_port));
+                if (retval == 0) {
+                    // 클라이언트가 연결을 종료한 경우
+                    printf("클라이언트 %d가 연결을 종료했습니다.\n", i);
+                    continue; // 연결 종료된 클라이언트는 처리하지 않고 넘어갑니다.
+                }
 
-        // 클라이언트 포트가 이미 존재하는지 확인
-        bool isNewClient = true;
-        for (int i = 0; i < udp_count; i++) {
-            if (udp_client_sockets[i] == client_port) {
-                isNewClient = false;
-                break;
+                // 받은 데이터 처리
+                PlayerMeshPacket* receivedPacket = (PlayerMeshPacket*)buffer;
+
+                // 받은 데이터 출력
+                printf("받은 데이터(클라이언트 %d): Position(%f, %f), Mesh Index:%d\n",
+                    i, receivedPacket->m_fxPosition, receivedPacket->m_fyPosition, receivedPacket->meshIndex);
+
+                // 상대 클라이언트로 데이터 전송
+                int targetClient = (i == 0) ? 1 : 0;  // 현재 클라이언트가 0이면 1로
+                retval = send(client_sockets[targetClient], (char*)receivedPacket, sizeof(PlayerMeshPacket), 0);
+                if (retval == SOCKET_ERROR) {
+                    printf("TCP send error (클라이언트 %d -> 클라이언트 %d)\n", i, targetClient);
+                    continue; // 전송 오류가 발생한 경우, 해당 전송을 건너뛰고 계속 진행
+                }
+               
+                printf("보냈습니다(클라이언트 %d -> 클라이언트 %d): Position(%f, %f), Mesh Index:%d\n",
+                    i, targetClient, receivedPacket->m_fxPosition, receivedPacket->m_fyPosition, receivedPacket->meshIndex);
             }
         }
 
-        // 새로운 클라이언트일 경우, 배열에 저장
-        if (isNewClient && udp_count < MAX_CLIENT_COUNT) {
-            udp_client_sockets[udp_count] = client_port;
-            udp_count++;  // 새로운 클라이언트가 추가되면 카운트 증가
-            printf("새 클라이언트 포트: %d, 소켓이 있습니다\n", client_port);
-        }
+        // 경과 시간을 1초마다 모든 클라이언트에 전송
+        for (int i = 0; i < 2; i++) {
+            retval = send(client_sockets[i], reinterpret_cast<char*>(&inner_time), sizeof(inner_time), 0);
 
-        // 두 클라이언트가 모두 연결되었으면, 서로 데이터를 주고받음
-        if (udp_count == 2) {
-            // 포트 번호에 따라 메시지를 다른 클라이언트에게 전송
-            if (client_port == udp_client_sockets[0]) {
-                udp_clientaddr.sin_port = htons(udp_client_sockets[1]);
-                sendto(udp_sock, (char*)receivedPacket, sizeof(PlayerMeshPacket), 0,
-                    (struct sockaddr*)&udp_clientaddr, sizeof(udp_clientaddr));
-                printf("보냈습니다1: %f, %f, %d\n",
-                    receivedPacket->m_fxPosition, receivedPacket->m_fyPosition, ntohl(receivedPacket->meshIndex));
-            }
-            else if (client_port == udp_client_sockets[1]) {
-                udp_clientaddr.sin_port = htons(udp_client_sockets[0]);
-                sendto(udp_sock, (char*)receivedPacket, sizeof(PlayerMeshPacket), 0,
-                    (struct sockaddr*)&udp_clientaddr, sizeof(udp_clientaddr));
-                printf("보냈습니다2: %f, %f, %d\n",
-                    receivedPacket->m_fxPosition, receivedPacket->m_fyPosition, ntohl(receivedPacket->meshIndex));
+            if (retval == SOCKET_ERROR) {
+                printf("TCP send time error (클라이언트 %d)\n", i);
+                continue; // 시간 전송 오류가 발생하면 해당 클라이언트는 건너뛰고 계속 진행
             }
         }
+        if (inner_time == 100)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                retval = send(client_sockets[i], /**/);
+                if (retval == SOCKET_ERROR)
+                {
+                    printf("sendERROR %d\n", i);
+                }
+            }
+            //소켓종료부분
+           
 
-        fflush(stdout);  // 출력 버퍼를 즉시 플러시
+        }
+
+        printf("시간 보냈음 %d\n", inner_time);
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(100)); // 잠시 대기 후 계속 처리
     }
 
     return 0;  // 쓰레드 종료
 }
 //tcp 패킷 관련
-DWORD WINAPI TcpPacket(LPVOID param)
+DWORD WINAPI ITEM_KEY_Packet(LPVOID param)
 {
     SOCKET* client_sockets = (SOCKET*)param;
     char key_buf[BUFSIZE + 1];
@@ -95,7 +125,6 @@ DWORD WINAPI TcpPacket(LPVOID param)
         for (int i = 0; i < MAX_CLIENT_COUNT; i++)
         {
             retval = recv(client_sockets[i], key_buf, sizeof(client_sockets), 0);
-            //error부분을 try catch문법으로 작성해서 콘솔창에 띄우는게 나을라나?
             if (SOCKET_ERROR == retval)
             {
                 err_quit("recvErrorKey");
@@ -133,38 +162,6 @@ DWORD WINAPI TcpPacket(LPVOID param)
         }
         break;
         }
-    }
-    return 0;
-}
-
-//동: Timer 함수 (기존처럼 경과 시간 계산 및 전송)
-DWORD WINAPI Timer(LPVOID param) {
-    SOCKET* client_sockets = (SOCKET*)param;  // 클라이언트 소켓 배열
-    int inner_time;
-    auto start = std::chrono::high_resolution_clock::now(); // 시작 시간 기록
-    int retval;
-    char keybuf[BUFSIZE + 1];
-
-
-    while (true) {
-        // 경과 시간 계산
-        auto now = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<float> elapsed = now - start; // float 형식으로 경과 시간 저장
-        inner_time = static_cast<int>(elapsed.count()); // 경과 시간을 int로 변환
-
-        // 모든 소켓에 경과 시간 전송
-        for (int i = 0; i < MAX_CLIENT_COUNT; i++) {
-            retval = send(client_sockets[i], reinterpret_cast<char*>(&inner_time), sizeof(inner_time), 0);
-            if (SOCKET_ERROR == retval)
-            {
-                err_quit("SendErrorTime");
-                continue;
-            }
-        }
-
-        printf("보낸 경과시간: %d초\n", inner_time); // 서버에서 경과 시간 출력
-
-        std::this_thread::sleep_for(std::chrono::seconds(1)); // 데이터 너무 많이 가는 문제 방지
     }
     return 0;
 }
@@ -245,19 +242,16 @@ int main(int argc, char* argv[]) {
 
     // 모든 클라이언트 연결 완료
     printf("\n클라이언트 2 접속 완료. 게임을 시작합니다.\n");
-    TcpThread = CreateThread(NULL, 0, TcpPacket, (LPVOID)client_sockets, 0, NULL);
     // Timer 쓰레드 실행
-    HANDLE timer_thread = CreateThread(NULL, 0, Timer, (LPVOID)client_sockets, 0, NULL);
-    HANDLE udp_thread = CreateThread(NULL, 0, UDP_thread, (LPVOID)udp_sock, 0, NULL);
+    HANDLE timer_thread = CreateThread(NULL, 0, Combined_TCP_Thread, (LPVOID)client_sockets, 0, NULL);
+    TcpThread = CreateThread(NULL, 0, ITEM_KEY_Packet, (LPVOID)client_sockets, 0, NULL);
     //player key recv
 
     // 쓰레드 종료 대기
-    WaitForSingleObject(TcpThread, INFINITE);
-    WaitForSingleObject(timer_thread, INFINITE);
-    WaitForSingleObject(udp_thread, INFINITE);
+    WaitForSingleObject(Combined_TCP_Thread, INFINITE);
+    WaitForSingleObject(ITEM_KEY_Packet, INFINITE);
     CloseHandle(TcpThread);
     CloseHandle(timer_thread);
-    CloseHandle(udp_thread);
     // 소켓 닫기
     for (int i = 0; i < client_count; i++) {
         closesocket(client_sockets[i]);

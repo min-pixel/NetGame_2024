@@ -3,7 +3,9 @@
 
 enum PacketType {
     MESH_PACKET,
-    KEY_CONTROL_PACKET
+    KEY_CONTROL_PACKET,
+    ITEM_PACKET
+
 };
 
 
@@ -17,4 +19,7 @@ struct PlayerMeshPacket {
 struct PlayerKeyControlPacket {
     PacketType packetType = KEY_CONTROL_PACKET;
     uint32_t nMessageID;
+};
+struct PlayerItemPacket {
+    PacketType packetType = ITEM_PACKET;
 };
