@@ -3,7 +3,7 @@
 
 char* SERVERIP = (char*)"127.0.0.2";
 #define SERVERPORT 9000
-#define BUFSIZE 512
+#define BUFSIZE 1024
 #define WM_LBUTTONDOWN 0x0201  // 서버 요구 메시지 ID 값
 #define MAX_CLIENT_COUNT 2
 
@@ -14,17 +14,27 @@ DWORD WINAPI Combined_TCP_Thread(LPVOID param) {
     SOCKET* client_sockets = (SOCKET*)param;  // 클라이언트 소켓 배열
     char buffer[BUFSIZE + 1];
     int retval;
-    int inner_time;
-
+    int inner_time = 0;
+    int SavePosition[2]{};
     auto start = std::chrono::high_resolution_clock::now(); // 시작 시간 기록
-
-    fd_set readfds;  // 읽기 가능한 소켓을 관리할 집합 //이부분 select GPT사용 좀더 해봐야할듯 데이터 안들어올때 오류뜨는거라
+    const char* win_game = "이겼습니다";
+    const char* lose_game = "이겼습니다";
+    fd_set readfds;  // 읽기 가능한 소켓을 관리할 집합
 
     while (true) {
         // 경과 시간 계산
         auto now = std::chrono::high_resolution_clock::now();
         std::chrono::duration<float> elapsed = now - start; // float 형식으로 경과 시간 저장
         inner_time = static_cast<int>(elapsed.count());
+
+        for (int i = 0; i < 2; i++) {
+            retval = send(client_sockets[i], reinterpret_cast<char*>(&inner_time), sizeof(inner_time), 0);
+            if (retval == SOCKET_ERROR) {
+                printf("TCP send time error (클라이언트 %d)\n", i);
+                continue; // 시간 전송 오류가 발생하면 해당 클라이언트는 건너뛰고 계속 진행
+            }
+        }
+        printf("시간 보냈음 %d\n", inner_time);
 
         // 읽기 가능한 소켓을 확인
         FD_ZERO(&readfds);  // 기존에 설정된 소켓 집합 초기화
@@ -33,8 +43,8 @@ DWORD WINAPI Combined_TCP_Thread(LPVOID param) {
 
         // select 호출하여 읽기 가능한 소켓을 기다림 (타임아웃을 0.1초로 설정)
         struct timeval timeout;
-        timeout.tv_sec = 0;  
-        timeout.tv_usec = 100000;
+        timeout.tv_sec = 0;
+        timeout.tv_usec = 200000;  // 0.2초 타임아웃
 
         retval = select(0, &readfds, NULL, NULL, &timeout);
         if (retval == SOCKET_ERROR) {
@@ -66,6 +76,9 @@ DWORD WINAPI Combined_TCP_Thread(LPVOID param) {
                 // 받은 데이터 처리
                 PlayerMeshPacket* receivedPacket = (PlayerMeshPacket*)buffer;
 
+                // Position 데이터를 저장
+                //SavePosition[i] = receivedPacket->topPositionRate;
+
                 // 받은 데이터 출력
                 printf("받은 데이터(클라이언트 %d): Position(%f, %f), Mesh Index:%d\n",
                     i, receivedPacket->m_fxPosition, receivedPacket->m_fyPosition, receivedPacket->meshIndex);
@@ -75,31 +88,123 @@ DWORD WINAPI Combined_TCP_Thread(LPVOID param) {
                 retval = send(client_sockets[targetClient], (char*)receivedPacket, sizeof(PlayerMeshPacket), 0);
                 if (retval == SOCKET_ERROR) {
                     printf("TCP send error (클라이언트 %d -> 클라이언트 %d)\n", i, targetClient);
-                    continue; // 전송 오류가 발생한 경우, 해당 전송을 건너뛰고 계속 진행
+                    
                 }
 
                 printf("보냈습니다(클라이언트 %d -> 클라이언트 %d): Position(%f, %f), Mesh Index:%d\n",
                     i, targetClient, receivedPacket->m_fxPosition, receivedPacket->m_fyPosition, receivedPacket->meshIndex);
             }
         }
+        
+        
+        if (inner_time == 100)
+        {
+            //끝났을 때 무슨 값을 보내야 하는지...
 
-        // 경과 시간을 1초마다 모든 클라이언트에 전송
-        for (int i = 0; i < 2; i++) {
-            retval = send(client_sockets[i], reinterpret_cast<char*>(&inner_time), sizeof(inner_time), 0);
+            for (int i = 0; i < 2; i++)
+            {
+                PlayerMeshPacket meshHeight;
+                if (SavePosition[0] < SavePosition[1])
+                {
+                    //meshHeight.Win = (i == 1);//이부분 생각좀 해봐야할듯 우선 클라2개 bool값 보내고  문자열로 승리 패배 보내주면 그거 출력하게
+                    for (int i = 0; i < 2; i++) {
+                        retval = send(client_sockets[i], (char*)&meshHeight, sizeof(PlayerMeshPacket), 0);
+                    }
+                    retval = send(client_sockets[1], (char*)&win_game, sizeof(win_game), 0);
+                    retval = send(client_sockets[0], (char*)&lose_game, sizeof(win_game), 0);
+                }
+                else if (SavePosition[1] < SavePosition[0]) {
+                    //meshHeight.Win = (i == 0);
+                    for (int i = 0; i < 2; i++) {
+                        retval = send(client_sockets[i], (char*)&meshHeight, sizeof(PlayerMeshPacket), 0);
+                    }
+                    retval = send(client_sockets[0], (char*)&win_game, sizeof(win_game), 0);
+                    retval = send(client_sockets[1], (char*)&lose_game, sizeof(win_game), 0);
+                }
 
-            if (retval == SOCKET_ERROR) {
-                printf("TCP send time error (클라이언트 %d)\n", i);
-                continue; // 시간 전송 오류가 발생하면 해당 클라이언트는 건너뛰고 계속 진행
+                //retval = send(client_sockets[i], (char*)&meshHeight, sizeof(PlayerMeshPacket), 0); 이부분 왜?
+                //소켓 값에 동일하게 종료 되었다란 걸 보내야 할텐데
+                if (retval == SOCKET_ERROR)
+                {
+                    printf("sendERROR %d\n", i);
+                }
             }
-        }
-        printf("시간 보냈음 %d\n", inner_time);
+            break;
+            //소켓종료부분
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(100)); // 잠시 대기 후 계속 처리
+
+        }
+        // 이부분 클라랑 맞춰야함
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
+
+        
+    }
+
+    // 소켓 종료 처리
+    for (int i = 0; i < 2; i++) {
+        closesocket(client_sockets[i]);
     }
 
     return 0;  // 쓰레드 종료
 }
 
+//이거 하면 왜 안되지?
+/*
+DWORD WINAPI ITEM_KEY_Packet(LPVOID param)
+{
+    SOCKET* client_sockets = (SOCKET*)param;
+    char key_buf[BUFSIZE + 1];
+    char item_buf[BUFSIZE + 1];
+    int retval;
+    PacketType* packetTp = (PacketType*)key_buf;
+    PlayerKeyControlPacket* recvKeyPacket = (PlayerKeyControlPacket*)key_buf;
+    PlayerItemPacket* recvItemPacket = (PlayerItemPacket*)item_buf;
+    while (1)
+    {
+        for (int i = 0; i < MAX_CLIENT_COUNT; i++)
+        {
+            retval = recv(client_sockets[i], key_buf, sizeof(client_sockets), 0);
+            if (SOCKET_ERROR == retval)
+            {
+                printf("recv에러 %d번째 소캣", i);
+                continue;
+            }
+        }
+        //recv Key 
+        switch (*packetTp) {
+        case KEY_CONTROL_PACKET:
+        {
+            //send key
+            for (int i = 0; i < MAX_CLIENT_COUNT; i++)
+            {
+                retval = send(client_sockets[i], key_buf, sizeof(PlayerKeyControlPacket), 0);
+                if (SOCKET_ERROR == retval)
+                {
+                    printf("send에러 %d번째 소켓", i);
+                    continue;
+                }
+            }
+
+        }
+        break;
+        case ITEM_PACKET:
+        {
+            for (int i = 0; i < MAX_CLIENT_COUNT; i++)
+            {
+                retval = send(client_sockets[i], key_buf, sizeof(PlayerItemPacket), 0);
+                if (SOCKET_ERROR == retval)
+                {
+                    err_quit("SendErrorKey");
+                    continue;
+                }
+            }
+        }
+        break;
+        }
+    }
+    return 0;
+}
+*/
 
 int main(int argc, char* argv[]) {
     int retval;
@@ -175,15 +280,16 @@ int main(int argc, char* argv[]) {
         }
     }
     printf("시작값 보냄\n");
-    // Timer 쓰레드 실행
+    //  쓰레드 실행
     HANDLE timer_thread = CreateThread(NULL, 0, Combined_TCP_Thread, (LPVOID)client_sockets, 0, NULL);
-
+    //HANDLE KEY_thread = CreateThread(NULL, 0, ITEM_KEY_Packet, (LPVOID)client_sockets, 0, NULL);
 
     // 쓰레드 종료 대기
     WaitForSingleObject(timer_thread, INFINITE);
+    //WaitForSingleObject(ITEM_KEY_Packet, INFINITE);
 
     CloseHandle(timer_thread);
-
+    //CloseHandle(ITEM_KEY_Packet);
     // 소켓 닫기
     for (int i = 0; i < client_count; i++) {
         closesocket(client_sockets[i]);
