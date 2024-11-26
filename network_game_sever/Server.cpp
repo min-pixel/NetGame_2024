@@ -18,7 +18,7 @@ DWORD WINAPI Combined_TCP_Thread(LPVOID param) {
     int SavePosition[2]{};
     auto start = std::chrono::high_resolution_clock::now(); // 시작 시간 기록
     const char* win_game = "이겼습니다";
-    const char* lose_game = "이겼습니다";
+    const char* lose_game = "졌습니다";
     fd_set readfds;  // 읽기 가능한 소켓을 관리할 집합
 
     while (true) {
@@ -99,7 +99,7 @@ DWORD WINAPI Combined_TCP_Thread(LPVOID param) {
         
         if (inner_time == 100)
         {
-            //끝났을 때 무슨 값을 보내야 하는지...
+            //일단 이부분 클라에서 최대 높이값 받아와야 검증 가능
 
             for (int i = 0; i < 2; i++)
             {
@@ -148,7 +148,7 @@ DWORD WINAPI Combined_TCP_Thread(LPVOID param) {
     return 0;  // 쓰레드 종료
 }
 
-//이거 하면 왜 안되지?
+//이거 하면 왜 안되지? 동기화 필요한거같은데 
 /*
 DWORD WINAPI ITEM_KEY_Packet(LPVOID param)
 {
