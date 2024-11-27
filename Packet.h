@@ -25,5 +25,6 @@ struct PlayerKeyControlPacket {
 //아이템 일단 바꾸는 것만 해놨습니다.
 //교수님이 상대 블럭을 파괴하거나 그런 건 하지 말라 하셔서 하나만 받아오게 했습니다.
 struct PlayerItemPacket {
+    PacketType packetType = ITEM_PACKET;
     int m_nChangeBlockCount;
 };
