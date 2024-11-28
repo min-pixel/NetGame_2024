@@ -1,201 +1,87 @@
-#include "Packet.h"
-// HANDLE, CreateThread, etc.
+ï»¿#include "Packet.h"
+#include <iostream>
+char* SERVERIP = (char*)"127.0.0.1";
 #define SERVERPORT 9000
-#define BUFSIZE    512
+#define BUFSIZE 512
 #define MAX_CLIENT_COUNT 2
-#define UDP_SERVERPORT 9500
 
-
-DWORD WINAPI Combined_TCP_Thread(LPVOID param) {
-    SOCKET* client_sockets = (SOCKET*)param;  // Å¬¶óÀÌ¾ğÆ® ¼ÒÄÏ ¹è¿­
-    char buffer[BUFSIZE + 1];
-    int retval;
-    int inner_time;
-    int SavePosition[2]{};
-    auto start = std::chrono::high_resolution_clock::now(); // ½ÃÀÛ ½Ã°£ ±â·Ï
-
-    fd_set readfds;  // ÀĞ±â °¡´ÉÇÑ ¼ÒÄÏÀ» °ü¸®ÇÒ ÁıÇÕ //ÀÌºÎºĞ select GPT»ç¿ë Á»´õ ÇØºÁ¾ßÇÒµí µ¥ÀÌÅÍ ¾Èµé¾î¿Ã¶§ ¿À·ù¶ß´Â°Å¶ó
-
-    while (true) {
-        // °æ°ú ½Ã°£ °è»ê
-        auto now = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<float> elapsed = now - start; // float Çü½ÄÀ¸·Î °æ°ú ½Ã°£ ÀúÀå
-        inner_time = static_cast<int>(elapsed.count());
-        
-
-        // ÀĞ±â °¡´ÉÇÑ ¼ÒÄÏÀ» È®ÀÎ
-        FD_ZERO(&readfds);  // ±âÁ¸¿¡ ¼³Á¤µÈ ¼ÒÄÏ ÁıÇÕ ÃÊ±âÈ­
-        FD_SET(client_sockets[0], &readfds);  // Ã¹ ¹øÂ° Å¬¶óÀÌ¾ğÆ® ¼ÒÄÏÀ» Ãß°¡
-        FD_SET(client_sockets[1], &readfds);  // µÎ ¹øÂ° Å¬¶óÀÌ¾ğÆ® ¼ÒÄÏÀ» Ãß°¡
-
-        // select È£ÃâÇÏ¿© ÀĞ±â °¡´ÉÇÑ ¼ÒÄÏÀ» ±â´Ù¸² (Å¸ÀÓ¾Æ¿ôÀ» 0.1ÃÊ·Î ¼³Á¤)
-        struct timeval timeout;
-        timeout.tv_sec = 0;
-        timeout.tv_usec = 100000;
-
-        retval = select(0, &readfds, NULL, NULL, &timeout);
-        if (retval == SOCKET_ERROR) {
-            printf("select error\n");
-            break;
-        }
-
-        if (retval == 0) {
-            // Å¸ÀÓ¾Æ¿ô ¹ß»ı (µ¥ÀÌÅÍ°¡ ¾øÀ¸¸é °è¼Ó ´ë±â)
-            continue;
-        }
-
-        // µ¥ÀÌÅÍ¸¦ ¼ö½ÅÇÒ ¼ö ÀÖ´Â ¼ÒÄÏ È®ÀÎ
-        for (int i = 0; i < 2; i++) {
-            if (FD_ISSET(client_sockets[i], &readfds)) {  // ÇØ´ç ¼ÒÄÏÀÌ ÁØºñµÇ¾úÀ» ¶§¸¸ Ã³¸®
-                // µ¥ÀÌÅÍ ¼ö½Å
-                retval = recv(client_sockets[i], buffer, BUFSIZE, 0);
-                if (retval == SOCKET_ERROR) {
-                    printf("TCP recv error (Å¬¶óÀÌ¾ğÆ® %d)\n", i);
-                    continue; // ¿¡·¯°¡ ¹ß»ıÇÑ °æ¿ì ÀÌ Å¬¶óÀÌ¾ğÆ®´Â °Ç³Ê¶Ù°í, ´ÙÀ½ Å¬¶óÀÌ¾ğÆ®·Î ÀÌµ¿
-                }
-
-                if (retval == 0) {
-                    // Å¬¶óÀÌ¾ğÆ®°¡ ¿¬°áÀ» Á¾·áÇÑ °æ¿ì
-                    printf("Å¬¶óÀÌ¾ğÆ® %d°¡ ¿¬°áÀ» Á¾·áÇß½À´Ï´Ù.\n", i);
-                    continue; // ¿¬°á Á¾·áµÈ Å¬¶óÀÌ¾ğÆ®´Â Ã³¸®ÇÏÁö ¾Ê°í ³Ñ¾î°©´Ï´Ù.
-                }
-
-                // ¹ŞÀº µ¥ÀÌÅÍ Ã³¸®
-                PlayerMeshPacket* receivedPacket = (PlayerMeshPacket*)buffer;
-                
-                // ¹ŞÀº µ¥ÀÌÅÍ Ãâ·Â
-                printf("¹ŞÀº µ¥ÀÌÅÍ(Å¬¶óÀÌ¾ğÆ® %d): Position(%f, %f), Mesh Index:%d\n",
-                    i, receivedPacket->m_fxPosition, receivedPacket->m_fyPosition, receivedPacket->meshIndex);
-                //ÀÌÂÊ ºÎºĞ ¼öÁ¤(ÁØ)
-                SavePosition[i] = receivedPacket->topPositionRate;
-                // ¿©±â±îÁö(ÁØ)
-                // »ó´ë Å¬¶óÀÌ¾ğÆ®·Î µ¥ÀÌÅÍ Àü¼Û
-                int targetClient = (i == 0) ? 1 : 0;  // ÇöÀç Å¬¶óÀÌ¾ğÆ®°¡ 0ÀÌ¸é 1·Î
-                retval = send(client_sockets[targetClient], (char*)receivedPacket, sizeof(PlayerMeshPacket), 0);
-                if (retval == SOCKET_ERROR) {
-                    printf("TCP send error (Å¬¶óÀÌ¾ğÆ® %d -> Å¬¶óÀÌ¾ğÆ® %d)\n", i, targetClient);
-                    continue; // Àü¼Û ¿À·ù°¡ ¹ß»ıÇÑ °æ¿ì, ÇØ´ç Àü¼ÛÀ» °Ç³Ê¶Ù°í °è¼Ó ÁøÇà
-                }
-
-                printf("º¸³Â½À´Ï´Ù(Å¬¶óÀÌ¾ğÆ® %d -> Å¬¶óÀÌ¾ğÆ® %d): Position(%f, %f), Mesh Index:%d\n",
-                    i, targetClient, receivedPacket->m_fxPosition, receivedPacket->m_fyPosition, receivedPacket->meshIndex);
-            }
-        }
-
-        // °æ°ú ½Ã°£À» 1ÃÊ¸¶´Ù ¸ğµç Å¬¶óÀÌ¾ğÆ®¿¡ Àü¼Û
-        for (int i = 0; i < 2; i++) {
-            retval = send(client_sockets[i], reinterpret_cast<char*>(&inner_time), sizeof(inner_time), 0);
-
-            if (retval == SOCKET_ERROR) {
-                printf("TCP send time error (Å¬¶óÀÌ¾ğÆ® %d)\n", i);
-                continue; // ½Ã°£ Àü¼Û ¿À·ù°¡ ¹ß»ıÇÏ¸é ÇØ´ç Å¬¶óÀÌ¾ğÆ®´Â °Ç³Ê¶Ù°í °è¼Ó ÁøÇà
-            }
-        }
-        if (inner_time == 100)
-        {
-            //³¡³µÀ» ¶§ ¹«½¼ °ªÀ» º¸³»¾ß ÇÏ´ÂÁö...
-            if (SavePosition[0] < SavePosition[1])
-            {
-                for (int i = 0; i < 2; i++)
-                {
-                    PlayerMeshPacket meshHeight;
-                    if (SavePosition[0] < SavePosition[1])
-                    {
-                        meshHeight.Win = (i == 1);
-                    }
-                    else {
-                        meshHeight.Win = (i == 0);
-                    }
-                    retval = send(client_sockets[i], (char*)&meshHeight, sizeof(PlayerMeshPacket), 0);
-                    //¼ÒÄÏ °ª¿¡ µ¿ÀÏÇÏ°Ô Á¾·á µÇ¾ú´Ù¶õ °É º¸³»¾ß ÇÒÅÙµ¥
-                    if (retval == SOCKET_ERROR)
-                    {
-                        printf("sendERROR %d\n", i);
-                    }
-                }
-            }
-            //¼ÒÄÏÁ¾·áºÎºĞ
-
-
-        }
-
-        printf("½Ã°£ º¸³ÂÀ½ %d\n", inner_time);
-
-        std::this_thread::sleep_for(std::chrono::milliseconds(100)); // Àá½Ã ´ë±â ÈÄ °è¼Ó Ã³¸®
-    }
-
-    return 0;  // ¾²·¹µå Á¾·á
-}
-//tcp ÆĞÅ¶ °ü·Ã
-DWORD WINAPI ITEM_KEY_Packet(LPVOID param)
-{
+DWORD WINAPI ITEM_KEY_Packet(LPVOID param) {
     SOCKET* client_sockets = (SOCKET*)param;
-    char key_buf[BUFSIZE + 1];
-    char item_buf[BUFSIZE + 1];
+
+    char recv_bufs[MAX_CLIENT_COUNT][BUFSIZE];
     int retval;
-    PacketType packetTp;
-    PlayerKeyControlPacket* recvKeyPacket = (PlayerKeyControlPacket*)key_buf;
-    PlayerItemPacket* recvItemPacket = (PlayerItemPacket*)item_buf;
-    while (1)
-    {
-        for (int i = 0; i < MAX_CLIENT_COUNT; i++)
-        {
-            retval = recv(client_sockets[i], key_buf, sizeof(client_sockets), 0);
-            if (SOCKET_ERROR == retval)
-            {
-                printf("recv¿¡·¯ %d¹øÂ° ¼ÒÄ¹", i);
+
+    while (1) {
+        for (int i = 0; i < MAX_CLIENT_COUNT; i++) {
+            memset(recv_bufs[i], 0, BUFSIZE);
+            retval = recv(client_sockets[i], recv_bufs[i], sizeof(PlayerPacket), 0);
+            if (SOCKET_ERROR == retval) {
+                printf("recv ì—ëŸ¬ %dë²ˆì§¸ ì†Œì¼“: %d\n", i, WSAGetLastError());
                 continue;
             }
-        }
-        //recv Key 
-        switch (packetTp) {
-        case KEY_CONTROL_PACKET:
-        {
-            //send key
-            for (int i = 0; i < MAX_CLIENT_COUNT; i++)
-            {
-                retval = send(client_sockets[i], key_buf, sizeof(PlayerKeyControlPacket), 0);
-                if (SOCKET_ERROR == retval)
-                {
-                    printf("send¿¡·¯ %d¹øÂ° ¼ÒÄÏ", i);
-                    continue;
-                }
+
+            PlayerPacket* pk = (PlayerPacket*)recv_bufs[i];
+            retval = recv(client_sockets[i], recv_bufs[i] + sizeof(PlayerPacket), pk->size - sizeof(PlayerPacket), 0);
+            if (SOCKET_ERROR == retval) {
+                printf("recv ì—ëŸ¬ %dë²ˆì§¸ ì†Œì¼“: %d\n", i, WSAGetLastError());
+                continue;
             }
 
-        }
-        break;
-        case ITEM_PACKET:
-        {
-            for (int i = 0; i < MAX_CLIENT_COUNT; i++)
-            {
-                retval = send(client_sockets[i], key_buf, sizeof(PlayerItemPacket), 0);
-                if (SOCKET_ERROR == retval)
-                {
-                    err_quit("SendErrorKey");
-                    continue;
+            switch (pk->packetType) {
+            case KEY_CONTROL_PACKET: {
+                PlayerKeyControlPacket* recvKeyPacket = (PlayerKeyControlPacket*)recv_bufs[i];
+                printf("í´ë¼ì´ì–¸íŠ¸ %dì—ì„œ í‚¤ ë°ì´í„° ìˆ˜ì‹ : %d\n", i, recvKeyPacket->nMessageID);
+
+                // í‚¤ ë°ì´í„° ì²˜ë¦¬ í›„ ì „ì†¡
+                retval = send(client_sockets[i], (char*)recvKeyPacket, sizeof(PlayerKeyControlPacket), 0);
+                if (SOCKET_ERROR == retval) {
+                    printf("send ì—ëŸ¬ %dë²ˆì§¸ ì†Œì¼“: %d\n", i, WSAGetLastError());
                 }
+                break;
             }
-        }
-        break;
+            case ITEM_PACKET: {
+                PlayerItemPacket* recvItemPacket = (PlayerItemPacket*)recv_bufs[i];
+                printf("í´ë¼ì´ì–¸íŠ¸ %dì—ì„œ ì•„ì´í…œ ë°ì´í„° ìˆ˜ì‹ : %d\n", i, recvItemPacket->m_nChangeBlockCount);
+
+                // ì•„ì´í…œ ë°ì´í„° ì²˜ë¦¬ í›„ ì „ì†¡
+                retval = send(client_sockets[i], (char*)recvItemPacket, sizeof(PlayerItemPacket), 0);
+                if (SOCKET_ERROR == retval) {
+                    printf("send ì—ëŸ¬ %dë²ˆì§¸ ì†Œì¼“: %d\n", i, WSAGetLastError());
+                }
+                break;
+            }
+            case MESH_PACKET: {
+                printf("MESH íŒ¨í‚· íƒ€ì…\n");
+                break;
+            }
+            default:
+                printf("ì•Œ ìˆ˜ ì—†ëŠ” íŒ¨í‚· íƒ€ì…\n");
+                continue;
+            }
         }
     }
     return 0;
 }
 
+
+
+
 int main(int argc, char* argv[]) {
     int retval;
-    int udp_retval;
     WSADATA wsa;
 
-    HANDLE TcpThread;
-
-    // À©¼Ó ÃÊ±âÈ­
-    if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
+    // ìœˆì† ì´ˆê¸°í™”
+    if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0) {
+        printf("WSAStartup ì˜¤ë¥˜: %d\n", WSAGetLastError());
         return 1;
+    }
 
-    // TCP ¼ÒÄÏ »ı¼º
+    // TCP ì†Œì¼“ ìƒì„±
     SOCKET listen_sock = socket(AF_INET, SOCK_STREAM, 0);
-    if (listen_sock == INVALID_SOCKET) err_quit("socket()");
+    if (listen_sock == INVALID_SOCKET) {
+        printf("ì†Œì¼“ ìƒì„± ì‹¤íŒ¨: %d\n", WSAGetLastError());
+        return 1;
+    }
 
     // bind()
     struct sockaddr_in serveraddr;
@@ -204,77 +90,82 @@ int main(int argc, char* argv[]) {
     serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);
     serveraddr.sin_port = htons(SERVERPORT);
     retval = bind(listen_sock, (struct sockaddr*)&serveraddr, sizeof(serveraddr));
-    if (retval == SOCKET_ERROR) err_quit("bind()");
+    if (retval == SOCKET_ERROR) {
+        printf("bind() ì‹¤íŒ¨: %d\n", WSAGetLastError());
+        return 1;
+    }
+
+    bool start_btn = true;
 
     // listen()
     retval = listen(listen_sock, SOMAXCONN);
-    if (retval == SOCKET_ERROR) err_quit("listen()");
+    if (retval == SOCKET_ERROR) {
+        printf("listen() ì‹¤íŒ¨: %d\n", WSAGetLastError());
+        return 1;
+    }
 
-    // UDP ¼ÒÄÏ »ı¼º
-    SOCKET udp_sock = socket(AF_INET, SOCK_DGRAM, 0);
-    if (udp_sock == INVALID_SOCKET) err_quit("socket()");
-
-    printf("UDP¼ÒÄÏ¿¬°á¼º°ø\n");
-
-    // UDP bind()
-    struct sockaddr_in udp_serveraddr;
-    memset(&serveraddr, 0, sizeof(serveraddr));
-    udp_serveraddr.sin_family = AF_INET;
-    udp_serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    udp_serveraddr.sin_port = htons(UDP_SERVERPORT);
-    udp_retval = bind(udp_sock, (struct sockaddr*)&udp_serveraddr, sizeof(udp_serveraddr));
-    if (udp_retval == SOCKET_ERROR) err_quit("bind()");
-
-
-
-    // Å¬¶óÀÌ¾ğÆ® ¼ÒÄÏ ¹è¿­
+    // í´ë¼ì´ì–¸íŠ¸ ì†Œì¼“ ë°°ì—´
     SOCKET client_sockets[MAX_CLIENT_COUNT] = { 0 };
     int client_count = 0;
 
-    // Å¬¶óÀÌ¾ğÆ® ¿¬°á Ã³¸®
+    // í´ë¼ì´ì–¸íŠ¸ ì—°ê²° ì²˜ë¦¬
     while (client_count < MAX_CLIENT_COUNT) {
         struct sockaddr_in clientaddr;
         int addrlen = sizeof(clientaddr);
 
         SOCKET client_socket = accept(listen_sock, (struct sockaddr*)&clientaddr, &addrlen);
+        if (client_socket == INVALID_SOCKET) {
+            printf("accept() ì‹¤íŒ¨: %d\n", WSAGetLastError());
+            continue;
+        }
 
-
-        // Å¬¶óÀÌ¾ğÆ® ¼ÒÄÏ ¹è¿­¿¡ ÀúÀå
+        // í´ë¼ì´ì–¸íŠ¸ ì†Œì¼“ ë°°ì—´ì— ì €ì¥
         client_sockets[client_count] = client_socket;
 
-        // Á¢¼ÓÇÑ Å¬¶óÀÌ¾ğÆ® Á¤º¸ Ãâ·Â
+        // ì ‘ì†í•œ í´ë¼ì´ì–¸íŠ¸ ì •ë³´ ì¶œë ¥
         char addr[INET_ADDRSTRLEN];
         inet_ntop(AF_INET, &clientaddr.sin_addr, addr, sizeof(addr));
-        printf("[TCP ¼­¹ö] Å¬¶óÀÌ¾ğÆ® Á¢¼Ó: IP ÁÖ¼Ò=%s, Æ÷Æ® ¹øÈ£=%d\n", addr, ntohs(clientaddr.sin_port));
+        printf("[TCP ì„œë²„] í´ë¼ì´ì–¸íŠ¸ ì ‘ì†: IP ì£¼ì†Œ=%s, í¬íŠ¸ ë²ˆí˜¸=%d\n", addr, ntohs(clientaddr.sin_port));
 
-        client_count++; // Å¬¶óÀÌ¾ğÆ® Ä«¿îÆ® Áõ°¡
+        client_count++; // í´ë¼ì´ì–¸íŠ¸ ì¹´ìš´íŠ¸ ì¦ê°€
 
-
-        // Å¬¶óÀÌ¾ğÆ® 1 ´ë±â ¸Ş½ÃÁö Ãâ·Â
+        // í´ë¼ì´ì–¸íŠ¸ 1 ëŒ€ê¸° ë©”ì‹œì§€ ì¶œë ¥
         if (client_count == 1) {
-            printf("Å¬¶óÀÌ¾ğÆ® 1 Á¢¼Ó ¿Ï·á. Å¬¶óÀÌ¾ğÆ® 2¸¦ ±â´Ù¸³´Ï´Ù...\n");
+            printf("í´ë¼ì´ì–¸íŠ¸ 1 ì ‘ì† ì™„ë£Œ. í´ë¼ì´ì–¸íŠ¸ 2ë¥¼ ê¸°ë‹¤ë¦½ë‹ˆë‹¤...\n");
         }
     }
 
-    // ¸ğµç Å¬¶óÀÌ¾ğÆ® ¿¬°á ¿Ï·á
-    printf("\nÅ¬¶óÀÌ¾ğÆ® 2 Á¢¼Ó ¿Ï·á. °ÔÀÓÀ» ½ÃÀÛÇÕ´Ï´Ù.\n");
-    // Timer ¾²·¹µå ½ÇÇà
-    HANDLE timer_thread = CreateThread(NULL, 0, Combined_TCP_Thread, (LPVOID)client_sockets, 0, NULL);
-    TcpThread = CreateThread(NULL, 0, ITEM_KEY_Packet, (LPVOID)client_sockets, 0, NULL);
-    //player key recv
+    // ëª¨ë“  í´ë¼ì´ì–¸íŠ¸ ì—°ê²° ì™„ë£Œ
+    printf("\ní´ë¼ì´ì–¸íŠ¸ 2 ì ‘ì† ì™„ë£Œ. ê²Œì„ì„ ì‹œì‘í•©ë‹ˆë‹¤.\n");
 
-    // ¾²·¹µå Á¾·á ´ë±â
-    WaitForSingleObject(Combined_TCP_Thread, INFINITE);
-    WaitForSingleObject(ITEM_KEY_Packet, INFINITE);
-    CloseHandle(TcpThread);
-    CloseHandle(timer_thread);
-    // ¼ÒÄÏ ´İ±â
+    for (int i = 0; i < MAX_CLIENT_COUNT; i++) {
+        retval = send(client_sockets[i], reinterpret_cast<char*>(&start_btn), sizeof(start_btn), 0);
+        if (retval == SOCKET_ERROR) {
+            printf("TCP send time error: %d\n", WSAGetLastError());
+            break;
+        }
+    }
+    printf("ì‹œì‘ê°’ ë³´ëƒ„\n");
+
+    // ì“°ë ˆë“œ ì‹¤í–‰
+    HANDLE KEY_thread = CreateThread(NULL, 0, ITEM_KEY_Packet, (LPVOID)client_sockets, 0, NULL);
+    if (KEY_thread == NULL) {
+        printf("ì“°ë ˆë“œ ìƒì„± ì‹¤íŒ¨: %d\n", GetLastError());
+        return 1;
+    }
+
+    // ì“°ë ˆë“œ ì¢…ë£Œ ëŒ€ê¸°
+    WaitForSingleObject(KEY_thread, INFINITE);
+    CloseHandle(KEY_thread);
+
+    // ì†Œì¼“ ë‹«ê¸°
     for (int i = 0; i < client_count; i++) {
+        shutdown(client_sockets[i], SD_BOTH);
         closesocket(client_sockets[i]);
     }
     closesocket(listen_sock);
 
-    // À©¼Ó Á¾·á
+    // ìœˆì† ì¢…ë£Œ
     WSACleanup();
     return 0;
 }
