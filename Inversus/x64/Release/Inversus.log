@@ -1,7 +1,8 @@
 ﻿  NetworkManager.cpp
+C:\Users\msi\Desktop\넷겜플 기말 본본본\Inversus\NetworkManager.cpp(392,85): warning C4244: '=': 'const float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다.
-  23 of 826 functions ( 2.8%) were compiled, the rest were copied from previous compilation.
+  1 of 841 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    32 functions had inline decision re-evaluated but remain unchanged
+    6 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
-  Inversus.vcxproj -> C:\Users\msi\Desktop\2024 윈도우프로그래밍 기말 프로젝트 02반 민준기, 안재모 최종코드 - 복사본 (2)\x64\Release\Inversus.exe
+  Inversus.vcxproj -> C:\Users\msi\Desktop\넷겜플 기말 본본본\x64\Release\Inversus.exe

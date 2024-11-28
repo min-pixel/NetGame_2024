@@ -61,7 +61,7 @@ private: //게임 오브젝트의 배열로 구성되어있다.
 	//GameObject* m_pNextGameObjectOne = NULL; //다음출력될 블럭을 미리 보여주는 거. 플레이어 1
 	GameObject* m_pNextGameObjectTwo = NULL; //다음출력될 블럭을 미리 보여주는 거.  플레이어 2
 
-	Point2D m_pTopPosition1;	//플레이어 1의 블럭들 중 가장 높은거 저장.
+	//Point2D m_pTopPosition1;	//플레이어 1의 블럭들 중 가장 높은거 저장.
 	Point2D m_pTopPosition2;
 
 
@@ -110,6 +110,7 @@ public:
 	GameObject* m_pNextGameObjectOne = NULL; //다음출력될 블럭을 미리 보여주는 거. 플레이어 1
 	int m_nIndex = 0; //현재 선택된 메쉬의 종류를 판단해줄 index값 0~7
 	int m_nIndexPlayerOne = 0;
+	Point2D m_pTopPosition1;	//플레이어 1의 블럭들 중 가장 높은거 저장
 	WPARAM m_lastKeyPressed; 
 
 public:
