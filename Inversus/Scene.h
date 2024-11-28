@@ -47,29 +47,29 @@ private: //게임 오브젝트의 배열로 구성되어있다.
 	GameObject* m_pGround2 = NULL;
 
 	Player* m_pPlayer = NULL;
-	Player* m_pPlayer2 = NULL;
+	//Player* m_pPlayer2 = NULL;
 
 	b2World* m_b2World = NULL;
 
 	//int m_nIndexPlayerOne = 0;		//현재 1번 플레이어의 오브젝트들의 몇 번째 인덱스가 플레이어의 입력 제어를 받을지
 	//std::vector<GameObject*> m_objects;
 
-	int m_nIndexPlayerTwo = 0;
-	std::vector<GameObject*> m_objects2;
+	//int m_nIndexPlayerTwo = 0;
+	//std::vector<GameObject*> m_objects2;
 
 	//랜덤하게 생성되는 블럭 관련 부분.
 	//GameObject* m_pNextGameObjectOne = NULL; //다음출력될 블럭을 미리 보여주는 거. 플레이어 1
-	GameObject* m_pNextGameObjectTwo = NULL; //다음출력될 블럭을 미리 보여주는 거.  플레이어 2
+	//GameObject* m_pNextGameObjectTwo = NULL; //다음출력될 블럭을 미리 보여주는 거.  플레이어 2
 
 	//Point2D m_pTopPosition1;	//플레이어 1의 블럭들 중 가장 높은거 저장.
 	Point2D m_pTopPosition2;
 
 
 
-	MeshGetInfo* m_pRandomMeshGet = NULL;	//8개의 메쉬 정보를 갖고있다.
-	int m_nRandomCount = 8;	//블럭 메쉬는 총 8개를 의미.
+	//MeshGetInfo* m_pRandomMeshGet = NULL;	//8개의 메쉬 정보를 갖고있다.
+	//int m_nRandomCount = 8;	//블럭 메쉬는 총 8개를 의미.
 	//int m_nIndex = 0; //현재 선택된 메쉬의 종류를 판단해줄 index값 0~7
-	int m_nIndex2 = 0;
+	//int m_nIndex2 = 0;
 	DWORD m_dColor[8] = { RGB(125,0,0),RGB(200,0,0), RGB(120,120,0), RGB(120,200,0), RGB(120,0,102), RGB(200,0,200),
 	RGB(0,125,125), RGB(0,200,125) };	//블럭들 색상
 
@@ -104,12 +104,21 @@ public:
 	bool		m_bTriggerActive = true; // 이것이 true가 되면 동적 콜라이더로 중력의 영향을 받도록 바꿔준다.
 	bool		m_bTriggerActive2 = true; // 이것이 true가 되면 동적 콜라이더로 중력의 영향을 받도록 바꿔준다.
 
+	Player* m_pPlayer2 = NULL;
 	bool m_bKeyInput = false; //키입력 체크
 	bool m_bGameStop = false;
 	std::vector<GameObject*> m_objects;
 	GameObject* m_pNextGameObjectOne = NULL; //다음출력될 블럭을 미리 보여주는 거. 플레이어 1
+	GameObject* m_pNextGameObjectTwo = NULL; //다음출력될 블럭을 미리 보여주는 거.  플레이어 2
 	int m_nIndex = 0; //현재 선택된 메쉬의 종류를 판단해줄 index값 0~7
-	int m_nIndexPlayerOne = 0;
+	int m_nIndex2 = 0;
+	int m_nIndexPlayerOne = 0; 
+	int m_nIndexPlayerTwo = 0; 
+	int m_nRandomCount = 8;
+	MeshGetInfo* m_pRandomMeshGet = NULL;
+	std::vector<GameObject*> m_objects2;
+	float m_fElapsedTimeForPlayerTwo; // 플레이어 2의 중력 타이머 
+	const float GRAVITY_TRIGGER_TIME = 5.0f; // 5초마다 중력 발동 
 	Point2D m_pTopPosition1;	//플레이어 1의 블럭들 중 가장 높은거 저장
 	WPARAM m_lastKeyPressed; 
 

@@ -4,8 +4,7 @@
 #include <thread>
 
 
-
-Scene::Scene(Player* pPlayer, Player* pPlayer2, b2World* world, HINSTANCE Instance) : m_lastKeyPressed(0)  // 초기화 리스트에서 m_lastKeyPressed를 0으로 초기화
+Scene::Scene(Player* pPlayer, Player* pPlayer2, b2World* world, HINSTANCE Instance) : m_lastKeyPressed(0), m_fElapsedTimeForPlayerTwo(0.0f)  // 초기화 리스트에서 m_lastKeyPressed를 0으로 초기화
 {
 	m_pPlayer = pPlayer;
 	m_pPlayer2 = pPlayer2;
@@ -44,21 +43,47 @@ void Scene::OnProcessingMouseMessage(HWND hWnd, UINT nMessageID, WPARAM wParam, 
 				m_pNetworkManager->SendAcceptServerPacket();
 			}*/
 
-			ReleaseObjects();	//오브젝트를 삭제하고
-			BuildObjects();	//오브젝트를 생성하고
+			//ReleaseObjects();	//오브젝트를 삭제하고
+			//BuildObjects();	//오브젝트를 생성하고
 
-			m_bGameStart = true;
-			m_bGameStop = false; //11월 19일 추가 : 재시작 안 하면 전송 안 하던 걸 해결.
+			//m_bGameStart = false;
+			//m_bGameStop = false; //11월 19일 추가 : 재시작 안 하면 전송 안 하던 걸 해결.
 			m_pNetworkManager = new NetworkManager();
 			if (m_pNetworkManager->ConnectToServer("127.0.0.1", 9000)) { // 서버 IP와 포트를 입력
 				// 연결이 성공한 경우, 클라이언트 전송 스레드를 시작
+
+				// 연결이 성공하면 서버의 시작 신호를 대기
+				bool startSignal = false;
+				while (!startSignal) {
+					m_pNetworkManager->ReceiveStartSignal(startSignal);  // 시작 신호를 받는 함수를 추가
+				}
+
+				// 시작 신호를 받은 후 게임 시작
+				ReleaseObjects();	//오브젝트를 삭제하고
+				BuildObjects();	//오브젝트를 생성하고
+
+
+
+				m_bGameStart = true;
+				m_bGameStop = false; //11월 19일 추가 : 재시작 안 하면 전송 안 하던 걸 해결.
+
 				std::thread clientSendThread(&NetworkManager::Client_Send_Thread, m_pNetworkManager, m_pPlayer, this);
 				clientSendThread.detach(); // 스레드를 분리하여 독립적으로 실행
+
+				std::thread receiveThread(&NetworkManager::ReceiveThread, m_pNetworkManager, m_pPlayer, this); 
+				receiveThread.detach();
+
+				
+
+				
+
 			}
 			else {
 				// 연결 실패 처리
 				MessageBox(NULL, L"서버에 연결할 수 없습니다.", L"네트워크 오류", MB_OK | MB_ICONERROR);
 			}
+
+
 
 		}// exit 버튼을 클릭 했을때 로직
 		else if (m_MouseX < m_DbtnLeft + (FRAMEBUFFER_WIDTH / 4) && m_MouseX> m_DbtnRight - (FRAMEBUFFER_WIDTH / 4) && m_MouseY > (m_DbtnTop + (FRAMEBUFFER_HEIGHT / 10) * 2) && m_MouseY < m_DbtnBottom + (FRAMEBUFFER_HEIGHT / 10) * 2)
@@ -201,9 +226,8 @@ void Scene::OnProcessingKeyboardMessage(HWND hWnd, UINT nMessageID, WPARAM wPara
 					m_bTriggerActive = false;	//동작을 수행할 수 있게 만들어주고
 					b2Vec2 velocity(0.0f, -50.0f);
 					m_objects[m_nIndexPlayerOne]->m_pBody->SetLinearVelocity(velocity);
-					/*delete m_pNextGameObjectOne;
-					m_pNextGameObjectOne = NULL;*/
 					m_pNextGameObjectOne = RandomMesh(m_pPlayer);
+
 				}
 				else if (!m_bTriggerActive)
 				{
@@ -455,8 +479,7 @@ GameObject* Scene::RandomMesh(Player* pPlayer)
 	pNewObject->SetPosition(spawnPosition.x - 100, spawnPosition.y + 220);
 	if (pPlayer == m_pPlayer)
 		m_nIndex = randomIndex;
-	else if (pPlayer == m_pPlayer2)
-		m_nIndex2 = randomIndex;
+	
 
 	return pNewObject;
 }
@@ -548,6 +571,7 @@ void Scene::RunTimeReleaseObjects2(std::vector<GameObject*>& objects, int index)
 {
 	printf("오브젝트 하나를 삭제 했어");
 	if (index >= 0 && index < objects.size()) {
+
 		m_b2World->DestroyBody(objects[index]->m_pBody);
 		delete objects[index]; // 객체 삭제
 		objects.erase(objects.begin() + index); // 벡터에서 제거
@@ -575,6 +599,28 @@ Point2D Scene::CheckTopPostion(std::vector<GameObject*>& objects)	//위치를 읽어�
 void Scene::Animate(float fElapsedTime)
 {
 	if (!m_bGameStop && !m_bPauseGame) {
+
+		// 타이머 업데이트
+		m_fElapsedTimeForPlayerTwo += fElapsedTime;
+
+		// 플레이어 2의 블록이 5초마다 떨어지도록 설정
+		if (m_fElapsedTimeForPlayerTwo >= GRAVITY_TRIGGER_TIME) {
+			m_fElapsedTimeForPlayerTwo = 0.0f; // 타이머 리셋
+
+			if (m_bTriggerActive2) { // 새로운 블록 생성
+				m_nIndexPlayerTwo = RunTimeBuildObject(m_nIndex2, m_pPlayer2);
+				m_bTriggerActive2 = false;
+				b2Vec2 velocity(0.0f, -50.0f); // 기본 속도 적용
+				m_objects2[m_nIndexPlayerTwo]->m_pBody->SetLinearVelocity(velocity);
+				m_pNextGameObjectTwo = RandomMesh(m_pPlayer2);
+			}
+			else { // 기존 블록 중력 활성화
+				b2Vec2 velocity(0.0f, -500.0f); // 빠르게 떨어지도록 설정
+				m_objects2[m_nIndexPlayerTwo]->m_pBody->SetLinearVelocity(velocity);
+			}
+		}
+
+
 		for (int i = 0; i < m_nObjectsOne; i++)	//플레이어 원에 블럭들
 		{
 			if (m_objects[m_nIndexPlayerOne]->m_pBody->GetGravityScale() != 0.0f && !m_objects[m_nIndexPlayerOne]->m_bgravity)

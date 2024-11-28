@@ -27,6 +27,7 @@ public:
     ~NetworkManager();
 
 
+
     bool Initialize();
     bool ConnectToServer(const std::string& serverIP, int serverPort);
     //bool SendMessageFunc(const std::string& data);
@@ -35,10 +36,11 @@ public:
     //bool ReceiveData(std::string& outData); // 서버로부터 데이터 수신
     //bool SendAcceptServerPacket();
     void Disconnect();
+    bool ReceiveStartSignal(bool& startSignal);
 
     // 처음 시도한 방법
     bool ReceiveTimeData(int& timeData);
-    void ReceiveThread();
+    void ReceiveThread(Player* pPlayer2, Scene* scene);
 
     SOCKET GetSocket() const { return m_socket; }
 
