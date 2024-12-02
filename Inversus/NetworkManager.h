@@ -55,6 +55,8 @@ private:
     std::string m_serverIP;   // 서버 IP 주소
     int m_serverPort;         // 서버 포트 번호
 
+    
+
     bool m_initialized;
 };
 

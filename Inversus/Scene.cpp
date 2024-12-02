@@ -599,26 +599,26 @@ Point2D Scene::CheckTopPostion(std::vector<GameObject*>& objects)	//위치를 읽어�
 void Scene::Animate(float fElapsedTime)
 {
 	if (!m_bGameStop && !m_bPauseGame) {
-
+		//-------------------임시로 5초마다 떨어지게 한거 11/28
 		// 타이머 업데이트
-		m_fElapsedTimeForPlayerTwo += fElapsedTime;
+		//m_fElapsedTimeForPlayerTwo += fElapsedTime;
 
-		// 플레이어 2의 블록이 5초마다 떨어지도록 설정
-		if (m_fElapsedTimeForPlayerTwo >= GRAVITY_TRIGGER_TIME) {
-			m_fElapsedTimeForPlayerTwo = 0.0f; // 타이머 리셋
+		//// 플레이어 2의 블록이 5초마다 떨어지도록 설정
+		//if (m_fElapsedTimeForPlayerTwo >= GRAVITY_TRIGGER_TIME) {
+		//	m_fElapsedTimeForPlayerTwo = 0.0f; // 타이머 리셋
 
-			if (m_bTriggerActive2) { // 새로운 블록 생성
-				m_nIndexPlayerTwo = RunTimeBuildObject(m_nIndex2, m_pPlayer2);
-				m_bTriggerActive2 = false;
-				b2Vec2 velocity(0.0f, -50.0f); // 기본 속도 적용
-				m_objects2[m_nIndexPlayerTwo]->m_pBody->SetLinearVelocity(velocity);
-				m_pNextGameObjectTwo = RandomMesh(m_pPlayer2);
-			}
-			else { // 기존 블록 중력 활성화
-				b2Vec2 velocity(0.0f, -500.0f); // 빠르게 떨어지도록 설정
-				m_objects2[m_nIndexPlayerTwo]->m_pBody->SetLinearVelocity(velocity);
-			}
-		}
+		//	if (m_bTriggerActive2) { // 새로운 블록 생성
+		//		m_nIndexPlayerTwo = RunTimeBuildObject(m_nIndex2, m_pPlayer2);
+		//		m_bTriggerActive2 = false;
+		//		b2Vec2 velocity(0.0f, -50.0f); // 기본 속도 적용
+		//		m_objects2[m_nIndexPlayerTwo]->m_pBody->SetLinearVelocity(velocity);
+		//		m_pNextGameObjectTwo = RandomMesh(m_pPlayer2);
+		//	}
+		//	else { // 기존 블록 중력 활성화
+		//		b2Vec2 velocity(0.0f, -500.0f); // 빠르게 떨어지도록 설정
+		//		m_objects2[m_nIndexPlayerTwo]->m_pBody->SetLinearVelocity(velocity);
+		//	}
+		//}
 
 
 		for (int i = 0; i < m_nObjectsOne; i++)	//플레이어 원에 블럭들

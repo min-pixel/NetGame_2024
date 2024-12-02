@@ -195,8 +195,9 @@ bool NetworkManager::SendData(void* packet) {
             LogDebugOutput(udpError);
         }
         else {
-            std::string udpSuccess = "[Debug] Sent Mesh Packet via TCP (Index: ";
-            LogDebugOutput(udpSuccess);
+            std::cout << "[Debug] Sending Key Packet: Key = " << keyControlPacket->nMessageID << std::endl;
+            std::string debugMessage = "[Debug] Sending Key Packet: Key = " + std::to_string(keyControlPacket->nMessageID);
+            LogDebugOutput(debugMessage);
         }
         
         break;
@@ -237,65 +238,58 @@ bool NetworkManager::SendData(void* packet) {
 }
 
 void NetworkManager::Client_Send_Thread(Player* player, Scene* scene) {
-    
-    PlayerMeshPacket meshPacket = {};  // 모든 값을 0으로 초기화 
-    PlayerKeyControl keyControlPacket = {}; // 모든 값을 0으로 초기화 
+    auto hasMeshPacket = false;
+    auto hasKeyControlPacket = false;
 
-    
-    
+    PlayerMeshPacket meshPacket{};
+    meshPacket.packetType = MESH_PACKET;
+    meshPacket.size = sizeof(PlayerMeshPacket);
+
+    PlayerKeyControl keyControlPacket{};
+    keyControlPacket.packetType = KEY_CONTROL_PACKET;
+    keyControlPacket.size = sizeof(PlayerKeyControl);
 
     // 이전 좌표를 저장하는 변수
     float lastFxPosition = 0.0f;
     float lastFyPosition = 0.0f;
     //float lastFRotaion = 0.0f;
-    
 
     while (scene->m_bGameStop == false) {  // scene의 m_bGameStop을 사용하여 루프 유지 여부 결정
-        std::lock_guard<std::mutex> lock(packetMutex);
-        if (scene->m_pNextGameObjectOne) {
+        hasMeshPacket = false;
+        hasKeyControlPacket = false;
 
+        packetMutex.lock();
+
+        if (scene->m_pNextGameObjectOne) {
             if (!scene->m_objects.empty() && scene->m_nIndexPlayerOne >= 0 &&
                 scene->m_nIndexPlayerOne < scene->m_objects.size()) {
 
                 GameObject* activeBlock = scene->m_objects[scene->m_nIndexPlayerOne];  //현재 조작중인 블럭의 정보.
                 // 패킷 데이터 설정
 
-                //if (activeBlock->m_fxPosition != lastFxPosition || activeBlock->m_fyPosition != lastFyPosition) { //블럭의 위치가 바뀌면 전송
+                if (activeBlock->m_fxPosition != lastFxPosition || activeBlock->m_fyPosition != lastFyPosition) { //블럭의 위치가 바뀌면 전송
                     lastFxPosition = activeBlock->m_fxPosition;
                     lastFyPosition = activeBlock->m_fyPosition;
                     //lastFRotaion = activeBlock->m_fRotation;
 
-                    meshPacket.packetType = MESH_PACKET;
                     meshPacket.m_fxPosition = activeBlock->m_fxPosition;
                     meshPacket.m_fyPosition = activeBlock->m_fyPosition;
                     //meshPacket.m_fRotation = activeBlock->m_fRotation;
                     meshPacket.meshIndex = scene->m_nIndex;
                     meshPacket.topPositionRate = activeBlock->m_pBody->GetPosition().y;
-                    
-                    // 서버로 패킷 전송
-                    this->SendData(&meshPacket);
-                    if (!this->SendData(&meshPacket)) {
-                        std::cerr << "[Error] Failed to send mesh packet to server." << std::endl;
-                    }
 
-
+                    hasMeshPacket = true;
                     /*std::string debugMessage = "Sending Packet: fx: " + std::to_string(activeBlock->m_fxPosition) +
                         ", fy: " + std::to_string(activeBlock->m_fyPosition) +
                         ", meshIndex: " + std::to_string(scene->m_nIndex) +
                         "탑 포지션: " + std::to_string(activeBlock->m_pBody->GetPosition().y);
                     LogDebugOutput(debugMessage);*/
-
-
-
-                //}
-
+                }
             }
         }
 
-
         // 키 입력이 있을 경우 키 입력 제어 패킷 전송
         if (scene->m_bKeyInput) {
-
             switch (scene->m_lastKeyPressed) {
             case VK_LEFT:
                 keyControlPacket.nMessageID = VK_LEFT;
@@ -316,6 +310,7 @@ void NetworkManager::Client_Send_Thread(Player* player, Scene* scene) {
                 keyControlPacket.nMessageID = VK_OEM_PERIOD;
                 break;
             default:
+                keyControlPacket.nMessageID = 0;
                 break;
             }
 
@@ -324,16 +319,29 @@ void NetworkManager::Client_Send_Thread(Player* player, Scene* scene) {
             //std::string debugMessage = "[Debug] Sending Key Packet: Key = " + std::to_string(keyControlPacket.nMessageID);
             //LogDebugOutput(debugMessage);
 
-            keyControlPacket.packetType = KEY_CONTROL_PACKET;
-            
-            this->SendData(static_cast<void*>(&keyControlPacket));
-            
-
-
-
+            if (keyControlPacket.nMessageID != 0)
+            {
+                hasKeyControlPacket = true;
+            }
         }
+
+        packetMutex.unlock();
+
+        if (hasMeshPacket)
+        {
+            this->SendData(&meshPacket);
+            if (!this->SendData(&meshPacket))
+            {
+                std::cerr << "[Error] Failed to send mesh packet to server." << std::endl;
+            }
+        }
+
+        if (hasKeyControlPacket)
+        {
+            this->SendData(static_cast<void*>(&keyControlPacket));
+        }
+
         Sleep(100); // 전송 주기 (0.1초)
-    
     }
 }
 
@@ -342,22 +350,20 @@ void NetworkManager::ReceiveThread(Player* pPlayer2, Scene* scene) {
     char buffer[BUFSIZE];
     int result;
 
+    
     while (true) {
+
         result = recv(m_socket, buffer, BUFSIZE, 0);
+
+        
 
         if (result > 0) {
             // 받은 데이터를 PacketType으로 파싱
             PacketType* packetType = reinterpret_cast<PacketType*>(buffer);
-
             switch (*packetType) {
             case MESH_PACKET: {
                 // MESH_PACKET 처리
                 PlayerMeshPacket* meshPacket = reinterpret_cast<PlayerMeshPacket*>(buffer);
-
-
-
-                // Lock을 사용하여 안전하게 플레이어 2 업데이트
-                std::lock_guard<std::mutex> lock(packetMutex);
 
                 if (pPlayer2 && scene) {
 
@@ -379,7 +385,7 @@ void NetworkManager::ReceiveThread(Player* pPlayer2, Scene* scene) {
                         //if (scene->m_bTriggerActive2)
                         //{
                         //    scene->m_nIndexPlayerTwo = scene->RunTimeBuildObject(scene->m_nIndex2, scene->m_pPlayer2);	//해당 인덱스에 대해 저장
-                        //    scene->m_bTriggerActive2 = false;	//동작을 수행할 수 있게 만들어주고
+                        //    scene->m_bTriggerActive2 = true;	//동작을 수행할 수 있게 만들어주고
                         //    b2Vec2 velocity(0.0f, -50.0f);
                         //    scene->m_objects2[scene->m_nIndexPlayerTwo]->m_pBody->SetLinearVelocity(velocity);
                         //    if (meshPacket->meshIndex >= 0 && meshPacket->meshIndex < scene->m_nRandomCount) {
@@ -446,34 +452,45 @@ void NetworkManager::ReceiveThread(Player* pPlayer2, Scene* scene) {
                     
                 //}
 
-                std::string debugMessage = "[Debug] Received Mesh Packet: Position("
+                /*std::string debugMessage = "[Debug] Received Mesh Packet: Position("
                     + std::to_string(meshPacket->m_fxPosition) + ", "
                     + std::to_string(meshPacket->m_fyPosition) + "), MeshIndex: "
                     + std::to_string(meshPacket->meshIndex)
                     + ", TopYPosition: " + std::to_string(meshPacket->topPositionRate)
                     + "win: " + std::to_string(meshPacket->Win);
-                LogDebugOutput(debugMessage);
+                LogDebugOutput(debugMessage);*/
                 break;
             }
             case KEY_CONTROL_PACKET: {
                 // KEY_CONTROL_PACKET 처리
                 PlayerKeyControl* keyPacket = reinterpret_cast<PlayerKeyControl*>(buffer);
 
-                //std::lock_guard<std::mutex> lock(packetMutex);
+                
 
                 // 다운키의 로직 실행
-                /*if (keyPacket->nMessageID == VK_DOWN) {
-                    std::lock_guard<std::mutex> lock(packetMutex);
-
-                    if (scene->m_bTriggerActive2) {
-                        scene->m_nIndexPlayerTwo = scene->RunTimeBuildObject(scene->m_nIndex2, pPlayer2);
-                        scene->m_bTriggerActive2 = false;
-
-                        GameObject* activeBlock = scene->m_objects2[scene->m_nIndexPlayerTwo];
-                        b2Vec2 velocity(0.0f, -50.0f);
-                        activeBlock->m_pBody->SetLinearVelocity(velocity);
+                if (keyPacket->nMessageID == VK_DOWN) {
+                    if (scene->m_bTriggerActive2){
+                             
+                        		scene->m_nIndexPlayerTwo = scene->RunTimeBuildObject(scene->m_nIndex2, scene->m_pPlayer2);	//해당 인덱스에 대해 저장
+                                scene->m_bTriggerActive2 = false;	//동작을 수행할 수 있게 만들어주고
+                        		b2Vec2 velocity(0.0f, -50.0f);
+                                scene->m_objects2[scene->m_nIndexPlayerTwo]->m_pBody->SetLinearVelocity(velocity);
+                                //scene->m_pNextGameObjectTwo = scene->RandomMesh(scene->m_pPlayer2);
+                                
+                    
                     }
-                }*/
+                    else if (!scene->m_bTriggerActive2)
+                    {
+                        		b2Vec2 velocity(0.0f, -500.0f);
+                                scene->m_objects2[scene->m_nIndexPlayerTwo]->m_pBody->SetLinearVelocity(velocity);
+                    }
+
+                }
+
+                std::string debugMessage = "키값 받음: "
+                    + std::to_string(keyPacket->nMessageID);
+                LogDebugOutput(debugMessage);
+
                 break;
             }
             default: {
@@ -495,6 +512,8 @@ void NetworkManager::ReceiveThread(Player* pPlayer2, Scene* scene) {
         }
         Sleep(100); // CPU 사용량을 낮추기 위해 약간의 대기
     }
+    
+    
 
     std::string debugMessage = "Receive thread terminated.";
     LogDebugOutput(debugMessage);
