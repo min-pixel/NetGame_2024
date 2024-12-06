@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "GraphicsPipeline.h"
 #include <thread>
+#include <mutex>
 
 
 Scene::Scene(Player* pPlayer, Player* pPlayer2, b2World* world, HINSTANCE Instance) : m_lastKeyPressed(0), m_fElapsedTimeForPlayerTwo(0.0f)  // 초기화 리스트에서 m_lastKeyPressed를 0으로 초기화
@@ -62,15 +63,15 @@ void Scene::OnProcessingMouseMessage(HWND hWnd, UINT nMessageID, WPARAM wParam, 
 				ReleaseObjects();	//오브젝트를 삭제하고
 				BuildObjects();	//오브젝트를 생성하고
 
-
-
 				m_bGameStart = true;
-				m_bGameStop = false; //11월 19일 추가 : 재시작 안 하면 전송 안 하던 걸 해결.
+				m_bGameStop = false; //11월 19일 추가 : 재시작 안 하면 전송 안 하던 걸 해결
 
+
+				
 				std::thread clientSendThread(&NetworkManager::Client_Send_Thread, m_pNetworkManager, m_pPlayer, this);
 				clientSendThread.detach(); // 스레드를 분리하여 독립적으로 실행
 
-				std::thread receiveThread(&NetworkManager::ReceiveThread, m_pNetworkManager, m_pPlayer, this); 
+				std::thread receiveThread(&NetworkManager::ReceiveThread, m_pNetworkManager, m_pPlayer2, this); 
 				receiveThread.detach();
 
 				
@@ -304,22 +305,22 @@ void Scene::OnProcessingKeyboardMessage(HWND hWnd, UINT nMessageID, WPARAM wPara
 			//		m_objects2[m_nIndexPlayerTwo]->m_pBody->SetLinearVelocity(velocity);
 			//	}
 			//	break;
-			//case 'S':
-			//	if (m_bTriggerActive2)
-			//	{
-			//		m_nIndexPlayerTwo = RunTimeBuildObject(m_nIndex2, m_pPlayer2);	//해당 인덱스에 대해 저장
-			//		m_bTriggerActive2 = false;	//동작을 수행할 수 있게 만들어주고
-			//		b2Vec2 velocity(0.0f, -50.0f);
-			//		m_objects2[m_nIndexPlayerTwo]->m_pBody->SetLinearVelocity(velocity);
-			//		m_pNextGameObjectTwo = RandomMesh(m_pPlayer2);
-			//		printf("%f", m_pPlayer2->GetCamera()->GetPosition().x);
-			//	}
-			//	else if (!m_bTriggerActive2)
-			//	{
-			//		b2Vec2 velocity(0.0f, -500.0f);
-			//		m_objects2[m_nIndexPlayerTwo]->m_pBody->SetLinearVelocity(velocity);
-			//	}
-			//	break;
+			case 'S':
+				if (m_bTriggerActive2)
+				{
+					m_nIndexPlayerTwo = RunTimeBuildObject(m_nIndex2, m_pPlayer2);	//해당 인덱스에 대해 저장
+					m_bTriggerActive2 = false;	//동작을 수행할 수 있게 만들어주고
+					b2Vec2 velocity(0.0f, -50.0f);
+					m_objects2[m_nIndexPlayerTwo]->m_pBody->SetLinearVelocity(velocity);
+					m_pNextGameObjectTwo = RandomMesh(m_pPlayer2);
+					printf("%f", m_pPlayer2->GetCamera()->GetPosition().x);
+				}
+				else if (!m_bTriggerActive2)
+				{
+					b2Vec2 velocity(0.0f, -500.0f);
+					m_objects2[m_nIndexPlayerTwo]->m_pBody->SetLinearVelocity(velocity);
+				}
+				break;
 			//case 'F':
 			//	if (!m_bTriggerActive2)
 			//	{
@@ -447,6 +448,8 @@ void Scene::BuildObjects()
 	m_pRandomMeshGet[7].SelectMesh = new Cube2x2Mesh(20.0f, 20.0f);
 	m_pNextGameObjectOne = RandomMesh(m_pPlayer);	//맨 처음에 콜라이더를 선언하지 않은 놈을 만들고
 	m_pNextGameObjectTwo = RandomMesh(m_pPlayer2);
+
+	
 }
 
 void Scene::ReleaseObjects()
@@ -620,6 +623,9 @@ void Scene::Animate(float fElapsedTime)
 		//	}
 		//}
 
+		// 물리 작업 큐 처리
+		//ProcessPhysicsTasks();
+
 
 		for (int i = 0; i < m_nObjectsOne; i++)	//플레이어 원에 블럭들
 		{
@@ -674,8 +680,13 @@ void Scene::Animate(float fElapsedTime)
 			m_pPlayer->GetCamera()->SetPosition(0.0f, m_pTopPosition1.y + 200);
 		}
 
+		
+
 		for (int i = 0; i < m_nObjectsTwo; i++)	//플레이어 투에 블럭들 
 		{
+
+			
+
 			if (m_objects2[m_nIndexPlayerTwo]->m_pBody->GetGravityScale() != 0.0f && !m_objects2[m_nIndexPlayerTwo]->m_bgravity)
 			{
 				m_objects2[m_nIndexPlayerTwo]->m_bgravity = true;	//그래비티가 활성화 됬다는소리고
@@ -798,6 +809,9 @@ void Scene::Render(HDC hDCFrameBuffer, Camera* pCamera, Camera* pCamera2)
 {
 	if (m_bGameStart == true)
 	{
+
+		
+
 		if (pCamera) GraphicsPipeline::SetCamera(pCamera);	//카메라가 존재하면 그래픽스파이프라인에 카메라를 set해라.
 		if (m_nObjectsOne != 0)
 		{
@@ -998,3 +1012,5 @@ void Scene::GameEndUI(HDC hDCFrameBuffer)
 		}
 	}
 }
+
+

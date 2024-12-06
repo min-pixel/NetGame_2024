@@ -237,6 +237,7 @@ void GameObject::UpdateFromPhysics()
 		m_fyPosition = pos.y;
 		m_fRotation = m_pBody->GetAngle() * (180.0f / b2_pi); // 라디안을 도로 변환
 	}
+
 }
 void GameObject::Move(float x, float y)
 {

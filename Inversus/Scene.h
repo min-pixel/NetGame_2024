@@ -3,6 +3,9 @@
 #include "GameObject.h"
 #include "Camera.h"
 #include "NetworkManager.h"
+#include <mutex>
+#include <functional> // std::function 사용을 위해 필요
+#include <vector>     // std::vector 사용을 위해 필요
 
 class MyContactListener : public b2ContactListener {
 public:
@@ -40,7 +43,7 @@ public:
 private: //게임 오브젝트의 배열로 구성되어있다.
 	HINSTANCE					m_hInstance = NULL;
 	int							m_nObjectsOne = 0;		//현재 1번 플레이어가 쌓은 블럭 개수 오브젝트를 갖는다.
-	int							m_nObjectsTwo = 0;		//현재 2번 플레이어가 쌓은 블럭 개수
+	//int							m_nObjectsTwo = 0;		//현재 2번 플레이어가 쌓은 블럭 개수
 	//GameObject** m_ppObjects = NULL;		//이중 포인터.
 	//MyContactListener m_contactListener;// 충돌 이벤트 처리를 위한 객체
 	GameObject* m_pGround = NULL;
@@ -98,6 +101,7 @@ private: //게임 오브젝트의 배열로 구성되어있다.
 	double m_DbtnBottom = m_DbtnTop + FRAMEBUFFER_HEIGHT / 10;// 좌표값 용도 입니다.
 
 	NetworkManager* m_pNetworkManager = nullptr; //네트워크 매니저 추가
+	
 
 public:
 
@@ -121,6 +125,9 @@ public:
 	const float GRAVITY_TRIGGER_TIME = 5.0f; // 5초마다 중력 발동 
 	Point2D m_pTopPosition1;	//플레이어 1의 블럭들 중 가장 높은거 저장
 	WPARAM m_lastKeyPressed; 
+	int							m_nObjectsTwo = 0;
+
+	
 
 public:
 	virtual void BuildObjects();	//오브젝트 생성

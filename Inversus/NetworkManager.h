@@ -16,7 +16,7 @@
 class Scene;
 class Player;
 class GameObject;
-
+class GameFramework; // 전방 선언 추가
 
 
 
@@ -43,6 +43,7 @@ public:
     void ReceiveThread(Player* pPlayer2, Scene* scene);
 
     SOCKET GetSocket() const { return m_socket; }
+    
 
 private:
 
