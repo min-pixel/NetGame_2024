@@ -5,6 +5,9 @@
 #include <mutex>
 
 
+
+
+
 Scene::Scene(Player* pPlayer, Player* pPlayer2, b2World* world, HINSTANCE Instance) : m_lastKeyPressed(0), m_fElapsedTimeForPlayerTwo(0.0f)  // 초기화 리스트에서 m_lastKeyPressed를 0으로 초기화
 {
 	m_pPlayer = pPlayer;
@@ -19,6 +22,11 @@ Scene::Scene(Player* pPlayer, Player* pPlayer2, b2World* world, HINSTANCE Instan
 
 Scene::~Scene()
 {
+}
+
+//디버그 메세지 확인용 12/07
+void Scene::LogDebugOutput(const std::string& message) {
+	OutputDebugStringA((message + "\n").c_str());
 }
 
 
@@ -51,13 +59,27 @@ void Scene::OnProcessingMouseMessage(HWND hWnd, UINT nMessageID, WPARAM wParam, 
 			//m_bGameStop = false; //11월 19일 추가 : 재시작 안 하면 전송 안 하던 걸 해결.
 			m_pNetworkManager = new NetworkManager();
 			if (m_pNetworkManager->ConnectToServer("127.0.0.1", 9000)) { // 서버 IP와 포트를 입력
-				// 연결이 성공한 경우, 클라이언트 전송 스레드를 시작
+				
+
+			
+				// 서버로부터 플레이어 카운트 수신   12/07
+				
+				if (!m_pNetworkManager->ReceivePlayerCount(m_playerCount)) {
+					std::cerr << "[Error] Failed to receive player count from server." << std::endl;
+					return; // 초기화 중단
+				}
+				std::cout << "Received player count: " << m_playerCount << std::endl;
+
+
 
 				// 연결이 성공하면 서버의 시작 신호를 대기
 				bool startSignal = false;
 				while (!startSignal) {
 					m_pNetworkManager->ReceiveStartSignal(startSignal);  // 시작 신호를 받는 함수를 추가
 				}
+
+				
+
 
 				// 시작 신호를 받은 후 게임 시작
 				ReleaseObjects();	//오브젝트를 삭제하고
@@ -71,7 +93,7 @@ void Scene::OnProcessingMouseMessage(HWND hWnd, UINT nMessageID, WPARAM wParam, 
 				std::thread clientSendThread(&NetworkManager::Client_Send_Thread, m_pNetworkManager, m_pPlayer, this);
 				clientSendThread.detach(); // 스레드를 분리하여 독립적으로 실행
 
-				std::thread receiveThread(&NetworkManager::ReceiveThread, m_pNetworkManager, m_pPlayer2, this); 
+				std::thread receiveThread(&NetworkManager::ReceiveThread, m_pNetworkManager, m_pPlayer, this); 
 				receiveThread.detach();
 
 				
@@ -317,7 +339,7 @@ void Scene::OnProcessingKeyboardMessage(HWND hWnd, UINT nMessageID, WPARAM wPara
 				}
 				else if (!m_bTriggerActive2)
 				{
-					b2Vec2 velocity(0.0f, -500.0f);
+					b2Vec2 velocity(0.0f, -50.0f);
 					m_objects2[m_nIndexPlayerTwo]->m_pBody->SetLinearVelocity(velocity);
 				}
 				break;
@@ -489,10 +511,35 @@ GameObject* Scene::RandomMesh(Player* pPlayer)
 int Scene::RunTimeBuildObject(int index, Player* pPlayer)	//키 입력 받으면 m_pNextGameObjectOne 이걸 기반으로 추가
 {
 	GameObject* pNewObject = NULL;
-	if (pPlayer == m_pPlayer)
+
+
+	// 디버그 메시지 추가
+	std::string debugMessage = "Current player count: " + std::to_string(m_playerCount);
+	LogDebugOutput(debugMessage);
+
+	debugMessage = "Player pointer: " + std::to_string(reinterpret_cast<std::uintptr_t>(pPlayer));
+	LogDebugOutput(debugMessage);
+
+	
+	if (m_playerCount == 0)
+	{
+		if (pPlayer == m_pPlayer)
+			pNewObject = m_pNextGameObjectOne;
+		else if (pPlayer == m_pPlayer2)
+			pNewObject = m_pNextGameObjectTwo;
+	}
+	if (m_playerCount > 0)
+	{
+		if (pPlayer == m_pPlayer2)
+			pNewObject = m_pNextGameObjectOne;
+		else if (pPlayer == m_pPlayer)
+			pNewObject = m_pNextGameObjectTwo;
+	}
+	//기존 꺼 12/07
+	/*if (pPlayer == m_pPlayer)
 		pNewObject = m_pNextGameObjectOne;
 	else if (pPlayer == m_pPlayer2)
-		pNewObject = m_pNextGameObjectTwo;
+		pNewObject = m_pNextGameObjectTwo;*/
 	Point2D spawnPosition = pPlayer->GetCamera()->GetPosition();
 	printf("좌표는:%f,%f이다", spawnPosition.x, spawnPosition.y);
 
@@ -555,6 +602,8 @@ int Scene::RunTimeBuildObject(int index, Player* pPlayer)	//키 입력 받으면 m_pNe
 		m_nObjectsTwo = m_objects2.size();
 		return m_nObjectsTwo - 1;
 	}
+	
+
 	return -99;
 }
 

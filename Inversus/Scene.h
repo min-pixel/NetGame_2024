@@ -7,6 +7,8 @@
 #include <functional> // std::function 사용을 위해 필요
 #include <vector>     // std::vector 사용을 위해 필요
 
+
+
 class MyContactListener : public b2ContactListener {
 public:
 	float m_nApositionX = 0.0f;
@@ -126,6 +128,11 @@ public:
 	Point2D m_pTopPosition1;	//플레이어 1의 블럭들 중 가장 높은거 저장
 	WPARAM m_lastKeyPressed; 
 	int							m_nObjectsTwo = 0;
+	int m_playerCount; // 서버에서 받은 플레이어 카운트 값 저장  12/07
+	
+	
+	void LogDebugOutput(const std::string& message);
+	
 
 	
 
@@ -149,6 +156,8 @@ public:
 	virtual void PauseUI(HDC hDCFrameBuffer); // Pause 할 때 UI
 	virtual void timeUI(float fElapsedTime);// 시간 UI
 	virtual void GameEndUI(HDC hDCFrameBuffer); //game끝날 때 UI
+
+	
 
 
 };

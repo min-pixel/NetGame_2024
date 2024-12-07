@@ -43,6 +43,8 @@ public:
     void ReceiveThread(Player* pPlayer2, Scene* scene);
 
     SOCKET GetSocket() const { return m_socket; }
+
+    bool ReceivePlayerCount(int& playerCount);
     
 
 private:

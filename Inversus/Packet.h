@@ -14,15 +14,19 @@ enum PacketType {
 };
 
 
+#pragma pack(push, 1)
+
+struct PlayerPacket {
+    PacketType packetType;  // 기본값 설정
+    int size;
+};
 
 struct getPlayer {
     PacketType packetType = GET_PLAYER_PACKET;
-    char ip[16];
-    uint32_t nMessageID;
-    bool accept_server;
+    int count;
 };
 
-#pragma pack(push, 1)
+
 struct PlayerMeshPacket {
     PacketType packetType = MESH_PACKET;
     int size;
@@ -48,3 +52,11 @@ struct PlayerItemPacket {
     int m_nChangeBlockCount;
 };
 #pragma pack(pop)
+
+
+
+
+
+
+
+   

@@ -17,6 +17,7 @@ void LogDebugOutput(const std::string& message) {
 
 
 std::mutex packetMutex;
+std::mutex eMutex;
 #define BUFSIZE 1024
 
 //아직 미완인 부분은 주석 처리함.
@@ -80,6 +81,9 @@ bool NetworkManager::ConnectToServer(const std::string& serverIP, int serverPort
         closesocket(m_socket);
         return false;
     }
+
+
+
 
     // 서버 정보 저장 (멤버 변수)
     m_serverIP = serverIP;
@@ -276,14 +280,14 @@ void NetworkManager::Client_Send_Thread(Player* player, Scene* scene) {
             //this->SendData(static_cast<void*>(&keyControlPacket));
         }
 
-        Sleep(100); // 전송 주기 (0.1초)
+        Sleep(200); // 전송 주기 (0.1초)
     }
 }
 
 
 
 
-void NetworkManager::ReceiveThread(Player* pPlayer2, Scene* scene) {
+void NetworkManager::ReceiveThread(Player* pPlayer, Scene* scene) {
     char buffer[BUFSIZE];
     int result;
   
@@ -294,22 +298,26 @@ void NetworkManager::ReceiveThread(Player* pPlayer2, Scene* scene) {
     // 이전 메쉬 인덱스를 추적하기 위한 변수를 Scene 클래스에 추가
     int previousMeshIndex = -1; // 초기값은 -1로 설정해 이전값과 비교 가능
     
+
+
     while (true) {
         
         
 
         result = recv(m_socket, buffer, BUFSIZE, 0);
-
+        
     
         // 이전 좌표를 저장하여 변경 여부를 확인
         float lastFxPosition = 0.0f;
         float lastFyPosition = 0.0f;
+        
         
 
         if (result > 0) {
             // 받은 데이터를 PacketType으로 파싱
             PacketType* packetType = reinterpret_cast<PacketType*>(buffer);
             switch (*packetType) {
+            
             case MESH_PACKET: {
                 // MESH_PACKET 처리
                 PlayerMeshPacket* meshPacket = reinterpret_cast<PlayerMeshPacket*>(buffer);
@@ -326,7 +334,7 @@ void NetworkManager::ReceiveThread(Player* pPlayer2, Scene* scene) {
                             scene->m_pNextGameObjectTwo->SetMesh(scene->m_pRandomMeshGet[meshPacket->meshIndex].SelectMesh);
                         }
 
-                        //---------------------------------------------------------------------12/06 지금은 
+                    //    //---------------------------------------------------------------------12/06 지금은 
                         // scene->m_objects2.size() > 0 && scene->m_nIndexPlayerTwo >= 0 && scene->m_nIndexPlayerTwo < scene->m_objects2.size() 가 만족되면 런타임빌드오브젝트로 
                         // 새 블럭을 만들고, b2Vec2 velocity 적용해서 떨구기만 되는 중, scene->m_objects2[scene->m_nIndexPlayerTwo]에 x,y 값을 서버에서 받은 걸로 변경해도 b2Vec2 velocity로만 움직임;;;;
                         // b2Vec2 velocity을 0.0f, 0.0f로 설정하면 생성하고 움직이지를 않음....
@@ -345,7 +353,7 @@ void NetworkManager::ReceiveThread(Player* pPlayer2, Scene* scene) {
                                     
                                     if (scene->m_bTriggerActive2) {
 
-                                        scene->m_nIndexPlayerTwo = scene->RunTimeBuildObject(meshPacket->meshIndex, scene->m_pPlayer2);	//해당 인덱스에 대해 저장
+                                        scene->m_nIndexPlayerTwo = scene->RunTimeBuildObject(scene->m_nIndex2, scene->m_pPlayer2);	//해당 인덱스에 대해 저장
                                         b2Vec2 velocity(lastFxPosition*-1, lastFyPosition*-1);
                                         scene->m_objects2[scene->m_nIndexPlayerTwo]->m_pBody->SetLinearVelocity(velocity);
                                         GameObject* activeBlock = scene->m_objects2[scene->m_nIndexPlayerTwo];
@@ -385,7 +393,7 @@ void NetworkManager::ReceiveThread(Player* pPlayer2, Scene* scene) {
                 }
 
 
-
+               
               
                 break;
             }
@@ -418,7 +426,7 @@ void NetworkManager::ReceiveThread(Player* pPlayer2, Scene* scene) {
                 std::string debugMessage = "키값 받음: "
                     + std::to_string(keyPacket->nMessageID);
                 LogDebugOutput(debugMessage);
-
+                
                 break;
             }
                                    //epacketMutex.unlock();
@@ -448,9 +456,9 @@ void NetworkManager::ReceiveThread(Player* pPlayer2, Scene* scene) {
             LogDebugOutput(debugMessage);
             break; // 오류 발생 시 종료
         }
-        
+    
 
-        Sleep(100); // CPU 사용량을 낮추기 위해 약간의 대기
+        Sleep(200); // CPU 사용량을 낮추기 위해 약간의 대기
     }
     
     
@@ -508,3 +516,28 @@ bool NetworkManager::ReceiveStartSignal(bool& startSignal) {
     return false;
 }
 
+//------------------------------------------서버가 보내는 소켓 순서값을 받는 함수 12/07 
+bool NetworkManager::ReceivePlayerCount(int& playerCount) {
+    if (m_socket == INVALID_SOCKET) {
+        std::cerr << "[Error] Socket is not connected." << std::endl;
+        return false;
+    }
+
+    // 서버로부터 count 값을 수신
+    char buffer[sizeof(int)] = { 0 };
+    int result = recv(m_socket, buffer, sizeof(int), 0);
+
+    if (result > 0) {
+        playerCount = ntohl(*reinterpret_cast<int*>(buffer));
+        std::string debugMessage = "Received Player Count from Server: " + std::to_string(playerCount);
+        LogDebugOutput(debugMessage);
+        return true;
+    }
+    else if (result == 0) {
+        std::cerr << "[Error] Connection closed by server." << std::endl;
+    }
+    else {
+        std::cerr << "[Error] Receive failed: " << WSAGetLastError() << std::endl;
+    }
+    return false;
+}
