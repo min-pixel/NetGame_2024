@@ -8,9 +8,11 @@
 #include <stdio.h> // printf(), ...
 #include <stdlib.h> // exit(), ...
 #include <string.h> // strncpy(), ...
-#include <iostream>
-#include <thread>
+
+#include <string>
 #include <chrono>
+#include <thread>
+#include <windows.h>
 
 #pragma comment(lib, "ws2_32") // ws2_32.lib ¸µÅ©
 
