@@ -1,70 +1,67 @@
 ﻿  Gameframework.cpp
-  Inversus.cpp
-  NetworkManager.cpp
-C:\Users\msi\Desktop\백업본\Inversus\NetworkManager.cpp(218,85): warning C4244: '=': 'const float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Scene.cpp
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(166,15): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(466,32): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(467,33): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(576,33): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(583,34): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(801,40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(833,40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(877,59): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(900,116): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(900,88): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(900,54): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(902,65): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(902,52): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(902,41): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(902,29): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(903,116): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(903,88): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(903,54): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(905,47): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(905,40): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(905,35): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(905,29): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(906,111): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(906,88): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(906,54): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(911,18): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(911,18): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(911,30): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(911,30): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(911,41): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(911,41): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(911,54): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(911,54): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(916,18): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(916,18): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(916,25): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(916,25): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(916,30): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(916,30): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(916,38): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(916,38): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(929,87): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(929,39): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(939,50): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(941,50): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(943,50): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(951,50): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(953,50): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(955,50): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(926,7): warning C4101: 'hPen' :참조되지 않은 지역 변수입니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(969,48): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(973,52): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(976,51): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(963,7): warning C4101: 'hPen' :참조되지 않은 지역 변수입니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(1018,48): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(1020,63): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(1023,62): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(1027,62): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(1031,53): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  코드를 생성하고 있습니다.
-  15 of 795 functions ( 1.9%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    9 functions had inline decision re-evaluated but remain unchanged
-  코드를 생성했습니다.
-  Inversus.vcxproj -> C:\Users\msi\Desktop\백업본\x64\Release\Inversus.exe
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(97,17): error C2374: 'clientSendThread': 재정의. 여러 번 초기화했습니다.
+      C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(81,17):
+      'clientSendThread' 선언을 참조하십시오.
+  
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(100,17): error C2374: 'receiveThread': 재정의. 여러 번 초기화했습니다.
+      C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(84,17):
+      'receiveThread' 선언을 참조하십시오.
+  
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(183,15): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(483,32): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(484,33): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(603,33): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(610,34): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(828,40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(860,40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(904,59): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(927,116): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(927,88): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(927,54): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(929,65): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(929,52): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(929,41): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(929,29): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(930,116): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(930,88): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(930,54): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(932,47): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(932,40): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(932,35): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(932,29): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(933,111): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(933,88): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(933,54): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(938,18): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(938,18): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(938,30): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(938,30): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(938,41): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(938,41): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(938,54): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(938,54): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(943,18): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(943,18): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(943,25): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(943,25): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(943,30): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(943,30): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(943,38): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(943,38): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(956,87): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(956,39): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(966,50): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(968,50): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(970,50): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(978,50): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(980,50): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(982,50): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(996,48): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(1000,52): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(1003,51): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(1045,48): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(1047,63): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(1050,62): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(1054,62): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\msi\Desktop\백업본\Inversus\Scene.cpp(1058,53): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.

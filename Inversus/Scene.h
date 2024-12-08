@@ -38,7 +38,7 @@ struct  MeshGetInfo
 class Scene
 {
 public:
-	Scene(Player* pPlayer, Player* pPlayer2, b2World* world, HINSTANCE Instance);
+	Scene(Player* pPlayer, Player* pPlayer2, b2World* world, HINSTANCE Instance, NetworkManager* pNetworkManager);
 	virtual ~Scene();
 	MyContactListener contactListener;
 
@@ -51,7 +51,7 @@ private: //게임 오브젝트의 배열로 구성되어있다.
 	GameObject* m_pGround = NULL;
 	GameObject* m_pGround2 = NULL;
 
-	Player* m_pPlayer = NULL;
+	//Player* m_pPlayer = NULL;
 	//Player* m_pPlayer2 = NULL;
 
 	b2World* m_b2World = NULL;
@@ -67,7 +67,7 @@ private: //게임 오브젝트의 배열로 구성되어있다.
 	//GameObject* m_pNextGameObjectTwo = NULL; //다음출력될 블럭을 미리 보여주는 거.  플레이어 2
 
 	//Point2D m_pTopPosition1;	//플레이어 1의 블럭들 중 가장 높은거 저장.
-	Point2D m_pTopPosition2;
+	//Point2D m_pTopPosition2;
 
 
 
@@ -129,9 +129,10 @@ public:
 	WPARAM m_lastKeyPressed; 
 	int							m_nObjectsTwo = 0;
 	int m_playerCount; // 서버에서 받은 플레이어 카운트 값 저장  12/07
-	
+	Player* m_pPlayer = NULL;
 	
 	void LogDebugOutput(const std::string& message);
+	Point2D m_pTopPosition2;
 	
 
 	

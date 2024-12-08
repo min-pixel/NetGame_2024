@@ -28,6 +28,12 @@ void GameFramework::OnDestroy()
 	if (m_hDCFrameBuffer) ::DeleteDC(m_hDCFrameBuffer);
 }
 
+//디버그 메세지 확인용 12/07
+void GameFramework::LogDebugOutput(const std::string& message) {
+	OutputDebugStringA((message + "\n").c_str());
+}
+
+
 void GameFramework::BuildFrameBuffer()
 {
 
@@ -71,22 +77,126 @@ void GameFramework::PresentFrameBuffer()
 
 void GameFramework::BuildObjects()		//카메라, 플레이어
 {
+	
+
 	Camera* pCamera = new Camera();
 	pCamera->SetViewport(0, 0, FRAMEBUFFER_WIDTH / 2, FRAMEBUFFER_HEIGHT);
 	Camera* pCamera2 = new Camera();
 	pCamera2->SetViewport(FRAMEBUFFER_WIDTH / 2, 0, FRAMEBUFFER_WIDTH / 2, FRAMEBUFFER_HEIGHT);
 	cubeB* playerMesh = new cubeB(10.0f, 10.0f);
 	m_pPlayer = new Player();
-	m_pPlayer->SetCamera(pCamera);
-	m_pPlayer->SetPosition(0.0f, 0.0f);
-	//m_pPlayer->SetMesh(playerMesh);
-	//m_pPlayer->SetColor(RGB(0, 0, 255));
 	m_pPlayer2 = new Player();
-	m_pPlayer2->SetCamera(pCamera2);
-	m_pPlayer2->SetPosition(1000.0f, 0.0f);
-	m_pScene = new Scene(m_pPlayer, m_pPlayer2, &world, m_hInstance);
+
+	//12/08 -------------------------------------------기존 Scene.cpp에 있던 커넥트를 옮겨옴, 서버에서 보내주는 소켓 순서값을 받을 ReceivePlayerCount() 제작
+	// 네트워크 매니저 초기화
+	m_pNetworkManager = new NetworkManager();
+	if (!m_pNetworkManager->ConnectToServer("127.0.0.1", 9000)) {
+		MessageBox(NULL, L"서버 연결 실패", L"네트워크 오류", MB_OK | MB_ICONERROR);
+		return;
+	}
+
+	// 서버로부터 클라이언트 번호 수신
+	if (!m_pNetworkManager->ReceivePlayerCount(m_playerCount)) {
+		MessageBox(NULL, L"플레이어 번호 수신 실패", L"네트워크 오류", MB_OK | MB_ICONERROR);
+		return;
+	}
+
+	// 디버그 메시지 추가 ------ 몇번째 클라인지
+	std::string debugMessage = "Current player count: " + std::to_string(m_playerCount);
+	LogDebugOutput(debugMessage);
+
+	//12/08 ------------------------서버에서 받은 소켓 순서값에 따라서 카메라 변경
+	if (m_playerCount == 0)
+	{
+		std::string debugMessage = "이이이이이이: " + std::to_string(m_playerCount);
+		LogDebugOutput(debugMessage);
+		m_pPlayer->SetCamera(pCamera);
+		m_pPlayer->SetPosition(0.0f, 0.0f);
+		//m_pPlayer->SetMesh(playerMesh);
+		//m_pPlayer->SetColor(RGB(0, 0, 255));
+
+		m_pPlayer2->SetCamera(pCamera2);
+		m_pPlayer2->SetPosition(1000.0f, 0.0f);
+	}
+	else if (m_playerCount != 0)
+	{
+		std::string debugMessage = "히히ㅣㅎ히히히: " + std::to_string(m_playerCount);
+		LogDebugOutput(debugMessage);
+		m_pPlayer->SetCamera(pCamera2);
+		m_pPlayer->SetPosition(0.0f, 0.0f);
+		//m_pPlayer->SetMesh(playerMesh);
+		//m_pPlayer->SetColor(RGB(0, 0, 255));
+
+		m_pPlayer2->SetCamera(pCamera);
+		m_pPlayer2->SetPosition(1000.0f, 0.0f);
+	}
+
+	m_pScene = new Scene(m_pPlayer, m_pPlayer2, &world, m_hInstance, m_pNetworkManager);
 	m_pScene->BuildObjects();
 }
+
+//백업
+//void GameFramework::BuildObjects()		//카메라, 플레이어
+//{
+//
+//	// 디버그 메시지 추가
+//	std::string debugMessage = "Current player count: " + std::to_string(m_playerCount);
+//	LogDebugOutput(debugMessage);
+//
+//	debugMessage = "Player pointer: " + std::to_string(reinterpret_cast<std::uintptr_t>(pPlayer));
+//	LogDebugOutput(debugMessage);
+//
+//
+//	if (m_playerCount == 0)
+//	{
+//		if (pPlayer == m_pPlayer)
+//			pNewObject = m_pNextGameObjectOne;
+//		else if (pPlayer == m_pPlayer2)
+//			pNewObject = m_pNextGameObjectTwo;
+//	}
+//	if (m_playerCount != 0)
+//	{
+//		if (pPlayer == m_pPlayer2)
+//			pNewObject = m_pNextGameObjectOne;
+//		else if (pPlayer == m_pPlayer)
+//			pNewObject = m_pNextGameObjectTwo;
+//	}
+//
+//
+//	Camera* pCamera = new Camera();
+//	pCamera->SetViewport(0, 0, FRAMEBUFFER_WIDTH / 2, FRAMEBUFFER_HEIGHT);
+//	Camera* pCamera2 = new Camera();
+//	pCamera2->SetViewport(FRAMEBUFFER_WIDTH / 2, 0, FRAMEBUFFER_WIDTH / 2, FRAMEBUFFER_HEIGHT);
+//	cubeB* playerMesh = new cubeB(10.0f, 10.0f);
+//	m_pPlayer = new Player();
+//	m_pPlayer2 = new Player();
+//	if (m_playerCount == 0)
+//	{
+//
+//	}
+//	if (m_playerCount != 0)
+//	{
+//		if (pPlayer == m_pPlayer2)
+//			pNewObject = m_pNextGameObjectOne;
+//		else if (pPlayer == m_pPlayer)
+//			pNewObject = m_pNextGameObjectTwo;
+//	}
+//
+//	m_pPlayer = new Player();
+//	m_pPlayer->SetCamera(pCamera);
+//	m_pPlayer->SetPosition(0.0f, 0.0f);
+//	//m_pPlayer->SetMesh(playerMesh);
+//	//m_pPlayer->SetColor(RGB(0, 0, 255));
+//	m_pPlayer2 = new Player();
+//	m_pPlayer2->SetCamera(pCamera2);
+//	m_pPlayer2->SetPosition(1000.0f, 0.0f);
+//	m_pScene = new Scene(m_pPlayer, m_pPlayer2, &world, m_hInstance);
+//	m_pScene->BuildObjects();
+//}
+
+
+
+
 
 void GameFramework::ReleaseObjects()
 {

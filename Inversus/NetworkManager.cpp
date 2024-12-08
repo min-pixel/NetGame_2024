@@ -17,7 +17,7 @@ void LogDebugOutput(const std::string& message) {
 
 
 std::mutex packetMutex;
-std::mutex eMutex;
+std::mutex socketMutex;
 #define BUFSIZE 1024
 
 //아직 미완인 부분은 주석 처리함.
@@ -190,8 +190,8 @@ void NetworkManager::Client_Send_Thread(Player* player, Scene* scene) {
     float lastFyPosition = 0.0f;
     //float lastFRotaion = 0.0f;
 
-    meshPacket.meshIndex = scene->m_nIndex; 
-    this->SendData(&meshPacket);
+    //meshPacket.meshIndex = scene->m_nIndex; 
+    //this->SendData(&meshPacket);
 
     while (scene->m_bGameStop == false) {  // scene의 m_bGameStop을 사용하여 루프 유지 여부 결정
         hasMeshPacket = false;
@@ -277,7 +277,7 @@ void NetworkManager::Client_Send_Thread(Player* player, Scene* scene) {
 
         if (hasKeyControlPacket)
         {
-            //this->SendData(static_cast<void*>(&keyControlPacket));
+            this->SendData(static_cast<void*>(&keyControlPacket));
         }
 
         Sleep(200); // 전송 주기 (0.1초)
@@ -328,67 +328,35 @@ void NetworkManager::ReceiveThread(Player* pPlayer, Scene* scene) {
 
                         if (scene->m_pNextGameObjectTwo) {
                             scene->m_pNextGameObjectTwo->SetMesh(scene->m_pRandomMeshGet[meshPacket->meshIndex].SelectMesh);
+                           
                         }
                         else if (!scene->m_pNextGameObjectTwo) {
                             scene->m_pNextGameObjectTwo = new GameObject();
                             scene->m_pNextGameObjectTwo->SetMesh(scene->m_pRandomMeshGet[meshPacket->meshIndex].SelectMesh);
                         }
-
-                    //    //---------------------------------------------------------------------12/06 지금은 
-                        // scene->m_objects2.size() > 0 && scene->m_nIndexPlayerTwo >= 0 && scene->m_nIndexPlayerTwo < scene->m_objects2.size() 가 만족되면 런타임빌드오브젝트로 
-                        // 새 블럭을 만들고, b2Vec2 velocity 적용해서 떨구기만 되는 중, scene->m_objects2[scene->m_nIndexPlayerTwo]에 x,y 값을 서버에서 받은 걸로 변경해도 b2Vec2 velocity로만 움직임;;;;
-                        // b2Vec2 velocity을 0.0f, 0.0f로 설정하면 생성하고 움직이지를 않음....
-
-                        // 메쉬 인덱스가 변경되었다면
-                        if (meshPacket->meshIndex != scene->m_nIndex2) {
-                            
-                            // 새로운 메쉬로 갱신
-                            scene->m_nIndex2 = meshPacket->meshIndex;
-                            lastFxPosition = meshPacket->m_fxPosition;
-                            lastFyPosition = meshPacket->m_fyPosition;
-
-
-                                if (scene->m_objects2.size() > 0 && scene->m_nIndexPlayerTwo >= 0 &&
-                                    scene->m_nIndexPlayerTwo < scene->m_objects2.size()) {
-                                    
-                                    if (scene->m_bTriggerActive2) {
-
-                                        scene->m_nIndexPlayerTwo = scene->RunTimeBuildObject(scene->m_nIndex2, scene->m_pPlayer2);	//해당 인덱스에 대해 저장
-                                        b2Vec2 velocity(lastFxPosition*-1, lastFyPosition*-1);
-                                        scene->m_objects2[scene->m_nIndexPlayerTwo]->m_pBody->SetLinearVelocity(velocity);
-                                        GameObject* activeBlock = scene->m_objects2[scene->m_nIndexPlayerTwo];
-                                        if (activeBlock) {
-                                            activeBlock->m_fxPosition = meshPacket->m_fxPosition;
-                                            activeBlock->m_fyPosition = meshPacket->m_fyPosition;
-                                            
-                                            
-                                        }
-                                        scene->m_pNextGameObjectTwo = scene->RandomMesh(scene->m_pPlayer2);
-
-
-                                    }
-                                    else if (!scene->m_bTriggerActive2)
-                                    {
-                                        b2Vec2 velocity(lastFxPosition*-1, lastFyPosition*-1);
-                                        scene->m_objects2[scene->m_nIndexPlayerTwo]->m_pBody->SetLinearVelocity(velocity);
-                                        if (scene->m_objects2[scene->m_nIndexPlayerTwo]) {
-                                            scene->m_objects2[scene->m_nIndexPlayerTwo]->m_fxPosition = meshPacket->m_fxPosition;
-                                            scene->m_objects2[scene->m_nIndexPlayerTwo]->m_fyPosition = meshPacket->m_fyPosition;
-                                            
-                                        }
-                                    }
-                                }
-                               
-
-                            
-
-
+                    }   
+                    //------------------------------------------------------------------------------블럭이 떨어지는 것, 플레이어1의 생성된 블럭이 있으면->플레이어2의 블럭낙하
+                    // 조건문 변경 필요, 지금은 우선 씬에 있던 S키 누를 시 진행되던 로직 복붙함.
+                    if (scene->m_objects.size() > 0 && scene->m_nIndexPlayerOne >= 0 &&
+                        scene->m_nIndexPlayerOne < scene->m_objects.size()) {
+                        if (scene->m_bTriggerActive2)
+                        {
+                            scene->m_nIndexPlayerTwo = scene->RunTimeBuildObject(scene->m_nIndex2, scene->m_pPlayer2);	//해당 인덱스에 대해 저장
+                            scene->m_bTriggerActive2 = false;	//동작을 수행할 수 있게 만들어주고
+                            b2Vec2 velocity(0.0f, -50.0f);
+                            scene->m_objects2[scene->m_nIndexPlayerTwo]->m_pBody->SetLinearVelocity(velocity);
+                            scene->m_pNextGameObjectTwo = scene->RandomMesh(scene->m_pPlayer2);
+                            printf("%f", scene->m_pPlayer2->GetCamera()->GetPosition().x);
+                        }
+                        else if (!scene->m_bTriggerActive2)
+                        {
+                            b2Vec2 velocity(0.0f, -50.0f);
+                            scene->m_objects2[scene->m_nIndexPlayerTwo]->m_pBody->SetLinearVelocity(velocity);
                         }
 
 
+                    }
 
-
-                    }    
 
                 }
 
@@ -461,7 +429,6 @@ void NetworkManager::ReceiveThread(Player* pPlayer, Scene* scene) {
         Sleep(200); // CPU 사용량을 낮추기 위해 약간의 대기
     }
     
-    
 
     std::string debugMessage = "Receive thread terminated.";
     LogDebugOutput(debugMessage);
@@ -516,7 +483,7 @@ bool NetworkManager::ReceiveStartSignal(bool& startSignal) {
     return false;
 }
 
-//------------------------------------------서버가 보내는 소켓 순서값을 받는 함수 12/07 
+//------------------------------------------서버가 보내는 소켓 순서값을 받는 함수 12/07  
 bool NetworkManager::ReceivePlayerCount(int& playerCount) {
     if (m_socket == INVALID_SOCKET) {
         std::cerr << "[Error] Socket is not connected." << std::endl;
@@ -540,4 +507,35 @@ bool NetworkManager::ReceivePlayerCount(int& playerCount) {
         std::cerr << "[Error] Receive failed: " << WSAGetLastError() << std::endl;
     }
     return false;
+}
+
+//--------------------12/08 서버에 스타트 시그널 보내는 함수, 씬에 있던 네트워크 매니저 커넥트를 게임프레임워크로 옮기면서 필요해져서 생성
+//                          이게 없으면 클라 2개 실행시 스타트 버튼을 누르지 않았는데도 게임이 시작 되어버림,  이에 맞춰서 서버도 수정함.
+//                          서버 -> 클라가 접속하면 소켓 순서값을 보내고 나서 클라 2 모두에게 스타트 시그널을 받으면 스타트 버튼 정보를 보내게끔 수정.
+bool NetworkManager::SendStartSignal(const bool& startSignal) {
+    std::lock_guard<std::mutex> lock(socketMutex); // 소켓 접근 보호
+    if (this == nullptr) {
+        std::string debugMessage3 = "죽엇으죽엇으";
+        LogDebugOutput(debugMessage3);
+        return false;
+    }
+    
+    if (m_socket == INVALID_SOCKET) {
+        std::string debugMessage2 = "아오아오아오아오아오";
+        LogDebugOutput(debugMessage2);
+        return false;
+    }
+
+    char buffer[sizeof(bool)];
+    *reinterpret_cast<bool*>(buffer) = startSignal;
+
+    int result = send(m_socket, buffer, sizeof(bool), 0);
+    if (result == SOCKET_ERROR) {
+        std::cerr << "[Error] Failed to send start signal: " << WSAGetLastError() << std::endl;
+        return false;
+    }
+
+    std::string debugMessage = "Sent Start Signal to Server: " + std::to_string(startSignal);
+    LogDebugOutput(debugMessage);
+    return true;
 }

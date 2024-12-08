@@ -6,7 +6,7 @@
 
 #include "Scene.h"
 #include "Timer.h"
-
+#include "NetworkManager.h"
 
 class GameFramework
 {
@@ -39,6 +39,15 @@ private:
 
 	POINT						m_ptOldCursorPos;
 
+	int m_playerCount; // 서버에서 받은 플레이어 카운트 값 저장  12/07
+
+	void LogDebugOutput(const std::string& message);
+
+	// 네트워크 관련 멤버
+	NetworkManager* m_pNetworkManager = NULL; // NetworkManager 객체
+	bool m_bGameStart = false; // 게임 시작 여부 플래그
+	bool m_bGameStop = false; // 게임 정지 여부 플래그
+
 public:
 	void OnCreate(HINSTANCE hInstance, HWND hMainWnd);
 	void OnDestroy();
@@ -57,5 +66,6 @@ public:
 	void OnProcessingMouseMessage(HWND hWnd, UINT nMessageID, WPARAM wParam, LPARAM lParam);
 	void OnProcessingKeyboardMessage(HWND hWnd, UINT nMessageID, WPARAM wParam, LPARAM lParam);
 	LRESULT CALLBACK OnProcessingWindowMessage(HWND hWnd, UINT nMessageID, WPARAM wParam, LPARAM lParam);
+	
 };
 

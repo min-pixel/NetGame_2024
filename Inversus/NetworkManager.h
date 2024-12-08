@@ -45,6 +45,7 @@ public:
     SOCKET GetSocket() const { return m_socket; }
 
     bool ReceivePlayerCount(int& playerCount);
+    bool SendStartSignal(const bool& startSignal);
     
 
 private:

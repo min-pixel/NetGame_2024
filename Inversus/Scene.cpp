@@ -8,7 +8,7 @@
 
 
 
-Scene::Scene(Player* pPlayer, Player* pPlayer2, b2World* world, HINSTANCE Instance) : m_lastKeyPressed(0), m_fElapsedTimeForPlayerTwo(0.0f)  // 초기화 리스트에서 m_lastKeyPressed를 0으로 초기화
+Scene::Scene(Player* pPlayer, Player* pPlayer2, b2World* world, HINSTANCE Instance, NetworkManager* pNetworkManager) : m_lastKeyPressed(0), m_fElapsedTimeForPlayerTwo(0.0f), m_pNetworkManager(pNetworkManager)  // 초기화 리스트에서 m_lastKeyPressed를 0으로 초기화
 {
 	m_pPlayer = pPlayer;
 	m_pPlayer2 = pPlayer2;
@@ -57,54 +57,40 @@ void Scene::OnProcessingMouseMessage(HWND hWnd, UINT nMessageID, WPARAM wParam, 
 
 			//m_bGameStart = false;
 			//m_bGameStop = false; //11월 19일 추가 : 재시작 안 하면 전송 안 하던 걸 해결.
-			m_pNetworkManager = new NetworkManager();
-			if (m_pNetworkManager->ConnectToServer("127.0.0.1", 9000)) { // 서버 IP와 포트를 입력
-				
 
 			
-				// 서버로부터 플레이어 카운트 수신   12/07
-				
-				if (!m_pNetworkManager->ReceivePlayerCount(m_playerCount)) {
-					std::cerr << "[Error] Failed to receive player count from server." << std::endl;
-					return; // 초기화 중단
+
+			//--------------12/08 원래 여기에 네트워크 매니저 커넥트로 연결을 했었는데, 카메라 결정되는 걸 먼저 프레임워크에서 해버려서 게임프레임워크 -> 빌드오브젝트로
+			//					  옮겨짐
+			//					  + 빌드오브젝트로 옮겨가면서 스타트 버튼을 안 눌러도 바로 연결이 되고 게임이 시작되버리는 상황 발생, 그래서
+			//						스타트 신호를 보내는 SendStartSignal() 제작 및 추가 -> 서버도 수정 (두 클라에서 스타트시그널을 받으면 두 클라에게 스타트버튼 정보
+			//																							보내게 끔)
+
+			bool startSignal = true; // 시작 신호 설정
+			m_pNetworkManager->SendStartSignal(startSignal);
+
+			// 서버로부터 시작 신호 대기
+			startSignal = false;
+			while (!startSignal) {
+				if (!m_pNetworkManager->ReceiveStartSignal(startSignal)) {
+					MessageBox(NULL, L"시작 신호 수신 실패", L"네트워크 오류", MB_OK | MB_ICONERROR);
+					return;
 				}
-				std::cout << "Received player count: " << m_playerCount << std::endl;
-
-
-
-				// 연결이 성공하면 서버의 시작 신호를 대기
-				bool startSignal = false;
-				while (!startSignal) {
-					m_pNetworkManager->ReceiveStartSignal(startSignal);  // 시작 신호를 받는 함수를 추가
-				}
-
-				
-
-
-				// 시작 신호를 받은 후 게임 시작
-				ReleaseObjects();	//오브젝트를 삭제하고
-				BuildObjects();	//오브젝트를 생성하고
-
-				m_bGameStart = true;
-				m_bGameStop = false; //11월 19일 추가 : 재시작 안 하면 전송 안 하던 걸 해결
-
-
-				
-				std::thread clientSendThread(&NetworkManager::Client_Send_Thread, m_pNetworkManager, m_pPlayer, this);
-				clientSendThread.detach(); // 스레드를 분리하여 독립적으로 실행
-
-				std::thread receiveThread(&NetworkManager::ReceiveThread, m_pNetworkManager, m_pPlayer, this); 
-				receiveThread.detach();
-
-				
-
-				
-
 			}
-			else {
-				// 연결 실패 처리
-				MessageBox(NULL, L"서버에 연결할 수 없습니다.", L"네트워크 오류", MB_OK | MB_ICONERROR);
-			}
+
+			// 시작 신호를 받은 후 게임 시작
+			ReleaseObjects();	//오브젝트를 삭제하고
+			BuildObjects();	//오브젝트를 생성하고
+
+			m_bGameStart = true;
+			m_bGameStop = false; //11월 19일 추가 : 재시작 안 하면 전송 안 하던 걸 해결
+
+			// 네트워크 관련 스레드 시작
+			std::thread clientSendThread(&NetworkManager::Client_Send_Thread, m_pNetworkManager, m_pPlayer,this);
+			clientSendThread.detach();
+
+			std::thread receiveThread(&NetworkManager::ReceiveThread, m_pNetworkManager, m_pPlayer, this);
+			receiveThread.detach();
 
 
 
@@ -521,25 +507,29 @@ int Scene::RunTimeBuildObject(int index, Player* pPlayer)	//키 입력 받으면 m_pNe
 	LogDebugOutput(debugMessage);
 
 	
-	if (m_playerCount == 0)
+	/*if (m_playerCount == 0)
 	{
-		if (pPlayer == m_pPlayer)
+		if (pPlayer == m_pPlayer) {
 			pNewObject = m_pNextGameObjectOne;
-		else if (pPlayer == m_pPlayer2)
+		}
+		else if (pPlayer == m_pPlayer2) {
 			pNewObject = m_pNextGameObjectTwo;
+		}
 	}
-	if (m_playerCount > 0)
+	else if (m_playerCount != 0)
 	{
-		if (pPlayer == m_pPlayer2)
+		if (pPlayer == m_pPlayer2) {
 			pNewObject = m_pNextGameObjectOne;
-		else if (pPlayer == m_pPlayer)
+		}
+		else if (pPlayer == m_pPlayer) {
 			pNewObject = m_pNextGameObjectTwo;
-	}
+		}
+	}*/
 	//기존 꺼 12/07
-	/*if (pPlayer == m_pPlayer)
+	if (pPlayer == m_pPlayer)
 		pNewObject = m_pNextGameObjectOne;
 	else if (pPlayer == m_pPlayer2)
-		pNewObject = m_pNextGameObjectTwo;*/
+		pNewObject = m_pNextGameObjectTwo;
 	Point2D spawnPosition = pPlayer->GetCamera()->GetPosition();
 	printf("좌표는:%f,%f이다", spawnPosition.x, spawnPosition.y);
 
